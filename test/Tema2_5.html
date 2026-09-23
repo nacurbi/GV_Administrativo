@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1;
+        }
+
+        section.contenedor-test, footer.rectangulo-resumen {
+            background-color: white;
+            padding: 20px;
+            border-radius: 2px;
+            width: 800px;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        section.contenedor-test {
+            border: 1px solid #2b2a7f;
+        }
+
+        .titulo-test {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6c757d;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+        .subtitulo-test {
+            font-size: 14px;
+            color: #6c757d;
+            margin: 0 0 20px 0;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .pregunta {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: left;
+            line-height: 1.5;
+        }
+        .opciones-contenedor {
+            display: grid;
+            gap: 2.5px;
+            margin-bottom: 25px;
+        }
+        .opcion {
+            background-color: white;
+            border: none;
+            color: #495057;
+            padding: 15px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s, border-color 0.2s;
+            text-align: left;
+        }
+        .opcion:hover {
+            background-color: #dee2e6;
+        }
+        .opcion.seleccionada {
+            background-color: #cce5ff;
+            border-color: #2b2a7f;
+            color: #004085;
+        }
+        .opcion.correcta {
+            background-color: #85d192;
+            border-color: #85d192;
+            color: #155724;
+            cursor: default;
+        }
+        .opcion.incorrecta {
+            background-color: #f0a1a8;
+            border-color: #f0a1a8;
+            color: #721c24;
+            cursor: default;
+        }
+        .opcion.correcta:hover, .opcion.incorrecta:hover {
+            background-color: #85d192;
+            color: #155724;
+            border-color: #85d192;
+        }
+        .opcion.incorrecta:hover {
+            background-color: #f0a1a8;
+            color: #721c24;
+            border-color: #f0a1a8;
+        }
+        .navegacion-btn-contenedor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .comprobar-btn, #finalizar-btn {
+            background-color: #cce5ff;
+            color: #004085;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 2px;
+            font-size: 12px;
+            width: 100px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .comprobar-btn:hover, #finalizar-btn:hover {
+            background-color: #b3d7ff;
+        }
+        .hidden {
+            display: none;
+        }
+
+        .navegacion-btn {
+            background-color: #E0E0E0;
+            color: #555;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 2px;
+            font-size: 12px;
+            width: 100px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .navegacion-btn:hover {
+            background-color: #CFCFCF;
+        }
+        .navegacion-btn:disabled {
+            background-color: #f1f1f1;
+            color: #aaa;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        footer.rectangulo-resumen {
+            background-color: #F0F0F0;
+            padding: 20px;
+            border-radius: 2px;
+            width: 800px;
+            margin-top: 20px;
+            overflow-y: auto;
+        }
+        .indices-contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .indice-pregunta {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: #495057;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .indice-pregunta.activa {
+            background-color: #cce5ff;
+            color: #004085;
+            border: none;
+        }
+        .indice-pregunta:hover {
+            background-color: #dee2e6;
+        }
+        .indice-pregunta.correcta {
+            background-color: #85d192;
+            color: #155724;
+        }
+        .indice-pregunta.incorrecta {
+            background-color: #f0a1a8;
+            color: #495057;
+        }
+
+        .custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .custom-modal {
+            background-color: white;
+            padding: 30px;
+            border-radius: 2px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .custom-modal h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .custom-modal button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .resultados-finales-container {
+            text-align: center;
+        }
+        .resultados-finales-texto {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .resultados-finales-correctas {
+            color: #155724;
+            font-weight: bold;
+        }
+        .resultados-finales-incorrectas {
+            color: #721c24;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 800px) {
+            section.contenedor-test, footer.rectangulo-resumen {
+                width: 95%;
+                padding: 15px;
+            }
+            .opcion {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test" style="text-align: justify;"><strong>TEMA 2. ESTATUTO DE AUTONOMÍA:</strong> Estatuto de Autonomía del País Vasco</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+            <div id="resultados-finales" class="hidden resultados-finales-container">
+                <h2>Resultados Finales</h2>
+                <div id="resultados-texto" class="resultados-finales-texto"></div>
+            </div>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+            <button id="finalizar-btn" class="comprobar-btn" style="width: 100%; margin-top: 20px;">Finalizar Test</button>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. Señala la respuesta cierta:",
+    "options": [
+      "a) El Lehendakari ostenta la ordinaria representación del Pueblo Vasco o Euskal Herria constituido en Comunidad Autónoma, así como la representación suprema del Estado en el territorio de dicha Comunidad.",
+      "b) El Lehendakari ostenta la suprema representación del Pueblo Vasco o Euskal Herria constituido en Comunidad Autónoma, así como la representación ordinaria del Estado en el territorio de dicha Comunidad.",
+      "c) El Lehendakari ostenta la suprema representación del Pueblo Vasco o Euskal Herria constituido en Comunidad Autónoma, así como la representación legal del Estado en el territorio de dicha Comunidad.",
+      "d) El Lehendakari ostenta la representación ordinaria del Pueblo Vasco o Euskal Herria constituido en Comunidad Autónoma, así como la representación legal del Estado en el territorio de dicha Comunidad."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "2. El Lehendakari, en razón a su cargo, tiene derecho a recibir el tratamiento de:",
+    "options": [
+      "a) Excelencia.",
+      "b) Señor.",
+      "c) Señoría.",
+      "d) Excelentísimo."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "3. El cargo de Lehendakari:",
+    "options": [
+      "a) Es compatible con el ejercicio de cualquier otro cargo público o privado y con el de toda clase de profesiones liberales y actividades mercantiles e industriales, a excepción del mandato parlamentario en el Parlamento Vasco.",
+      "b) Es incompatible con el ejercicio de cualquier otro cargo público o privado y con el de toda clase de profesiones liberales y actividades mercantiles e industriales, a excepción del mandato parlamentario en el Parlamento Vasco.",
+      "c) Es incompatible con el ejercicio de cualquier otro cargo público o privado, a excepción del mandato parlamentario en el Parlamento Vasco. Sin embargo, es compatible con el de toda clase de profesiones liberales y actividades mercantiles e industriales.",
+      "d) Todas son incorrectas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "4. El Lehendakari será designado, de entre sus miembros por el Parlamento, y nombrado por el Rey, mediante:",
+    "options": [
+      "a) Ley.",
+      "b) Decreto.",
+      "c) Real Decreto.",
+      "d) Orden."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "5. Señala la correcta:",
+    "options": [
+      "a) Resultará elegido Lehendakari el candidato que hubiere obtenido la mayoría de 3/5 de los votos de la Cámara. Si ninguno de los candidatos alcanzara la mayoría de 3/5 en la primera votación, se repetirá ésta y será designado Lehendakari el que, de entre ellos, obtuviere la mayoría simple de los votos válidamente emitidos.",
+      "b) Resultará elegido Lehendakari el candidato que hubiere obtenido la mayoría absoluta de los votos de la Cámara. Si ninguno de los candidatos alcanzara la mayoría absoluta en la primera votación, se repetirá ésta y será designado Lehendakari el que, de entre ellos, obtuviere la mayoría de 2/3 de los votos válidamente emitidos.",
+      "c) Resultará elegido Lehendakari el candidato que hubiere obtenido la mayoría simple de los votos de la Cámara. Si ninguno de los candidatos alcanzara la mayoría simple en la primera votación, se repetirá ésta y será designado Lehendakari el que, de entre ellos, obtuviere la mayoría de 2/3 de los votos válidamente emitidos.",
+      "d) Resultará elegido Lehendakari el candidato que hubiere obtenido la mayoría absoluta de los votos de la Cámara. Si ninguno de los candidatos alcanzara la mayoría absoluta en la primera votación, se repetirá ésta y será designado Lehendakari el que, de entre ellos, obtuviere la mayoría simple de los votos válidamente emitidos."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "6. Completa la siguiente frase: Transcurrido el plazo de …………. días desde la convocatoria del Parlamento para la elección del Lehendakari sin que ésta se lleve a efecto, el Lehendakari en funciones deberá, mediante ………………, declarar disuelto el Parlamento y procederá a la convocatoria de nuevas elecciones generales en el territorio de la Comunidad Autónoma.",
+    "options": [
+      "a) 60 - Decreto motivado.",
+      "b) 30 – Decreto.",
+      "c) 30 – Real Decreto motivado.",
+      "d) 60 – Orden."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "7. Señala la respuesta incorrecta. El Lehendakari, como supremo representante de Euskadi:",
+    "options": [
+      "a) Ostenta la representación del País Vasco en sus relaciones con el Estado, las demás Comunidades Autónomas o Preautonómicas, y con los Órganos de los Territorios Históricos y Municipios que integran la Comunidad Autónoma del País Vasco.",
+      "b) Promulga las leyes del Parlamento, así como los Decretos-Legislativos, y ordena su publicación en el «Boletín Oficial del País Vasco» en el plazo máximo de 15 días desde su aprobación, así como en el «Boletín Oficial del Estado».",
+      "c) Disuelve el Parlamento, previa deliberación del Gobierno.",
+      "d) Resuelve los conflictos de competencias entre los distintos Departamentos, cuando no se hubiere alcanzado el acuerdo entre sus titulares."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "8. La situación de interinidad en la Presidencia no podrá ser superior en ningún caso a:",
+    "options": [
+      "a) 2 meses.",
+      "b) 3 meses.",
+      "c) 4 meses.",
+      "d) 6 meses."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "9. Transcurrido el plazo anterior sin que hubieran desaparecido las causas que den lugar a la interinidad:",
+    "options": [
+      "a) El Lehendakari imposibilitado cesará a las 24 horas siguientes.",
+      "b) El Lehendakari imposibilitado cesará inmediatamente.",
+      "c) El Lehendakari imposibilitado no cesará.",
+      "d) El Lehendakari imposibilitado cesará en un plazo no superior a 3 días."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "10. Señala la respuesta correcta:",
+    "options": [
+      "a) El Presidente interino podrá ser sometido a moción de censura que, caso de que prosperase, supondrá su cese en el Gobierno, pero no implicará el de los restantes Consejeros.",
+      "b) El Presidente interino no podrá ser sometido a moción de censura, pero podrá plantear una cuestión de confianza.",
+      "c) El Presidente interino podrá ser sometido a moción de censura que, caso de que prosperase, no supondrá su cese en el Gobierno, pero implicará el de los restantes Consejeros.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "11. Señala la respuesta correcta. En los casos en los que el Lehendakari haya de ser sustituido, se seguirá el siguiente orden de prelación:",
+    "options": [
+      "a) 1º. El Vicepresidente Primero, en su caso. 2º. Los Vicepresidentes, y si hubiera varios, el de mayor jerarquía y, en caso de igualdad, el de más edad. 3º. En su defecto, los Consejeros, con la misma precedencia anterior.",
+      "b) 1º. El Vicepresidente Primero, en su caso. 2º. Los Vicepresidentes, y si hubiera varios, el que lleve perteneciendo más tiempo ininterrumpidamente al Gobierno y, en caso de igualdad, el de más edad. 3º. En su defecto, los Consejeros, con la misma precedencia anterior.",
+      "c) 1º. El Vicepresidente Primero, en su caso. 2º. Los Vicepresidentes, y si hubiera varios, el que lleve perteneciendo más tiempo ininterrumpidamente al Gobierno y, en caso de igualdad, el de mayor experiencia. 3º. En su defecto, los Consejeros, por orden de edad.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "12. Las ausencias temporales del Lehendakari superiores a un mes precisarán:",
+    "options": [
+      "a) Previa autorización del Parlamento.",
+      "b) Previa comunicación al Parlamento.",
+      "c) Autorización posterior del Parlamento.",
+      "d) Previa comunicación del Parlamento."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "13. Señala la respuesta incorrecta:",
+    "options": [
+      "a) El Lehendakari designará a un Consejero como Secretario del Gobierno.",
+      "b) La convocatoria de las reuniones del Gobierno irá acompañada del orden del día, el cual será establecido de acuerdo con las instrucciones del Lehendakari y firmada por el mismo.",
+      "c) La celebración de las reuniones del Gobierno requerirá, para su válida constitución, la asistencia del Lehendakari, o de su sustituto, y de, al menos, la mitad de sus miembros.",
+      "d) Los acuerdos del Gobierno constarán en acta que levantará el Secretario."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "14. ¿Cómo puede el Gobierno crear Comisiones delegadas para coordinar la elaboración de directrices y disposiciones, programar la política sectorial, examinar asuntos de interés común a varios Departamentos, y preparar las reuniones del Gobierno?",
+    "options": [
+      "a) Mediante Decreto.",
+      "b) Mediante Decreto-ley.",
+      "c) Mediante Reglamento.",
+      "d) Mediante Decreto legislativo."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "15. Las Comisiones delegadas serán convocadas por:",
+    "options": [
+      "a) El Lehendakari.",
+      "b) El Presidente delegado, en su caso.",
+      "c) Las respuestas a) y b) son ciertas.",
+      "d) Las respuestas a) y b) son falsas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "16. Si el Gobierno apreciara, por acuerdo de ………………………………., a su instancia o a la del Lehendakari, que éste se encuentra imposibilitado, transitoria o temporalmente, para el desempeño de sus funciones, lo comunicará así al Presidente del Parlamento.",
+    "options": [
+      "a) 3/5 partes de sus miembros.",
+      "b) 2/5 partes de sus miembros.",
+      "c) 4/5 partes de sus miembros.",
+      "d) 2/3 partes de sus miembros."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "17. Si el Lehendakari apreciara que han desaparecido las circunstancias que le imposibilitaban el desarrollo de sus funciones, lo comunicará así al Gobierno, que deberá reunirse a tal efecto en el plazo de:",
+    "options": [
+      "a) 24h.",
+      "b) 48h.",
+      "c) 72h.",
+      "d) 5 días."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "18. Los Consejeros inician la relación de servicio con la Comunidad Autónoma a partir de la fecha de:",
+    "options": [
+      "a) Su toma de posesión.",
+      "b) Su nombramiento.",
+      "c) El acto de acatamiento de la CE.",
+      "d) Las respuestas b) y c) son correctas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "19. Los Consejeros finalizan la relación de servicio mediante:",
+    "options": [
+      "a) Decreto, publicado en el BOPV.",
+      "b) Ley, publicada en el BOPV.",
+      "c) Ley, sin necesidad de publicación.",
+      "d) Orden, sin necesidad de publicación."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "20. ¿Cuántas causas de cese de Consejeros contempla la Ley 7/1981, de 30 de junio, sobre Ley de Gobierno?",
+    "options": [
+      "a) 5.",
+      "b) 6.",
+      "c) 7.",
+      "d) 8."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "21. ¿En qué año quedaron abolidos los fueros vascos?",
+    "options": [
+      "a) 1876.",
+      "b) 1796.",
+      "c) 1869.",
+      "d) 1977."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "22. La Constitución Española garantiza el derecho de autonomía en el artículo:",
+    "options": [
+      "a) 2.",
+      "b) 3.",
+      "c) 4.",
+      "d) 5."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "23. ¿Cuántas Disposiciones Transitorias tiene el Estatuto de Autonomía del País Vasco?",
+    "options": [
+      "a) Ninguna.",
+      "b) 9.",
+      "c) 4.",
+      "d) 1."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "24. El procedimiento general de reforma del Estatuto de Autonomía del País Vasco consta de:",
+    "options": [
+      "a) 3 pasos.",
+      "b) 4 pasos.",
+      "c) 5 pasos.",
+      "d) 2 pasos."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "25. En el marco del procedimiento general de reforma del Estatuto de Autonomía, la aprobación por el Parlamento Vasco requiere:",
+    "options": [
+      "a) Mayoría absoluta (38 votos).",
+      "b) Mayoría simple (26 votos).",
+      "c) Mayoría simple (28 votos).",
+      "d) Mayoría absoluta (39 votos)."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "26. Señala la incorrecta. Son tres los sujetos legitimados para dar inicio al procedimiento de reforma general del Estatuto de Autonomía:",
+    "options": [
+      "a) El Parlamento Vasco, a propuesta de la quinta parte de sus miembros.",
+      "b) El Gobierno Vasco.",
+      "c) Las Cortes Generales del Estado.",
+      "d) La iniciativa popular."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "27. Para el País Vasco, reviste un especial interés una Disposición Adicional de la CE que establece que la Constitución “ampara y respeta la actualización de los derechos históricos de los territorios forales”. ¿Cuál es esa Disposición Adicional?",
+    "options": [
+      "a) La primera.",
+      "b) La Segunda.",
+      "c) La Tercera.",
+      "d) La Cuarta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "28. Señala la respuesta falsa:",
+    "options": [
+      "a) Los Directores asumen la dirección de una Unidad Organizativa en los términos en que lo establezca el Decreto que fije la estructura orgánica del Departamento.",
+      "b) El Viceconsejero, bajo la dirección del Director titular de cada Departamento, asume la dirección y el ejercicio de las funciones y potestades que le están encomendadas por el Decreto de creación o de estructura orgánica del Departamento.",
+      "c) Los Consejeros tienen facultad para designar el personal de su confianza, dentro de los créditos que estuvieran consignados al efecto en el Presupuesto. Dicho personal de confianza cesará automáticamente al producirse el cese del Consejero que le hubiere designado.",
+      "d) Son personal alto cargo de la Administración las personas titulares de las Viceconsejerías y de las Direcciones, que se designan por Decreto y están vinculadas a la Comunidad Autónoma por una relación de servicio."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "29. ¿Cómo responde el Gobierno de su política ante el Parlamento?",
+    "options": [
+      "a) Subsidiariamente, sin perjuicio de la responsabilidad directa de cada Consejero por su gestión respectiva.",
+      "b) Solidariamente, sin perjuicio de la responsabilidad directa de cada Consejero por su gestión respectiva.",
+      "c) De forma mancomunada, sin perjuicio de la responsabilidad directa de cada Consejero por su gestión respectiva.",
+      "d) Individualmente, sin perjuicio de la responsabilidad directa de cada Consejero por su gestión respectiva."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "30. El Lehendakari, previa deliberación del Gobierno, podrá plantear al Parlamento la cuestión de confianza sobre su programa o sobre una declaración de política general. La confianza se entenderá otorgada cuando obtuviese:",
+    "options": [
+      "a) Mayoría simple de los votos de la Cámara.",
+      "b) Mayoría absoluta de los votos de la Cámara.",
+      "c) 2/3 de los votos de la Cámara.",
+      "d) 3/5 de los votos de la Cámara."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "31. El Parlamento podrá exigir la responsabilidad del Gobierno mediante la adopción de una moción de censura, que deberá ser respaldada por:",
+    "options": [
+      "a) Mayoría simple de los votos de la Cámara.",
+      "b) Mayoría absoluta de los votos de la Cámara.",
+      "c) 2/3 de los votos de la Cámara.",
+      "d) 3/5 de los votos de la Cámara."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "32. La moción de censura deberá ser propuesta, al menos, por:",
+    "options": [
+      "a) 2/6 de los Parlamentarios.",
+      "b) 4/5 de los Parlamentarios.",
+      "c) 2/3 de los Parlamentarios.",
+      "d) 1/6 de los Parlamentarios."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "33. Señala la respuesta correcta.",
+    "options": [
+      "a) La moción de censura no podrá ser votada hasta que transcurran cuatro días desde su presentación. En los tres primeros días de dicho plazo podrán presentarse mociones alternativas.",
+      "b) La moción de censura no podrá ser votada hasta que transcurran seis días desde su presentación. En los dos primeros días de dicho plazo podrán presentarse mociones alternativas.",
+      "c) La moción de censura no podrá ser votada hasta que transcurran cinco días desde su presentación. En los tres primeros días de dicho plazo podrán presentarse mociones alternativas.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 3
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.resultadosFinales.classList.add('hidden');
+                DOM.contenidoPregunta.classList.remove('hidden');
+                DOM.rectanguloResumen.classList.remove('hidden');
+                DOM.finalizarBtn.textContent = 'Finalizar Test';
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.textContent = esUltimaPregunta ? 'Terminar' : 'Siguiente';
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                } else {
+                    mostrarResultados();
+                }
+            }
+
+            function mostrarResultados() {
+                DOM.contenidoPregunta.classList.add('hidden');
+                DOM.resultadosFinales.classList.remove('hidden');
+
+                // Recalcular el recuento total acumulado
+                let correctas = 0;
+                let incorrectas = 0;
+                preguntas.forEach(p => {
+                    if (p.comprobada) {
+                        if (p.esCorrecta) correctas++;
+                        else incorrectas++;
+                    }
+                });
+
+                const correctasSpan = `<span class="resultados-finales-correctas">Correctas: ${correctas}</span>`;
+                const incorrectasSpan = `<span class="resultados-finales-incorrectas">Incorrectas: ${incorrectas}</span>`;
+                DOM.resultadosTexto.innerHTML = `${correctasSpan} | ${incorrectasSpan}`;
+
+                DOM.finalizarBtn.textContent = 'Volver al Test';
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function toggleFinalizarTest() {
+                if (DOM.resultadosFinales.classList.contains('hidden')) {
+                    mostrarResultados();
+                } else {
+                    mostrarPregunta();
+                }
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta'),
+                    resultadosFinales: document.getElementById('resultados-finales'),
+                    resultadosTexto: document.getElementById('resultados-texto'),
+                    finalizarBtn: document.getElementById('finalizar-btn')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'finalizar-btn') {
+                        toggleFinalizarTest();
+                    } else if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, finalizar test, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1;
+        }
+
+        section.contenedor-test, footer.rectangulo-resumen {
+            background-color: white;
+            padding: 20px;
+            border-radius: 2px;
+            width: 800px;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        section.contenedor-test {
+            border: 1px solid #2b2a7f;
+        }
+
+        .titulo-test {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6c757d;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+        .subtitulo-test {
+            font-size: 14px;
+            color: #6c757d;
+            margin: 0 0 20px 0;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .pregunta {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: left;
+            line-height: 1.5;
+        }
+        .opciones-contenedor {
+            display: grid;
+            gap: 2.5px;
+            margin-bottom: 25px;
+        }
+        .opcion {
+            background-color: white;
+            border: none;
+            color: #495057;
+            padding: 15px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s, border-color 0.2s;
+            text-align: left;
+        }
+        .opcion:hover {
+            background-color: #dee2e6;
+        }
+        .opcion.seleccionada {
+            background-color: #cce5ff;
+            border-color: #2b2a7f;
+            color: #004085;
+        }
+        .opcion.correcta {
+            background-color: #85d192;
+            border-color: #85d192;
+            color: #155724;
+            cursor: default;
+        }
+        .opcion.incorrecta {
+            background-color: #f0a1a8;
+            border-color: #f0a1a8;
+            color: #721c24;
+            cursor: default;
+        }
+        .opcion.correcta:hover, .opcion.incorrecta:hover {
+            background-color: #85d192;
+            color: #155724;
+            border-color: #85d192;
+        }
+        .opcion.incorrecta:hover {
+            background-color: #f0a1a8;
+            color: #721c24;
+            border-color: #f0a1a8;
+        }
+        .navegacion-btn-contenedor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .comprobar-btn, #finalizar-btn {
+            background-color: #cce5ff;
+            color: #004085;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 2px;
+            font-size: 12px;
+            width: 100px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .comprobar-btn:hover, #finalizar-btn:hover {
+            background-color: #b3d7ff;
+        }
+        .hidden {
+            display: none;
+        }
+
+        .navegacion-btn {
+            background-color: #E0E0E0;
+            color: #555;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 2px;
+            font-size: 12px;
+            width: 100px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .navegacion-btn:hover {
+            background-color: #CFCFCF;
+        }
+        .navegacion-btn:disabled {
+            background-color: #f1f1f1;
+            color: #aaa;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        footer.rectangulo-resumen {
+            background-color: #F0F0F0;
+            padding: 20px;
+            border-radius: 2px;
+            width: 800px;
+            margin-top: 20px;
+            overflow-y: auto;
+        }
+        .indices-contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .indice-pregunta {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: #495057;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .indice-pregunta.activa {
+            background-color: #cce5ff;
+            color: #004085;
+            border: none;
+        }
+        .indice-pregunta:hover {
+            background-color: #dee2e6;
+        }
+        .indice-pregunta.correcta {
+            background-color: #85d192;
+            color: #155724;
+        }
+        .indice-pregunta.incorrecta {
+            background-color: #f0a1a8;
+            color: #495057;
+        }
+
+        .custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .custom-modal {
+            background-color: white;
+            padding: 30px;
+            border-radius: 2px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .custom-modal h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .custom-modal button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .resultados-finales-container {
+            text-align: center;
+        }
+        .resultados-finales-texto {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .resultados-finales-correctas {
+            color: #155724;
+            font-weight: bold;
+        }
+        .resultados-finales-incorrectas {
+            color: #721c24;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 800px) {
+            section.contenedor-test, footer.rectangulo-resumen {
+                width: 95%;
+                padding: 15px;
+            }
+            .opcion {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test" style="text-align: justify;"><strong>TEMA 2. ESTATUTO DE AUTONOMÍA:</strong> Estatuto de Autonomía del País Vasco</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+            <div id="resultados-finales" class="hidden resultados-finales-container">
+                <h2>Resultados Finales</h2>
+                <div id="resultados-texto" class="resultados-finales-texto"></div>
+            </div>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+            <button id="finalizar-btn" class="comprobar-btn" style="width: 100%; margin-top: 20px;">Finalizar Test</button>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. Con respecto a la competencia en política infantil y juvenil, el Estatuto de Autonomía establece que la Comunidad Autónoma del País Vasco:",
+    "options": [
+      "a) No tiene competencia.",
+      "b) Tiene competencia exclusiva.",
+      "c) Tiene competencia para el desarrollo reglamentario de la legislación estatal.",
+      "d) Tiene competencia para la ejecución de la legislación estatal."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "2. El Estatuto de Autonomía señala que el Gobierno Vasco ostenta funciones:",
+    "options": [
+      "a) Legislativas y ejecutivas dentro del ámbito del País Vasco.",
+      "b) Solo legislativas dentro del ámbito del País Vasco.",
+      "c) Legislativas y ejecutivas dentro del ámbito del Estado Español.",
+      "d) Ejecutivas y administrativas del País Vasco."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "3. Para el adecuado ejercicio y financiación de sus competencias, el País Vasco dispondrá según el Estatuto de Autonomía de:",
+    "options": [
+      "a) Las Haciendas Forales.",
+      "b) Las cantidades procedentes del Cupo.",
+      "c) Su propia Hacienda Autónoma.",
+      "d) La Hacienda General del Estado."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "4. Por los votos y opiniones que emitan en el ejercicio de su cargo, los miembros del Parlamento Vasco, son según el Estatuto de Autonomía:",
+    "options": [
+      "a) Irresponsables.",
+      "b) Inamovibles.",
+      "c) Irrevocables.",
+      "d) Inviolables."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "5. Según el artículo 2.1 del Estatuto de Autonomía, tienen derecho a formar parte de la Comunidad Autónoma del País Vasco:",
+    "options": [
+      "a) Álava, Guipúzcoa y Vizcaya, así como Navarra.",
+      "b) Álava, Guipúzcoa y Vizcaya, así como Navarra, Lapurdi, Nafarroa Behera y Zuberoa.",
+      "c) Solo Álava, Guipúzcoa y Vizcaya.",
+      "d) Álava, Guipúzcoa y Vizcaya, así como cualquier otro territorio limítrofe."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "6. El Lehendakari será designado, de entre los miembros del Parlamento Vasco, por:",
+    "options": [
+      "a) El Parlamento.",
+      "b) El Rey.",
+      "c) El Presidente del Parlamento Vasco.",
+      "d) El Gobierno Vasco."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "7. ¿Qué requieren los convenios de la Comunidad Autónoma Vasca con otras CCAA?",
+    "options": [
+      "a) Ratificación en referéndum.",
+      "b) Comunicación a las Cortes Generales.",
+      "c) Autorización de las Cortes Generales.",
+      "d) Comunicación al Gobierno central."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "8. El Parlamento Vasco:",
+    "options": [
+      "a) Estará integrado por un número igual de representantes de cada Territorio Histórico.",
+      "b) Estará integrado por un número de representantes distinto por cada Territorio Histórico.",
+      "c) Será elegido por un período de 5 años.",
+      "d) Será elegido por sufragio universal, libre, indirecto y secreto."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "9. Conforme al Estatuto de Autonomía, la Real Academia de la Lengua Vasca-Euskaltzaindia, es una institución:",
+    "options": [
+      "a) De enseñanza oficial del euskera.",
+      "b) Consultiva oficial en lo referente al euskera.",
+      "c) De acreditación de los niveles de euskera.",
+      "d) De publicaciones en euskera."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "10. La Comunidad Autónoma del País Vasco tiene competencia exclusiva en las siguientes materias (señalar la incorrecta):",
+    "options": [
+      "a) Organización, régimen y funcionamiento de sus instituciones de autogobierno dentro de las normas del vigente Estatuto de Autonomía.",
+      "b) Agricultura y ganadería, de acuerdo con la ordenación general de la economía.",
+      "c) Casinos, juegos y apuestas, con excepción de las Apuestas Mutuas Deportivas Benéficas.",
+      "d) Régimen minero y energético. Recursos geotérmicos."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "11. La Comunidad Autónoma del País Vasco tiene competencia exclusiva en las siguientes materias:",
+    "options": [
+      "a) Desarrollo comunitario. Condición femenina. Política Infantil, juvenil y de la tercera edad.",
+      "b) Establecimiento y regulación de Bolsas de Comercio y demás centros de contratación de mercancías y de valores conforme a la legislación mercantil.",
+      "c) Ordenación farmacéutica de acuerdo con lo dispuesto en el artículo 149.1.16.a de la Constitución, e higiene, teniendo en cuenta lo dispuesto en el artículo 18 de este Estatuto.",
+      "d) Propiedad intelectual e industrial."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "12. Según el Estatuto tendrán la condición política de vascos quienes:",
+    "options": [
+      "a) Quienes hayan nacido en el País Vasco.",
+      "b) Quienes tengan la vecindad administrativa, en cualquiera de los municipios integrados en el territorio de la Comunidad Autónoma.",
+      "c) a) y b) son correctas.",
+      "d) No está regulada la condición política de vascos."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "13. Las leyes del Parlamento Vasco se publicarán:",
+    "options": [
+      "a) En el Boletín Oficial del País Vasco.",
+      "b) En el Boletín Oficial del Estado.",
+      "c) En el Boletín Oficial del Territorio Histórico de Álava.",
+      "d) a) y b) son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "14. El órgano colegiado que ostenta las funciones ejecutivas y administrativas del País Vasco es:",
+    "options": [
+      "a) El Parlamento Vasco.",
+      "b) El Lehendakari.",
+      "c) El Gobierno Vasco.",
+      "d) Las Juntas Generales."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "15. La sede de las instituciones comunes de la Comunidad Autónoma del País Vasco:",
+    "options": [
+      "a) Se determinará por decisión del Gobierno Vasco.",
+      "b) Se determinará mediante ley del Parlamento Vasco.",
+      "c) Viene determinada en el Estatuto de Autonomía.",
+      "d) Viene determinada en la Constitución."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "16. Conforme al Estatuto de Autonomía, la Comunidad Autónoma del País Vasco no tiene competencia exclusiva en una de las siguientes materias:",
+    "options": [
+      "a) Agricultura y ganadería, de acuerdo con la ordenación general de la economía.",
+      "b) Ordenación del territorio y del litoral, urbanismo y vivienda.",
+      "c) Turismo y deporte. Ocio y esparcimiento.",
+      "d) Legislación penitenciaria."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "17. La policía autónoma vasca, en cuanto actúe como policía judicial, estará al servicio y bajo la dependencia de:",
+    "options": [
+      "a) El Gobierno Vasco.",
+      "b) El Parlamento Vasco.",
+      "c) La Administración de Justicia.",
+      "d) No puede actuar como policía judicial."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "18. El Lehendakari:",
+    "options": [
+      "a) Será designado por el Gobierno Vasco.",
+      "b) Será designado por el Parlamento Vasco.",
+      "c) Será designado por los ciudadanos.",
+      "d) Será designado por las Juntas Generales."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "19. Las leyes del Parlamento Vasco solamente se someterán al:",
+    "options": [
+      "a) Control del Senado.",
+      "b) Control de constitucionalidad del Tribunal Constitucional.",
+      "c) Control de legalidad de los tribunales.",
+      "d) No se someterán a ningún control."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "20. Los períodos ordinarios de sesiones del Parlamento Vasco durarán como mínimo:",
+    "options": [
+      "a) 4 años.",
+      "b) 5 años.",
+      "c) 8 meses al año.",
+      "d) 10 meses al año."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "21. Conforme al Estatuto de Autonomía del País Vasco, el régimen de conciertos se aplicará de acuerdo con el principio constitucional de:",
+    "options": [
+      "a) Equidad.",
+      "b) Territorialidad.",
+      "c) Solidaridad.",
+      "d) Progresividad."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "22. Según el Estatuto de Autonomía del País Vasco, la Comunidad Autónoma del País Vasco tiene competencias de ejecución de la legislación del Estado en las siguientes materias:",
+    "options": [
+      "a) Agricultura y Ganadería.",
+      "b) Asistencia social.",
+      "c) Propiedad intelectual e industrial.",
+      "d) Turismo y deporte. Ocio y esparcimiento."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "23. El señalamiento de las aportaciones correspondientes a cada Territorio Histórico para integrar el Cupo global se realiza:",
+    "options": [
+      "a) Por Acuerdo de los respectivos órganos de gobierno de las instituciones Comunes y Forales.",
+      "b) Por decisión de la Comisión Arbitral.",
+      "c) Por una Comisión mixta, en la que están representados el Parlamento Vasco, las Diputaciones y la Administración del Estado.",
+      "d) Por una Comisión mixta, en la que están representados el Gobierno Vasco, las Diputaciones y la Administración del Estado."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "24. El Gobierno Vasco:",
+    "options": [
+      "a) Responde políticamente de sus actos de forma solidaria ante el Parlamento Vasco.",
+      "b) Responde políticamente de sus actos de forma solidaria ante el Lehendakari.",
+      "c) Cesa por pérdida de la confianza parlamentaria de su Presidente o Lehendakari.",
+      "d) Son ciertas las respuestas a) y c)."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "25. El Gobierno Vasco es el órgano colegiado que ostenta las funciones:",
+    "options": [
+      "a) Legislativas y administrativas.",
+      "b) Ejecutivas y administrativas.",
+      "c) Legislativas y ejecutivas.",
+      "d) Ejecutivas y judiciales."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "26. La aportación del País Vasco al Estado consistirá en un Cupo global, integrado por:",
+    "options": [
+      "a) Todas las cargas del Estado que no asuma la Comunidad Autónoma.",
+      "b) Todas las cargas del Estado que asuma la Comunidad Autónoma.",
+      "c) Todas las cargas asumidas por los Territorios Históricos.",
+      "d) Ninguna de las anteriores es cierta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "27. El Presidente del Tribunal Superior de Justicia del País Vasco será nombrado por:",
+    "options": [
+      "a) El Rey.",
+      "b) El Ministro de Justicia.",
+      "c) El Lehendakari.",
+      "d) El Consejero de Justicia."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "28. El territorio de la Comunidad Autónoma del País Vasco quedará integrado por los Territorios Históricos de:",
+    "options": [
+      "a) Álava, Guipuzcoa y Vizcaya, así como el de Navarra, en el supuesto de que ésta última decida su incorporación de acuerdo con el procedimiento establecido en la Disposición Transitoria 4ª del Estatuto de Autonomía.",
+      "b) Álava, Guipuzcoa y Vizcaya, así como el de Navarra, en el supuesto de que ésta última decida su incorporación de acuerdo con el procedimiento establecido en la Disposición Transitoria 4ª de la Constitución.",
+      "c) Álava, Guipuzcoa y Vizcaya, así como el de Navarra, en el supuesto de que ésta última decida su incorporación de acuerdo con el procedimiento establecido en el Título Preliminar de la Constitución.",
+      "d) Álava, Guipuzcoa y Vizcaya, así como el de Navarra, en el supuesto de que ésta última decida su incorporación de acuerdo con el procedimiento establecido en el Título Preliminar del Estatuto de Autonomía."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "29. El Lehendakari del Gobierno Vasco es nombrado por:",
+    "options": [
+      "a) El Rey.",
+      "b) El Parlamento Vasco.",
+      "c) El Presidente del Parlamento Vasco.",
+      "d) El Gobierno Vasco."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "30. Según el Estatuto de Autonomía, ¿cuál es la denominación de la Comunidad Autónoma del País Vasco?",
+    "options": [
+      "a) Euskadi o País Vasco.",
+      "b) Euskadi.",
+      "c) Euskadi o Euskal-Herria.",
+      "d) Euskal-Herria o País Vasco."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "31. La reforma del Estatuto de Autonomía del País Vasco precisará de:",
+    "options": [
+      "a) La aprobación de los electores mediante referéndum.",
+      "b) La iniciativa de los tres Territorios Históricos.",
+      "c) La iniciativa del Parlamento Vasco, a propuesta de una décima parte de sus componentes.",
+      "d) Todas las respuestas anteriores son correctas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "32. Según el Estatuto de Autonomía del País Vasco, tienen la condición política de vascos:",
+    "options": [
+      "a) Los residentes en el extranjero de nacionalidad española, si hubiesen tenido su última vecindad administrativa en el País Vasco.",
+      "b) Quienes tengan la vecindad administrativa en cualquier municipio de la Comunidad Autónoma Vasca.",
+      "c) Independientemente de su residencia, las personas que hayan nacido en el País Vasco y soliciten el reconocimiento de su condición política de vascos.",
+      "d) Todas las respuestas anteriores son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "33. La Comunidad Autónoma del País Vasco tiene competencia exclusiva en las siguientes materias:",
+    "options": [
+      "a) Asistencia Social.",
+      "b) Turismo, deporte, ocio y esparcimiento.",
+      "c) Ordenación del territorio y del litoral, urbanismo y vivienda.",
+      "d) Todas las respuestas anteriores son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "34. Las leyes del Parlamento Vasco serán promulgadas por:",
+    "options": [
+      "a) El Presidente del Gobierno Vasco y publicadas en el Boletín Oficial del País Vasco.",
+      "b) El Presidente del Parlamento Vasco y publicadas en el Boletín Oficial del País Vasco y en el Boletín Oficial del Estado.",
+      "c) El Rey y publicadas en el Boletín Oficial del País Vasco y en el Boletín Oficial del Estado.",
+      "d) El Presidente del Gobierno Vasco y publicadas en el Boletín Oficial del País Vasco y en el Boletín Oficial del Estado."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "35. Los poderes del País Vasco se ejercerán:",
+    "options": [
+      "a) A través del Parlamento, del Gobierno y del Tribunal Superior de Justicia del País Vasco.",
+      "b) A través del Parlamento, del Gobierno y de su Presidente o Lehendakari.",
+      "c) A través del Parlamento, del Gobierno, así como de las Juntas Generales y de las Diputaciones Forales de los Territorios Históricos, en el ámbito de sus competencias.",
+      "d) A través del Parlamento, del Gobierno y de las Diputaciones Forales de los Territorios Históricos."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "36. El Parlamento Vasco estará integrado por:",
+    "options": [
+      "a) Un número igual de representantes de cada Territorio Histórico elegidos por sufragio indirecto.",
+      "b) Un número de representantes proporcional a la población de cada Territorio Histórico, elegidos por sufragio universal, libre, indirecto y secreto.",
+      "c) Un número igual de representantes de cada Territorio Histórico, elegidos por sufragio universal, libre, directo y secreto.",
+      "d) Los parlamentarios y el Lehendakari."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "37. El Estatuto de Autonomía del País Vasco prevé un Parlamento Vasco en cuyas elecciones el sufragio es:",
+    "options": [
+      "a) Libre, universal, secreto e igual.",
+      "b) Libre, universal, directo, personal y secreto.",
+      "c) Libre, directo, personal y secreto.",
+      "d) Libre, universal, directo y secreto."
+    ],
+    "correct": 3
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.resultadosFinales.classList.add('hidden');
+                DOM.contenidoPregunta.classList.remove('hidden');
+                DOM.rectanguloResumen.classList.remove('hidden');
+                DOM.finalizarBtn.textContent = 'Finalizar Test';
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.textContent = esUltimaPregunta ? 'Terminar' : 'Siguiente';
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                } else {
+                    mostrarResultados();
+                }
+            }
+
+            function mostrarResultados() {
+                DOM.contenidoPregunta.classList.add('hidden');
+                DOM.resultadosFinales.classList.remove('hidden');
+
+                // Recalcular el recuento total acumulado
+                let correctas = 0;
+                let incorrectas = 0;
+                preguntas.forEach(p => {
+                    if (p.comprobada) {
+                        if (p.esCorrecta) correctas++;
+                        else incorrectas++;
+                    }
+                });
+
+                const correctasSpan = `<span class="resultados-finales-correctas">Correctas: ${correctas}</span>`;
+                const incorrectasSpan = `<span class="resultados-finales-incorrectas">Incorrectas: ${incorrectas}</span>`;
+                DOM.resultadosTexto.innerHTML = `${correctasSpan} | ${incorrectasSpan}`;
+
+                DOM.finalizarBtn.textContent = 'Volver al Test';
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function toggleFinalizarTest() {
+                if (DOM.resultadosFinales.classList.contains('hidden')) {
+                    mostrarResultados();
+                } else {
+                    mostrarPregunta();
+                }
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta'),
+                    resultadosFinales: document.getElementById('resultados-finales'),
+                    resultadosTexto: document.getElementById('resultados-texto'),
+                    finalizarBtn: document.getElementById('finalizar-btn')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'finalizar-btn') {
+                        toggleFinalizarTest();
+                    } else if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, finalizar test, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1;
+        }
+
+        section.contenedor-test, footer.rectangulo-resumen {
+            background-color: white;
+            padding: 20px;
+            border-radius: 2px;
+            width: 800px;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        section.contenedor-test {
+            border: 1px solid #2b2a7f;
+        }
+
+        .titulo-test {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6c757d;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+        .subtitulo-test {
+            font-size: 14px;
+            color: #6c757d;
+            margin: 0 0 20px 0;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .pregunta {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: left;
+            line-height: 1.5;
+        }
+        .opciones-contenedor {
+            display: grid;
+            gap: 2.5px;
+            margin-bottom: 25px;
+        }
+        .opcion {
+            background-color: white;
+            border: none;
+            color: #495057;
+            padding: 15px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s, border-color 0.2s;
+            text-align: left;
+        }
+        .opcion:hover {
+            background-color: #dee2e6;
+        }
+        .opcion.seleccionada {
+            background-color: #cce5ff;
+            border-color: #2b2a7f;
+            color: #004085;
+        }
+        .opcion.correcta {
+            background-color: #85d192;
+            border-color: #85d192;
+            color: #155724;
+            cursor: default;
+        }
+        .opcion.incorrecta {
+            background-color: #f0a1a8;
+            border-color: #f0a1a8;
+            color: #721c24;
+            cursor: default;
+        }
+        .opcion.correcta:hover, .opcion.incorrecta:hover {
+            background-color: #85d192;
+            color: #155724;
+            border-color: #85d192;
+        }
+        .opcion.incorrecta:hover {
+            background-color: #f0a1a8;
+            color: #721c24;
+            border-color: #f0a1a8;
+        }
+        .navegacion-btn-contenedor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .comprobar-btn, #finalizar-btn {
+            background-color: #cce5ff;
+            color: #004085;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 2px;
+            font-size: 12px;
+            width: 100px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .comprobar-btn:hover, #finalizar-btn:hover {
+            background-color: #b3d7ff;
+        }
+        .hidden {
+            display: none;
+        }
+
+        .navegacion-btn {
+            background-color: #E0E0E0;
+            color: #555;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 2px;
+            font-size: 12px;
+            width: 100px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .navegacion-btn:hover {
+            background-color: #CFCFCF;
+        }
+        .navegacion-btn:disabled {
+            background-color: #f1f1f1;
+            color: #aaa;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        footer.rectangulo-resumen {
+            background-color: #F0F0F0;
+            padding: 20px;
+            border-radius: 2px;
+            width: 800px;
+            margin-top: 20px;
+            overflow-y: auto;
+        }
+        .indices-contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .indice-pregunta {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: #495057;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .indice-pregunta.activa {
+            background-color: #cce5ff;
+            color: #004085;
+            border: none;
+        }
+        .indice-pregunta:hover {
+            background-color: #dee2e6;
+        }
+        .indice-pregunta.correcta {
+            background-color: #85d192;
+            color: #155724;
+        }
+        .indice-pregunta.incorrecta {
+            background-color: #f0a1a8;
+            color: #495057;
+        }
+
+        .custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .custom-modal {
+            background-color: white;
+            padding: 30px;
+            border-radius: 2px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .custom-modal h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .custom-modal button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .resultados-finales-container {
+            text-align: center;
+        }
+        .resultados-finales-texto {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .resultados-finales-correctas {
+            color: #155724;
+            font-weight: bold;
+        }
+        .resultados-finales-incorrectas {
+            color: #721c24;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 800px) {
+            section.contenedor-test, footer.rectangulo-resumen {
+                width: 95%;
+                padding: 15px;
+            }
+            .opcion {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test" style="text-align: justify;"><strong>TEMA 1. CONSTITUCIÓN ESPAÑOLA:</strong> Derechos y Deberes Fundamentales</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+            <div id="resultados-finales" class="hidden resultados-finales-container">
+                <h2>Resultados Finales</h2>
+                <div id="resultados-texto" class="resultados-finales-texto"></div>
+            </div>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+            <button id="finalizar-btn" class="comprobar-btn" style="width: 100%; margin-top: 20px;">Finalizar Test</button>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. Todos los españoles tendrán, en la forma y con los efectos que determine la ley, el derecho de:",
+    "options": [
+      "a) Petición individual, por escrito.",
+      "b) Petición colectiva, por escrito.",
+      "c) Petición individual y colectiva, por escrito o verbalmente.",
+      "d) Petición individual y colectiva, por escrito."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "2. La Constitución española establece que es obligatoria y gratuita:",
+    "options": [
+      "a) La enseñanza básica.",
+      "b) La educación primaria.",
+      "c) La educación secundaria.",
+      "d) La educación infantil."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "3. El artículo 35 de la Constitución española establece que todos los españoles tienen el deber de trabajar y el derecho al trabajo, a la libre elección de profesión u oficio, a la promoción a través del trabajo y a una remuneración suficiente para satisfacer sus necesidades y las de su familia:",
+    "options": [
+      "a) Sin que en ningún caso pueda hacerse discriminación por razón de raza.",
+      "b) Sin que en ningún caso pueda hacerse discriminación por razón de religión.",
+      "c) Sin que en ningún caso pueda hacerse discriminación por razón de sexo.",
+      "d) Sin que en ningún caso pueda hacerse discriminación por razón de cualquier circunstancia personal o social."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "4. Respecto al medio ambiente no es correcto:",
+    "options": [
+      "a) Todos tienen el derecho a disfrutar de un medio ambiente adecuado para el desarrollo de la persona.",
+      "b) Todos tienen el deber de conservar el medio ambiente.",
+      "c) Los poderes públicos velarán por la utilización racional de todos los recursos naturales, con el fin de proteger y mejorar la calidad de la vida y defender y restaurar el medio ambiente.",
+      "d) Para quienes violen lo dispuesto en el apartado anterior se establecerán sanciones administrativas, así como la obligación de reparar el daño causado. En ningún caso podrán establecerse sanciones penales."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "5. El Estado velará especialmente por la salvaguardia de:",
+    "options": [
+      "a) Los derechos económicos y sociales de los trabajadores españoles en el extranjero.",
+      "b) Los derechos civiles y económicos de los trabajadores españoles en el extranjero.",
+      "c) Los derechos políticos y sociales de los trabajadores españoles en el extranjero.",
+      "d) Los derechos económicos y políticos de los trabajadores españoles en el extranjero."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "6. Los padres deben prestar asistencia de todo orden a:",
+    "options": [
+      "a) Los hijos habidos dentro del matrimonio, durante su minoría de edad y en los demás casos en que legalmente proceda.",
+      "b) Los hijos habidos dentro o fuera del matrimonio, hasta que alcancen la independencia económica y en los demás casos en que legalmente proceda.",
+      "c) Los hijos habidos dentro del matrimonio, hasta que alcancen la independencia económica y en los demás casos en que legalmente proceda.",
+      "d) Los hijos habidos dentro o fuera del matrimonio, durante su minoría de edad y en los demás casos en que legalmente proceda."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "7. Señala la correcta respecto al derecho a sindicarse:",
+    "options": [
+      "a) Todos tienen derecho a sindicarse libremente.",
+      "b) La ley podrá limitar o exceptuar el ejercicio de este derecho a los funcionarios públicos.",
+      "c) La ley regulará las peculiaridades de su ejercicio a las Fuerzas o Institutos armados o a los demás Cuerpos sometidos a disciplina militar.",
+      "d) Todos los ciudadanos están obligados a afiliarse a un sindicato."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "8. Todos contribuirán al sostenimiento de los gastos públicos de acuerdo con su capacidad económica mediante un sistema tributario justo inspirado en los principios de igualdad y progresividad:",
+    "options": [
+      "a) Que, excepcionalmente, tendrá alcance confiscatorio.",
+      "b) Que tendrá carácter confiscatorio.",
+      "c) Que, en ningún caso, tendrá alcance confiscatorio.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "9. Podrá establecerse un servicio civil:",
+    "options": [
+      "a) Para el cumplimiento de fines de interés general.",
+      "b) Por causas de fuerza mayor.",
+      "c) Por razones de interés público.",
+      "d) En caso de grave riesgo."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "10. Los españoles:",
+    "options": [
+      "a) Tienen el derecho de defender a España.",
+      "b) Tienen el deber de defender a España.",
+      "c) Tienen el derecho y el deber de defender a España.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "11. Las asociaciones que persigan fines o utilicen medios tipificados como delito:",
+    "options": [
+      "a) Deberán inscribirse en un registro a los solos efectos de publicidad.",
+      "b) Sólo podrán ser disueltas o suspendidas en sus actividades en virtud de resolución judicial motivada.",
+      "c) Son ilegales.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "12. El domicilio es inviolable:",
+    "options": [
+      "a) Ninguna entrada o registro podrá hacerse en él salvo en caso de flagrante delito.",
+      "b) Ninguna entrada o registro podrá hacerse en él sin consentimiento del titular, salvo en caso de flagrante delito.",
+      "c) Ninguna entrada o registro podrá hacerse en él sin resolución judicial, salvo en caso de flagrante delito.",
+      "d) Ninguna entrada o registro podrá hacerse en él sin consentimiento del titular o resolución judicial, salvo en caso de flagrante delito."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "13. ¿Cuál es el tiempo máximo de duración de la detención preventiva?",
+    "options": [
+      "a) 36 horas.",
+      "b) 48 horas.",
+      "c) 72 horas.",
+      "d) 24 horas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "14. ¿En qué artículo de la Constitución española de 1978 se contiene el derecho a la libertad y seguridad individual?",
+    "options": [
+      "a) En el artículo 21.",
+      "b) En el artículo 17.",
+      "c) En el artículo 18.",
+      "d) En el artículo 20."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "15. ¿Qué artículo de la Constitución recoge el derecho y el deber de trabajar?",
+    "options": [
+      "a) El artículo 33.",
+      "b) El artículo 39.",
+      "c) El artículo 37.",
+      "d) El artículo 35."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "16. ¿En qué artículo de la Constitución se regula el derecho a la cláusula de conciencia y al secreto profesional?",
+    "options": [
+      "a) En el artículo 19.",
+      "b) En el artículo 24.",
+      "c) En el artículo 20.",
+      "d) En el artículo 27."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "17. El derecho de petición:",
+    "options": [
+      "a) Podrá ser ejercido en determinados casos de forma individual.",
+      "b) No podrá ser ejercido colectivamente.",
+      "c) Está reconocido en beneficio de los españoles en el art. 30 de la Constitución.",
+      "d) Siempre deberá ser ejercido por escrito."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "18. La asistencia de abogada/o a la/al detenida/o:",
+    "options": [
+      "a) Se garantiza al detenido desde que se le notifica el auto de procesamiento.",
+      "b) Se garantiza al detenido en las diligencias policiales.",
+      "c) Está garantizada desde la apertura del Juicio Oral.",
+      "d) Está garantizada desde la incoación del Sumario o de las Diligencias Previas de Procedimiento Abreviado."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "19. ¿A qué edad se alcanza la mayoría de edad a tenor del contenido del artículo 10 de la Constitución?",
+    "options": [
+      "a) A los dieciocho años, pero se establece en el artículo 15.",
+      "b) A los dieciocho años.",
+      "c) A los dieciocho años pero se regula en el artículo 18.",
+      "d) A los dieciocho años pero no se regula en el artículo 10."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "20. La figura del Defensor del Pueblo está regulada, por mandato constitucional:",
+    "options": [
+      "a) Por Ley orgánica.",
+      "b) Por Decreto legislativo.",
+      "c) Por Ley de bases.",
+      "d) Por Ley ordinaria."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "21. Los poderes públicos:",
+    "options": [
+      "a) Velarán por la seguridad e higiene en los servicios públicos que presten.",
+      "b) Fomentarán una política que garantice la formación y readaptación profesionales.",
+      "c) Garantizarán la erradicación de las horas extraordinarias.",
+      "d) Garantizarán la limitación de la jornada laboral como medida de fomento de empleo."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "22. En torno al medio ambiente:",
+    "options": [
+      "a) Todos tienen derecho a disfrutar de un medio ambiente adecuado para el desarrollo de la persona.",
+      "b) La Constitución no impone el deber de conservarlo.",
+      "c) El derecho a disfrutarlo es fundamental para las personas.",
+      "d) Se encuentra reconocido como Derecho en el art. 44 de la Constitución."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "23. Las penas privativas de libertad:",
+    "options": [
+      "a) Podrán estar orientadas hacia la reeducación.",
+      "b) Estarán orientadas hacia la reeducación y la reinserción social, al contrario de lo que sucede con las medidas de seguridad.",
+      "c) No podrán consistir en trabajos forzados.",
+      "d) En algunos casos deberán dirigirse a la obtención de la reinserción social."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "24. ¿Quiénes tienen derecho a la tutela judicial efectiva de jueces y tribunales?",
+    "options": [
+      "a) Solo los ciudadanos españoles y los nacionales de países de la Unión Europea legalizados.",
+      "b) Todos los ciudadanos de la Unión Europea y los españoles, pero no los extranjeros ajenos a ese ámbito.",
+      "c) Todas las personas.",
+      "d) Todos los españoles pero no los extranjeros no legalizados."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "25. El derecho de huelga reconocido constitucionalmente en favor de los trabajadores para la defensa de sus intereses:",
+    "options": [
+      "a) Se hará compatible su ejercicio con la posible vulneración de los derechos de los empresarios.",
+      "b) Carece de limitación.",
+      "c) Se hará compatible su ejercicio con el mantenimiento de los servicios esenciales de la comunidad, en todo caso.",
+      "d) Sólo es preciso que su ejercicio sea compatible con el mantenimiento de los servicios mínimos de la comunidad, cuando la huelga afecta a la educación, al transporte, a la sanidad y a la seguridad ciudadana."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "26. El principio de legalidad regulado en el art. 25.1 de nuestra Constitución implica que:",
+    "options": [
+      "a) Todos los ciudadanos y los poderes públicos están sometidos al imperio de la Ley.",
+      "b) Podrá ser sancionada una persona por la comisión de una infracción administrativa, aún cuando no constituya conducta sancionable en el momento de producirse.",
+      "c) Nadie podrá ser condenado o sancionado por acciones u omisiones que en el momento de producirse no constituyan delito según la legislación vigente en aquel momento.",
+      "d) Podrá ser sancionada una persona por la comisión de una falta, aún cuando no constituya infracción penal en el momento de producirse, siempre que sí lo sea al dictarse sentencia."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "27. El procedimiento que se emplea para poner de inmediato en presencia de un juez a una persona detenida ilegalmente se denomina:",
+    "options": [
+      "a) Procedimiento de Extradición Pasiva.",
+      "b) Procedimiento de Excarcelación Urgente.",
+      "c) Procedimiento de Hábeas Corpus.",
+      "d) Procedimiento de Extradición Activa."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "28. ¿En qué artículo de la Constitución española de 1978 se contiene el derecho a la libertad y seguridad individual?",
+    "options": [
+      "a) En el artículo 21.",
+      "b) En el artículo 17.",
+      "c) En el artículo 18.",
+      "d) En el artículo 20."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "29. El secreto de las comunicaciones:",
+    "options": [
+      "a) No cubre las efectuadas a través del espacio radioeléctrico mediante telefonía móvil.",
+      "b) Se encuentra protegido por el art. 18.2 de nuestra Constitución.",
+      "c) Sólo puede ser vulnerado mediante resolución judicial.",
+      "d) Afecta exclusivamente a las postales, telegráficas y telefónicas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "30. ¿Qué artículo del Título I recoge la regulación de la suspensión de los derechos y libertades?",
+    "options": [
+      "a) El artículo 55.",
+      "b) El artículo 57.",
+      "c) El artículo 51.",
+      "d) El artículo 53."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "31. Una de las siguientes afirmaciones no es cierta:",
+    "options": [
+      "a) Los poderes públicos fomentarán el deporte.",
+      "b) Los poderes públicos limitarán la utilización del ocio orientando su política a la consecución del pleno empleo.",
+      "c) Los poderes públicos fomentarán la educación sanitaria.",
+      "d) Los poderes públicos fomentarán la educación física."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "32. Aquellos que violen la normativa constitucional protectora del medio ambiente:",
+    "options": [
+      "a) Podrán ser sancionados penal y administrativamente, y estarán obligados a reparar el daño causado.",
+      "b) Sólo estarán obligados a reparar el daño causado.",
+      "c) Sólo podrán ser sancionados administrativamente.",
+      "d) Sólo podrán ser sancionados penalmente."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "33. No tienen derecho los ciudadanos:",
+    "options": [
+      "a) A un proceso público con todas las garantías.",
+      "b) A utilizar cualquier medio de prueba para su defensa.",
+      "c) A no declarar contra sí mismos.",
+      "d) A la presunción de inocencia."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "34. ¿En qué casos se puede obligar a un ciudadano a declarar sobre su ideología?",
+    "options": [
+      "a) En caso de ciudadanos extranjeros.",
+      "b) En casos de riesgo grave de la seguridad ciudadana.",
+      "c) En cualquier caso.",
+      "d) En ningún caso."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "35. Corresponde a los poderes públicos:",
+    "options": [
+      "a) Afianzar los obstáculos que impidan un equivocado o desmesurado empleo de la libertad individual.",
+      "b) Regular los cauces necesarios para alcanzar el disfrute por los ciudadanos de una seguridad plena.",
+      "c) Facilitar la participación de los ciudadanos en la vida cultural y social.",
+      "d) Facilitar la participación de los ciudadanos con capacidad en la vida política."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "36. La Sección Primera del Capítulo Segundo del Título Primero de la Constitución, comienza en el artículo:",
+    "options": [
+      "a) Catorce.",
+      "b) Dieciséis.",
+      "c) Trece.",
+      "d) Quince."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "37. El Estado podrá concertar tratados de doble nacionalidad:",
+    "options": [
+      "a) Con los países del continente europeo.",
+      "b) Con los países del continente americano.",
+      "c) Con los países con los que se haya mantenido una vinculación particular.",
+      "d) Con cualquier país del mundo, en base a lo que se acuerde en los tratados o acuerdos internacionales al efecto."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "38. ¿Quién nombra al Defensor del Pueblo?",
+    "options": [
+      "a) Las Cortes Generales.",
+      "b) La Comisión Mixta Congreso-Senado para las relaciones con el Defensor del Pueblo.",
+      "c) El Presidente del Gobierno.",
+      "d) El Rey."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "39. Si un español se naturaliza como ciudadano de un país con el que España tenga suscrito tratado de doble nacionalidad:",
+    "options": [
+      "a) Pierde en todo caso su nacionalidad española de origen.",
+      "b) Sólo pierde su nacionalidad española de origen si en el país afectado no se reconoce a sus ciudadanos un derecho recíproco.",
+      "c) Pierde la nacionalidad de origen en los casos previstos en la Constitución y en las Leyes.",
+      "d) No pierde la nacionalidad de origen en ningún caso."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "40. Todos los siguientes derechos, menos uno, podrán ser suspendidos en caso de que se acuerde la declaración de estado de excepción o de sitio:",
+    "options": [
+      "a) Derecho a expresar y difundir libremente los pensamientos.",
+      "b) Derecho a comunicar o recibir libremente información veraz por cualquier medio de difusión.",
+      "c) Derecho a la libertad de cátedra.",
+      "d) Derecho a la libre circulación por el territorio nacional."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "41. Uno de los siguientes principios no está garantizado por la Constitución:",
+    "options": [
+      "a) El de jerarquía reglamentaria.",
+      "b) El de irretroactividad.",
+      "c) El de publicidad de las normas.",
+      "d) El de legalidad."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "42. ¿Qué tipo de ley es necesaria para regular el desarrollo del artículo 21 de la Constitución española de 1978?",
+    "options": [
+      "a) Ley marco.",
+      "b) Ley ordinaria.",
+      "c) Ley de bases.",
+      "d) Ley orgánica."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "43. La extradición se concederá:",
+    "options": [
+      "a) Nunca atendiendo al mero principio de reciprocidad.",
+      "b) En cumplimiento del principio de legalidad.",
+      "c) En cumplimiento de un tratado o de la ley.",
+      "d) En cumplimiento del espíritu constitucional."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "44. ¿En qué casos se puede proceder a la entrada en un domicilio particular?",
+    "options": [
+      "a) En caso de autorización del titular, resolución judicial o flagrante delito.",
+      "b) En caso de delito flagrante o resolución judicial exclusivamente.",
+      "c) En caso de autorización del titular o resolución judicial exclusivamente.",
+      "d) En caso de resolución judicial exclusivamente."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "45. La educación tendrá por objeto:",
+    "options": [
+      "a) El pleno desarrollo de la personalidad humana en el respeto de los principios democráticos de convivencia, y a los derechos y libertades fundamentales.",
+      "b) El pleno desarrollo de la personalidad humana conforme a los planes educativos aprobados por el Consejo Escolar Nacional a instancia de las Asociaciones Nacionales de Padres de Alumnos.",
+      "c) El pleno desarrollo de la personalidad humana en el respeto de los principios democráticos marcados por cada colectivo educativo.",
+      "d) El desarrollo de la personalidad humana conforme a las líneas educativas marcadas por el Consejo Escolar Nacional."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "46. El derecho a la protección de la salud:",
+    "options": [
+      "a) Es un derecho fundamental de la persona.",
+      "b) Es un derecho simple de los españoles.",
+      "c) Es un principio inspirador de la política social del Estado.",
+      "d) Es un principio rector de la política social del Estado."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "47. En relación con el derecho de los españoles a una vivienda digna y adecuada:",
+    "options": [
+      "a) Los poderes públicos no están obligados a realizar gestión o promoción alguna para hacerlo efectivo.",
+      "b) Los poderes públicos están obligados a regular la utilización del suelo de acuerdo con el interés general para impedir la especulación.",
+      "c) La comunidad no está obligada a participar en la plusvalía que genere la acción urbanística de los entes públicos.",
+      "d) La efectividad de tal derecho está en manos de los propios ciudadanos y de las empresas constructoras."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "48. Uno de los siguientes colectivos no intervendrá en el control y gestión de los centros de enseñanza sostenidos con fondos públicos por la Administración:",
+    "options": [
+      "a) Los padres.",
+      "b) Las autoridades municipales de las localidades en las que los centros estén incardinados.",
+      "c) Los profesores.",
+      "d) Los alumnos."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "49. ¿Cuál de las siguientes afirmaciones es correcta?",
+    "options": [
+      "a) La pena de muerte está abolida en todos los casos.",
+      "b) La pena de muerte solo está abolida en su vertiente civil.",
+      "c) La pena de muerte no está abolida en España en el campo militar aún en tiempo de paz.",
+      "d) La pena de muerte está abolida en la actualidad salvo lo que puedan disponer las leyes penales militares y en tiempo de guerra."
+    ],
+    "correct": 3
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.resultadosFinales.classList.add('hidden');
+                DOM.contenidoPregunta.classList.remove('hidden');
+                DOM.rectanguloResumen.classList.remove('hidden');
+                DOM.finalizarBtn.textContent = 'Finalizar Test';
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.textContent = esUltimaPregunta ? 'Terminar' : 'Siguiente';
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                } else {
+                    mostrarResultados();
+                }
+            }
+
+            function mostrarResultados() {
+                DOM.contenidoPregunta.classList.add('hidden');
+                DOM.resultadosFinales.classList.remove('hidden');
+
+                // Recalcular el recuento total acumulado
+                let correctas = 0;
+                let incorrectas = 0;
+                preguntas.forEach(p => {
+                    if (p.comprobada) {
+                        if (p.esCorrecta) correctas++;
+                        else incorrectas++;
+                    }
+                });
+
+                const correctasSpan = `<span class="resultados-finales-correctas">Correctas: ${correctas}</span>`;
+                const incorrectasSpan = `<span class="resultados-finales-incorrectas">Incorrectas: ${incorrectas}</span>`;
+                DOM.resultadosTexto.innerHTML = `${correctasSpan} | ${incorrectasSpan}`;
+
+                DOM.finalizarBtn.textContent = 'Volver al Test';
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function toggleFinalizarTest() {
+                if (DOM.resultadosFinales.classList.contains('hidden')) {
+                    mostrarResultados();
+                } else {
+                    mostrarPregunta();
+                }
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta'),
+                    resultadosFinales: document.getElementById('resultados-finales'),
+                    resultadosTexto: document.getElementById('resultados-texto'),
+                    finalizarBtn: document.getElementById('finalizar-btn')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'finalizar-btn') {
+                        toggleFinalizarTest();
+                    } else if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, finalizar test, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>
