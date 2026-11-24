@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Practico5</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015 · TEST PRÁCTICO 5</strong></p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = ["<p>DON ÁLVARO MIGUELEZ, TITULAR DE UNA EMPRESA DE ACTIVIDADES NÁUTICAS, PRESENTÓ EL 12 DE ENERO DE 2026 UNA SOLICITUD ANTE EL AYUNTAMIENTO DE PUERTO AZUL PARA OBTENER AUTORIZACIÓN PARA INSTALAR DURANTE LA TEMPORADA ESTIVAL UN PARQUE ACUÁTICO HINCHABLE FLOTANTE EN UNA ZONA DELIMITADA DEL LITORAL. LA SOLICITUD FUE REGISTRADA ELECTRÓNICAMENTE Y ACOMPAÑADA DE DIVERSA DOCUMENTACIÓN TÉCNICA. TRAS EXAMINAR LA PETICIÓN, EL AYUNTAMIENTO COMPROBÓ QUE NO SE HABÍA APORTADO UN INFORME DE LA CCAA, EXIGIDO POR LA NORMATIVA MUNICIPAL SOBRE COMPATIBILIDAD DE LA INSTALACIÓN CON EL PLAN DE USOS DE LA PLAYA. POR ELLO, EL 22 DE ENERO DE 2026 REQUIRIÓ AL INTERESADO PARA SUBSANAR LA SOLICITUD. ÁLVARO PRESENTÓ LA DOCUMENTACIÓN SOLICITADA DENTRO DEL PLAZO CONCEDIDO, CONCRETAMENTE EL 30 DE ENERO DE 2026.</p><p>LA NORMATIVA REGULADORA DEL PROCEDIMIENTO ESTABLECE UN PLAZO MÁXIMO DE TRES MESES PARA RESOLVER Y NOTIFICAR. TRANSCURRIDO DICHO PLAZO SIN RESOLUCIÓN EXPRESA NI NOTIFICACIÓN ALGUNA, ÁLVARO CONSIDERÓ ESTIMADA SU SOLICITUD POR SILENCIO ADMINISTRATIVO Y SOLICITÓ UN CERTIFICADO ACREDITATIVO DEL ACTO PRESUNTO, SIN OBTENER RESPUESTA. ANTE ESTA SITUACIÓN, INTERPUSO RECURSO DE ALZADA ALEGANDO EL INCUMPLIMIENTO DE LA OBLIGACIÓN LEGAL DE RESOLVER.</p>"];
+            let preguntas = [
+  {
+    "question": "1. Respecto del requerimiento efectuado por el Ayuntamiento para aportar documentación adicional:",
+    "options": [
+      "a) Constituye una actuación prevista para corregir defectos subsanables de la solicitud.",
+      "b) Tiene por finalidad permitir la continuación del procedimiento con todas las garantías para el interesado.",
+      "c) No atenderlo puede producir consecuencias desfavorables para el interesado.",
+      "d) Todas las respuestas son correctas."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "2. La obligación de resolver expresamente por parte de la Administración:",
+    "options": [
+      "a) Existe únicamente en procedimientos iniciados a solicitud del interesado.",
+      "b) Existe cuando no opera el silencio administrativo.",
+      "c) Existe cualquiera que sea la forma de iniciación del procedimiento.",
+      "d) Ninguna respuesta es correcta."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "3. Respecto del plazo máximo para resolver el procedimiento:",
+    "options": [
+      "a) Comienza el día en que se subsana la solicitud.",
+      "b) Comienza con la entrada de la solicitud en el registro electrónico de la Administración competente, sin perjuicio de las incidencias legalmente previstas.",
+      "c) Comienza al día siguiente de la entrada de la solicitud en el registro electrónico de la Administración competente.",
+      "d) Comienza cuando se designa al instructor por parte del órgano competente."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "4. En relación con la subsanación de solicitudes (Señale la incorrecta):",
+    "options": [
+      "a) La Administración puede requerir la aportación de documentación omitida.",
+      "b) El interesado dispone del plazo legalmente previsto para subsanar.",
+      "c) La falta de subsanación puede dar lugar a que se le tenga por desistido.",
+      "d) La falta de subsanación obliga a la Administración a desestimar la solicitud."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "5. Si el interesado no hubiera atendido el requerimiento en plazo:",
+    "options": [
+      "a) La Administración podría decretar la renuncia al derecho solicitado.",
+      "b) Se podría conceder, únicamente mediante petición del interesado, una ampliación del plazo de subsanación.",
+      "c) El procedimiento podría continuar con la documentación obrante en el expediente.",
+      "d) La Administración podría tenerle por desistido de su petición."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "6. Respecto del silencio administrativo en procedimientos iniciados a solicitud del interesado:",
+    "options": [
+      "a) Tiene siempre carácter estimatorio.",
+      "b) Tiene con carácter general y salvo excepciones, sentido desestimatorio.",
+      "c) Salvo norma en contrario, tiene carácter estimatorio.",
+      "d) Ninguna respuesta es correcta."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "7. Una vez producido el silencio administrativo:",
+    "options": [
+      "a) El interesado puede hacer valer el acto presunto generado.",
+      "b) La Administración continúa obligada a resolver expresamente.",
+      "c) La resolución posterior queda condicionada por los efectos jurídicos producidos.",
+      "d) Todas las respuestas son correctas."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "8. ¿Qué plazo tiene la CCAA para emitir el informe que falta?",
+    "options": [
+      "a) Podrá emitirlo y remitirlo por medios electrónico, 10 días hábiles.",
+      "b) Podrá emitirlo y remitirlo por medios electrónico, 10 días naturales.",
+      "c) Podrá emitirlo y remitirlo en papel, 10 días.",
+      "d) Podrá emitirlo y remitirlo en papel, 10 días hábiles."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "9. Respecto de los derechos del interesado durante la tramitación:",
+    "options": [
+      "a) Tiene derecho a conocer el estado del procedimiento.",
+      "b) Tiene derecho a identificar a las autoridades y personal responsable de la tramitación.",
+      "c) Tiene derecho a acceder a la información que obre en el expediente.",
+      "d) Todas las respuestas son correctas."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "10. En relación con el interesado en el procedimiento (Señale la incorrecta):",
+    "options": [
+      "a) Pueden actuar mediante representante y de forma telemática.",
+      "b) Pueden formular alegaciones y aportar documentos en cualquier momento del procedimiento.",
+      "c) Tienen derecho a obtener una resolución expresa por parte de la Administración.",
+      "d) Tienen derecho a conocer el estado de tramitación."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "11. La falta de resolución expresa dentro del plazo máximo de 3 meses:",
+    "options": [
+      "a) Carece siempre de consecuencias jurídicas plenas.",
+      "b) Puede dar lugar a los efectos previstos legalmente para el silencio administrativo.",
+      "c) Supone automáticamente la anulabilidad del procedimiento.",
+      "d) Implica necesariamente responsabilidad disciplinaria de las autoridades y personal al cargo del despacho de los asuntos."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "12. Respecto del certificado acreditativo del silencio administrativo:",
+    "options": [
+      "a) La falta de expedición impide la existencia del acto presunto.",
+      "b) Únicamente puede acreditarse mediante dicho certificado.",
+      "c) Carece de toda utilidad jurídica.",
+      "d) Ninguna respuesta es correcta."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "13. El recurso administrativo interpuesto por el interesado contra el silencio producido:",
+    "options": [
+      "a) Debe ser resuelto y notificado en el plazo de 3 meses.",
+      "b) En caso de que no sea resuelto en dicho plazo, el silencio será estimatorio, al producirse la inversión del sentido del silencio.",
+      "c) Debe interponerse ante el órgano administrativo superior jerárquico del que dictó el acto impugnado.",
+      "d) Todas las respuestas son correctas."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "14. Respecto de los recursos administrativos (Señale la incorrecta):",
+    "options": [
+      "a) La ley regula distintos tipos de recursos, ordinarios alzada y potestativo de reposición y extraordinario de revisión.",
+      "b) Todo recurso administrativo suspende automáticamente la ejecución del acto impugnado.",
+      "c) Pueden dirigirse contra actos administrativos en los casos legalmente previstos.",
+      "d) Ninguna es incorrecta."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "15. En el supuesto planteado, el Ayuntamiento:",
+    "options": [
+      "a) Queda liberado de la obligación de resolver al producirse el silencio administrativo.",
+      "b) Una vez interpuesto el recurso, pierde toda competencia sobre el expediente.",
+      "c) Puede dictar directamente la resolución expresa del recurso posteriormente.",
+      "d) Ninguna respuesta es correcta."
+    ],
+    "correct": 3,
+    "caso": 0
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

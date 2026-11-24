@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPE Gobierno Vasco (GRUPO C1 - ESCALA ADMINISTRATIVA)</title>
+<link rel="stylesheet" href="src/estilo.css">
+<style>
+*{box-sizing:border-box}
+body{display:block;padding:0 0 20px}
+.hidden{display:none!important}
+header{background:var(--fondo);background-image:var(--trama);background-size:8px 8px}
+.interior{max-width:840px;margin:0 auto;padding:8px 20px 6px}
+.barra{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 -20px 6px;padding:0 20px;border-bottom:1px solid var(--borde)}
+.fichas{display:flex;align-items:flex-end;flex-wrap:wrap;gap:3px}
+.ficha{min-width:44px;padding:5px 14px;background:var(--fondo);color:#F9FAFC;font-size:13px;border:1px solid var(--borde);border-bottom:none;border-radius:6px 6px 0 0;cursor:pointer}
+.ficha:hover{background:#7390ab}
+.ficha.activo{background:var(--caja);color:var(--texto);font-weight:bold;margin-bottom:-1px;padding-bottom:6px;position:relative}
+h1{margin:0 0 8px;font-size:14px;line-height:1.25;text-align:center;color:#F9FAFC;font-weight:bold}
+.nombre-tema{margin:6px 0 0;font-size:13px;color:#F9FAFC}
+.lista{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:5px}
+.bloque{display:block;padding:3px 8px;background:#5F7791;border:1px solid #7A90A8;border-radius:3px;color:#F9FAFC;text-decoration:none;font-size:13px;text-align:center}
+.bloque:hover{background:#6D86A1}
+.bloque.activo{background:var(--caja);color:var(--texto);border-color:#F9FAFC;box-shadow:0 0 0 1px #F9FAFC}
+iframe{width:100%;height:80vh;display:block;margin:0 auto;border:none;background:var(--fondo)}
+
+</style>
+</head>
+<body>
+<header><div class="interior">
+  <h1>Gobierno Vasco – OPE 2026 · C1 Escala Administrativa</h1>
+  <div class="barra">
+    <!-- Para añadir un tema: copia un botón y cambia data-tema y el texto -->
+    <nav class="fichas">
+      <button type="button" class="ficha" data-tema="1">1</button>
+      <button type="button" class="ficha" data-tema="2">2</button>
+      <button type="button" class="ficha" data-tema="3">3</button>
+      <button type="button" class="ficha" data-tema="4">4</button>
+      <button type="button" class="ficha" data-tema="39">Ley 39/2015</button>
+      <button type="button" class="ficha" data-tema="40">Ley 40/2015</button>
+      <button type="button" class="ficha" data-tema="12">12</button>
+      <button type="button" class="ficha" data-tema="24">24</button>
+    </nav>
+  </div>
+
+  <!-- Un panel por tema (data-tema igual que en su ficha). Para añadir un test: copia una línea -->
+  <nav class="panel" data-tema="1">
+    <p class="nombre-tema">Tema 1. Constitución Española</p>
+    <ul class="lista">
+      <li><a href="test/Tema1_1.html" target="marco" class="bloque">Test 1</a></li>
+      <li><a href="test/Tema1_2.html" target="marco" class="bloque">Test 2</a></li>
+      <li><a href="test/Tema1_3.html" target="marco" class="bloque">Test 3</a></li>
+      <li><a href="test/Tema1_4.html" target="marco" class="bloque">Test 4</a></li>
+      <li><a href="test/Tema1_5.html" target="marco" class="bloque">Test 5</a></li>
+      <li><a href="test/Tema1_Repaso.html" target="marco" class="bloque">Repaso</a></li>
+    </ul>
+  </nav>
+  <nav class="panel" data-tema="2">
+    <p class="nombre-tema">Tema 2. Estatuto de Autonomía</p>
+    <ul class="lista">
+      <li><a href="test/Tema2_1.html" target="marco" class="bloque">Test 1</a></li>
+      <li><a href="test/Tema2_2.html" target="marco" class="bloque">Test 2</a></li>
+      <li><a href="test/Tema2_3.html" target="marco" class="bloque">Test 3</a></li>
+      <li><a href="test/Tema2_4.html" target="marco" class="bloque">Test 4</a></li>
+      <li><a href="test/Tema2_5.html" target="marco" class="bloque">Test 5</a></li>
+      <li><a href="test/Tema2_6.html" target="marco" class="bloque">Test 6</a></li>
+      <li><a href="test/Tema2_7.html" target="marco" class="bloque">Test 7</a></li>
+    </ul>
+  </nav>
+  <nav class="panel" data-tema="3">
+    <p class="nombre-tema">Tema 3. Protección de Datos Personales y garantía de los derechos digitales</p>
+    <ul class="lista">
+      <li><a href="test/Tema3_1.html" target="marco" class="bloque">Test 1</a></li>
+      <li><a href="test/Tema3_2.html" target="marco" class="bloque">Test 2</a></li>
+    </ul>
+  </nav>
+  <nav class="panel" data-tema="4">
+    <p class="nombre-tema">Tema 4. Igualdad efectiva de mujeres y hombres</p>
+    <ul class="lista">
+      <li><a href="test/Tema4_1.html" target="marco" class="bloque">Test 1</a></li>
+      <li><a href="test/Tema4_2.html" target="marco" class="bloque">Test 2</a></li>
+    </ul>
+  </nav>
+  <nav class="panel" data-tema="39">
+    <p class="nombre-tema">Temas 5 a 9. Ley 39/2015, del Procedimiento Administrativo Común</p>
+    <ul class="lista">
+      <li><a href="test/Ley_392015_Test1.html" target="marco" class="bloque">Test 1</a></li>
+      <li><a href="test/Ley_392015_Test2.html" target="marco" class="bloque">Test 2</a></li>
+      <li><a href="test/Ley_392015_Test3.html" target="marco" class="bloque">Test 3</a></li>
+      <li><a href="test/Ley_392015_Test4.html" target="marco" class="bloque">Test 4</a></li>
+      <li><a href="test/Ley_392015_Test5.html" target="marco" class="bloque">Test 5</a></li>
+      <li><a href="test/Ley_392015_Test6.html" target="marco" class="bloque">Test 6</a></li>
+      <li><a href="test/Ley_392015_Test7.html" target="marco" class="bloque">Test 7</a></li>
+      <li><a href="test/Ley_392015_Test8.html" target="marco" class="bloque">Test 8</a></li>
+      <li><a href="test/Ley_392015_Test9.html" target="marco" class="bloque">Test 9</a></li>
+      <li><a href="test/Ley_392015_Test10.html" target="marco" class="bloque">Test 10</a></li>
+      <li><a href="test/Ley_392015_Test11.html" target="marco" class="bloque">Test 11</a></li>
+      <li><a href="test/Ley_392015_Test12.html" target="marco" class="bloque">Test 12</a></li>
+      <li><a href="test/Ley_392015_Test13.html" target="marco" class="bloque">Test 13</a></li>
+      <li><a href="test/Ley_392015_Test14.html" target="marco" class="bloque">Test 14</a></li>
+      <li><a href="test/Ley_392015_Test15.html" target="marco" class="bloque">Test 15</a></li>
+      <li><a href="test/Ley_392015_Test16.html" target="marco" class="bloque">Test 16</a></li>
+      <li><a href="test/Ley_392015_Practico1.html" target="marco" class="bloque">Práctico 1</a></li>
+      <li><a href="test/Ley_392015_Practico2.html" target="marco" class="bloque">Práctico 2</a></li>
+      <li><a href="test/Ley_392015_Practico3.html" target="marco" class="bloque">Práctico 3</a></li>
+      <li><a href="test/Ley_392015_Practico4.html" target="marco" class="bloque">Práctico 4</a></li>
+      <li><a href="test/Ley_392015_Practico5.html" target="marco" class="bloque">Práctico 5</a></li>
+      <li><a href="test/Ley_392015_Practico6.html" target="marco" class="bloque">Práctico 6</a></li>
+      <li><a href="test/Ley_392015_Practico7.html" target="marco" class="bloque">Práctico 7</a></li>
+      <li><a href="test/Ley_392015_Practico8.html" target="marco" class="bloque">Práctico 8</a></li>
+      <li><a href="test/Ley_392015_Practico9.html" target="marco" class="bloque">Práctico 9</a></li>
+      <li><a href="test/Ley_392015_Practico10.html" target="marco" class="bloque">Práctico 10</a></li>
+      <li><a href="test/Ley_392015_Practico11.html" target="marco" class="bloque">Práctico 11</a></li>
+      <li><a href="test/Ley_392015_Practico12.html" target="marco" class="bloque">Práctico 12</a></li>
+      <li><a href="test/Ley_392015_Practico13.html" target="marco" class="bloque">Práctico 13</a></li>
+      <li><a href="test/Ley_392015_Practico14.html" target="marco" class="bloque">Práctico 14</a></li>
+      <li><a href="test/Ley_392015_Practico15.html" target="marco" class="bloque">Práctico 15</a></li>
+      <li><a href="test/Ley_392015_RepasoPractico.html" target="marco" class="bloque">Repaso</a></li>
+    </ul>
+  </nav>
+  <nav class="panel" data-tema="40">
+    <p class="nombre-tema">Temas 10 y 11. Ley 40/2015, de Régimen Jurídico del Sector Público</p>
+    <ul class="lista">
+      <li><a href="test/Ley_402015_Practico.html" target="marco" class="bloque">Práctico 1</a></li>
+    </ul>
+  </nav>
+  <nav class="panel" data-tema="12">
+    <p class="nombre-tema">Tema 12. Fuentes del Derecho Administrativo</p>
+    <ul class="lista">
+      <li><a href="test/Tema12_1.html" target="marco" class="bloque">Test 1</a></li>
+      <li><a href="test/Tema12_2.html" target="marco" class="bloque">Test 2</a></li>
+      <li><a href="test/Tema12_3.html" target="marco" class="bloque">Test 3</a></li>
+      <li><a href="test/Tema12_4.html" target="marco" class="bloque">Test 4</a></li>
+    </ul>
+  </nav>
+  <nav class="panel" data-tema="24">
+    <p class="nombre-tema">Tema 24</p>
+    <ul class="lista">
+      <li><a href="test/Tema24.html" target="marco" class="bloque">Test 1</a></li>
+    </ul>
+  </nav>
+</div></header>
+<main><iframe id="marco" name="marco" title="Contenido" srcdoc="<p style='font-family:Arial;color:#c9d4df;text-align:center;margin-top:40px'>Selecciona un tema y un test para comenzar.</p>"></iframe></main>
+<script>
+var marco = document.getElementById('marco'), cab = document.querySelector('header');
+var fichas = document.querySelectorAll('.ficha'), paneles = document.querySelectorAll('.panel'), bloques = document.querySelectorAll('.bloque');
+// El marco crece hasta la altura del test: la página entera (cabecera incluida) sube al hacer scroll
+window.addEventListener('message', function (e) {
+  if (e.data && e.data.tipo === 'alturaContenido') marco.style.height = e.data.altura + 'px';
+});
+// La cabecera mide un múltiplo de 8 px para que su cuadrícula encaje con la del contenido
+function ajustarCabecera() { cab.style.minHeight = ''; cab.style.minHeight = (Math.ceil(cab.offsetHeight / 8) * 8) + 'px'; }
+function verTema(t) {
+  fichas.forEach(function (f) { f.classList.toggle('activo', f.dataset.tema === t); });
+  paneles.forEach(function (p) { p.classList.toggle('hidden', p.dataset.tema !== t); });
+  ajustarCabecera();
+}
+fichas.forEach(function (f) { f.addEventListener('click', function () { verTema(f.dataset.tema); }); });
+bloques.forEach(function (b) {
+  b.addEventListener('click', function () {
+    bloques.forEach(function (x) { x.classList.remove('activo'); });
+    b.classList.add('activo');
+  });
+});
+verTema(fichas[0].dataset.tema);
+window.addEventListener('load', ajustarCabecera); window.addEventListener('resize', ajustarCabecera);
+</script>
+</body>
+</html>

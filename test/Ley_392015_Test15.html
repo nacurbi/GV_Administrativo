@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Test15</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN:</strong> Test 15 (Recursos administrativos)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. Se ajustarán a los procedimientos establecidos por su legislación específica, las reclamaciones:",
+    "options": [
+      "a) Judiciales.",
+      "b) Económico-laborales.",
+      "c) Económico-administrativas.",
+      "d) Todas las anteriores son falsas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "2. ¿Qué recursos son susceptibles de interponerse contra actos de trámite que no produzcan indefensión a los interesados?",
+    "options": [
+      "a) El recurso de alzada exclusivamente.",
+      "b) El recurso de alzada o el potestativo de revisión.",
+      "c) El recurso de alzada o el potestativo de reposición.",
+      "d) Todas las anteriores son falsas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "3. ¿Qué sucede en aquellas ocasiones en que el recurrente no califique un recurso en el momento de interponerlo?",
+    "options": [
+      "a) Que exigirá la apertura de un período de subsanación.",
+      "b) Cierta la A), por un período no inferior a 10 días ni superior a 15.",
+      "c) Que no será obstáculo para su tramitación, siempre que se deduzca su verdadero carácter.",
+      "d) Que será obstáculo para su tramitación."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "4. La LPAC señala los diferentes elementos que debe expresar la interposición de un recurso. ¿Cuál de los siguientes no es uno de ellos?",
+    "options": [
+      "a) Órgano, centro o unidad administrativa al que se dirige y su correspondiente código de identificación.",
+      "b) Cualquier particularidad exigida, en su caso, por las disposiciones específicas.",
+      "c) La identificación personal del órgano al que se recurre.",
+      "d) El acto que se recurre y la razón de su impugnación."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "5. Una vez decidida positivamente la suspensión de la ejecución del acto impugnado con la interposición del oportuno recurso administrativo, ¿qué decisión puede tomarse?",
+    "options": [
+      "a) Adoptar las medidas cautelares que sean necesarias para asegurar la protección del interés público o de terceros y la eficacia de la resolución o el acto impugnado.",
+      "b) Cuando de la suspensión puedan derivarse perjuicios de cualquier naturaleza, aquélla sólo producirá efectos previa prestación de caución o garantía suficiente para responder de ellos, en los términos establecidos reglamentariamente.",
+      "c) Ciertas A) y B).",
+      "d) Cierta la C), sólo hasta agotado el plazo de ejercicio de la vía administrativa."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "6. ¿Suspende la interposición de cualquier recurso la ejecución del acto impugnado?",
+    "options": [
+      "a) No, salvo en los casos en que una disposición establezca lo contrario.",
+      "b) Sí, paraliza la misma de manera inmediata.",
+      "c) Sí, de oficio.",
+      "d) Sí, salvo una serie de circunstancias sobrevenidas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "7. Según la LPAC, si el acto proviniera de la Administración Local, la declaración de lesividad de un acto se efectúa a través:",
+    "options": [
+      "a) Del Presidente de la Corporación Local.",
+      "b) De la Junta de Gobierno Local.",
+      "c) Del Pleno de la Corporación Local, o en defecto de éste, por el órgano colegiado superior de la entidad.",
+      "d) Del Concejal competente en la materia."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "8. El recurso de alzada podrá interponerse:",
+    "options": [
+      "a) Ante el órgano que dictó el acto que se impugna.",
+      "b) Ante el órgano competente para resolver el acto que se impugna.",
+      "c) Ante el órgano que dictó el acto que se impugna o ante el competente para resolverlo.",
+      "d) Ante el orden jurisdiccional contencioso-administrativo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "9. Las Administraciones Públicas podrán rectificar los errores materiales, de hecho o aritméticos existentes en sus actos. ¿Cuál de las siguientes alternativas es cierta en relación con esta cuestión?",
+    "options": [
+      "a) Que se exigirá previa declaración de lesividad.",
+      "b) Que la rectificación podrá ejercitarse en cualquier momento, bien de oficio o a instancia de los interesados.",
+      "c) Que la tramitación se realizará través del recurso ordinario.",
+      "d) Que se exigirá previa audiencia a los interesados."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "10. ¿Puede existir otro procedimiento de impugnación que sustituya al recurso de alzada?",
+    "options": [
+      "a) Sí, las Administraciones Públicas pueden establecer procedimientos equivalentes al recurso de alzada cuando la especificidad de la materia así lo justifique.",
+      "b) Sí, establecido mediante ley, en supuestos o ámbitos sectoriales determinados, y cuando la especificidad de la materia así lo justifique.",
+      "c) No, en ningún caso.",
+      "d) No, aunque las Administraciones Públicas, mediante Ley pueden establecer procedimientos equivalentes al recurso de alzada cuando la especificidad de la materia así lo justifique."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "11. ¿Qué recursos en vía administrativa son susceptibles de interponerse contra las resoluciones administrativas?",
+    "options": [
+      "a) El recurso de alzada exclusivamente.",
+      "b) Bien el recurso de alzada o el potestativo de revisión.",
+      "c) Bien el recurso de alzada o el potestativo de reposición.",
+      "d) Bien el recurso de alzada o el extraordinario de reposición."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "12. Según la LPAC, ¿cuál es el límite temporal para la adopción de la declaración de lesividad?",
+    "options": [
+      "a) Seis meses desde que se dictó el acto administrativo.",
+      "b) Dos años desde que se dictó el acto administrativo.",
+      "c) Cuatro años desde que se dictó el acto administrativo.",
+      "d) Tres meses desde que se dictó el acto administrativo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "13. El plazo para la interposición del recurso de reposición si el acto fuera expreso será:",
+    "options": [
+      "a) 2 meses.",
+      "b) 1 mes.",
+      "c) 3 meses.",
+      "d) En cualquier momento."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "14. Según la LPAC, ¿de cuál de las siguientes opciones no puede decirse que ponga fin a la vía administrativa?",
+    "options": [
+      "a) Las resoluciones de los recursos de alzada.",
+      "b) Las resoluciones de los procedimientos a que se refiere el artículo 112.2.",
+      "c) Los acuerdos, pactos, convenios o contratos que tengan la consideración de iniciadores del procedimiento.",
+      "d) Todas las anteriores ponen fin a la vía administrativa."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "15. La LPAC señala los diferentes elementos que debe expresar la interposición de un recurso. ¿Cuál de los siguientes es uno de ellos?",
+    "options": [
+      "a) El nombre y apellidos del recurrente, así como la identificación personal del mismo.",
+      "b) El acto que se recurre y la razón de su impugnación.",
+      "c) Órgano, centro o unidad administrativa al que se dirige y su correspondiente código de identificación.",
+      "d) Todos los anteriores deben expresarse."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "16. Según la LPAC, ¿qué puede decirse de la resolución administrativa de los procedimientos de responsabilidad patrimonial, cualquiera que fuese el tipo de relación, pública o privada, de que derive?",
+    "options": [
+      "a) Que pone fin a la vía administrativa.",
+      "b) Que es un acto firme en vía administrativa.",
+      "c) Que es un acto firme en vía administrativa y judicial.",
+      "d) Que no es impugnable en vía administrativa en ningún caso."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "17. Transcurrido el plazo para la interposición del recurso de reposición:",
+    "options": [
+      "a) Únicamente podrá interponerse recurso contencioso-administrativo.",
+      "b) Únicamente podrá interponerse recurso extraordinario de revisión, sin perjuicio, en su caso, de la procedencia de alzada.",
+      "c) Únicamente podrá interponerse recurso contencioso-administrativo, sin perjuicio, en su caso, de la procedencia del recurso extraordinario de revisión.",
+      "d) Únicamente podrá interponerse recurso de alzada."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "18. ¿Procede algún recurso contra los actos firmes en vía administrativa?",
+    "options": [
+      "a) El recurso de alzada exclusivamente.",
+      "b) El recurso de alzada o el potestativo de revisión.",
+      "c) Sólo el recurso extraordinario de revisión siempre y cuando concurra alguna de las circunstancias previstas en el artículo 125.",
+      "d) El recurso de alzada o el potestativo de revisión, así como el recurso extraordinario de revisión cuando concurra alguna de las circunstancias previstas en el artículo 125."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "19. El plazo máximo para dictar y notificar la resolución del recurso de reposicion será de:",
+    "options": [
+      "a) 10 días.",
+      "b) 1 mes.",
+      "c) 3 meses.",
+      "d) 6 meses."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "20. Será competente para la resolución del recurso extraordinario de revisión:",
+    "options": [
+      "a) El órgano superior jerárquico del que los dictó.",
+      "b) El órgano administrativo que los dictó.",
+      "c) El orden jurisdiccional contencioso-administrativo.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "21. ¿Qué sucede si un recurrente calificara, al interponerlo, un recurso de alzada como recurso potestativo de reposición?",
+    "options": [
+      "a) Que no será obstáculo para su tramitación como recurso de alzada, siempre que se deduzca su verdadero carácter.",
+      "b) Que no podrá continuarse la tramitación del mismo.",
+      "c) Que exigirá la apertura de un período de subsanación.",
+      "d) Cierta la C), por un período no superior a 10 días."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "22. ¿Qué limitación se establece en la LPAC en relación con las alegaciones formuladas por un interesado en la interposición de un recurso administrativo?",
+    "options": [
+      "a) Que los vicios y defectos que hagan nulo un acto no podrán ser alegados por quienes los hubieren causado.",
+      "b) Que los vicios y defectos que hagan anulable un acto no podrán ser alegados por quienes los hubieren causado.",
+      "c) Que los vicios y defectos que hagan nulo o anulable un acto no podrán ser alegados por quienes los hubieren causado.",
+      "d) Que los vicios y defectos que hagan viciado un acto no podrán ser alegados por quienes los hubieren causado."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "23. ¿Cuál de las siguientes es causa de inadmisión de un recurso potestativo de reposición?",
+    "options": [
+      "a) Que haya transcurrido el plazo para la interposición del mismo.",
+      "b) Que el recurso carezca manifiestamente de fundamento.",
+      "c) Que el recurrente carezca de legitimación.",
+      "d) Todas las anteriores son ciertas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "24. ¿Cuál de las siguientes circunstancias permitiría suspender la ejecución de un acto impugnado con la interposición del oportuno recurso administrativo?",
+    "options": [
+      "a) Que la ejecución pudiera causar perjuicios de imposible o difícil reparación.",
+      "b) Que la impugnación se fundamente en alguna de las causas de nulidad de pleno derecho previstas en el artículo 47.1 LPAC.",
+      "c) Ciertas A) y B).",
+      "d) Cierta la B), así como que el recurrente no sólo solicitara la suspensión, sino, además, la retroactividad del acto impugnado a su estado inicial."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "25. ¿Cuál de las siguientes opciones no es causa de inadmisión de un recurso potestativo de alzada contemplada en la LPAC?",
+    "options": [
+      "a) Que no haya transcurrido el plazo para la interposición del mismo.",
+      "b) Que el recurso se haya remitido a un órgano incompetente, perteneciente a diferente Administración Pública.",
+      "c) Que el recurso carezca manifiestamente de fundamento.",
+      "d) La pregunta está mal enunciada."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "26. Una vez decidida la suspensión de la ejecución del acto impugnado con la interposición del oportuno recurso administrativo, ¿qué decisión puede tomarse?",
+    "options": [
+      "a) Adoptar las medidas provisionales que sean necesarias para asegurar la protección interés general y la de terceros y la eficiencia de la resolución del acto impugnado.",
+      "b) Adoptar las medidas cautelares que sean necesarias para asegurar la protección del interés público o de del terceros y la eficacia de la resolución o el acto impugnado.",
+      "c) Adoptar las medidas provisionales que sean necesarias para asegurar la protección del interés público o de terceros y la eficiencia de la resolución o el acto impugnado.",
+      "d) Adoptar por parte del órgano recurrido las medidas provisionales que sean necesarias para asegurar la protección del interés general de terceros y la eficiencia de la resolución o el acto impugnado."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "27. ¿A qué órgano corresponde decidir acerca de la suspensión de la ejecución de un acto impugnado con ocasión de la interposición del oportuno recurso administrativo?",
+    "options": [
+      "a) Al que competa resolver el recurso.",
+      "b) Al órgano instructor.",
+      "c) Al órgano a quien competa la resolución del procedimiento.",
+      "d) Todas ciertas, según el caso."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "28. ¿Qué recurso en vía administrativa contempla la LPAC contra las disposiciones administrativas de carácter general?",
+    "options": [
+      "a) El recurso de alzada exclusivamente.",
+      "b) Exclusivamente el recurso potestativo de reposición.",
+      "c) Ninguno.",
+      "d) El recurso de alzada o el potestativo de reposición."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "29. El recurso extraordinario de revisión podrá interponerse cuando (señala la incorrecta):",
+    "options": [
+      "a) Al dictarlos se hubiera incurrido en error de hecho, que resulte de los propios documentos incorporados al expediente.",
+      "b) Aparezcan documentos de valor esencial para la resolución del asunto que, siendo anteriores, evidencien el error de la resolución recurrida.",
+      "c) En la resolución hayan influido esencialmente documentos o testimonios declarados falsos por sentencia judicial firme, anterior o posterior a aquella resolución.",
+      "d) La resolución se hubiese dictado como consecuencia de prevaricación, cohecho, violencia, maquinación fraudulenta u otra conducta punible y se haya declarado así en virtud de sentencia judicial firme."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "30. Según la LPAC, ¿qué recursos son susceptibles de interponerse contra aquellos actos de trámite que determinen la posibilidad de continuar el procedimiento?",
+    "options": [
+      "a) El recurso de alzada o el potestativo de revisión.",
+      "b) No cabe ningún recurso, aunque sí oponerse realizando una alegación por parte del interesado, para su consideración en la resolución que ponga fin al procedimiento.",
+      "c) El recurso de alzada o el potestativo de reposición.",
+      "d) El recurso de alzada exclusivamente."
+    ],
+    "correct": 1
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

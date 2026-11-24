@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Test2</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN:</strong> Test 2</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. Según la Ley 39/2015, 4enen capacidad de obrar ante las Administraciones Públicas:",
+    "options": [
+      "a) Solo las personas físicas mayores de edad.",
+      "b) Las personas físicas y jurídicas que ostenten capacidad de obrar conforme a las normas civiles.",
+      "c) Únicamente quienes tengan nacionalidad española.",
+      "d) Solo quienes actúen mediante representante."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "2. Respecto a la representación en el procedimiento administra4vo:",
+    "options": [
+      "a) Debe acreditarse siempre mediante escritura pública notarial.",
+      "b) Se presumirá para todos los actos del procedimiento.",
+      "c) Será necesaria para formular solicitudes.",
+      "d) Sólo puede otorgarse apud acta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "3. La falta o insuﬁciente acreditación de la representación:",
+    "options": [
+      "a) Determina automáticamente la nulidad del acto.",
+      "b) Impide continuar definitivamente el procedimiento.",
+      "c) Puede subsanarse en el plazo de diez días o superior cuando las circunstancias lo aconsejen.",
+      "d) Obliga a iniciar un nuevo procedimiento."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "4. ¿Quiénes están obligados a relacionarse electrónicamente con las Administraciones Públicas?",
+    "options": [
+      "a) Solo las personas jurídicas.",
+      "b) Las personas jurídicas, entidades sin personalidad jurídica y determinados colectivos profesionales, entre otros.",
+      "c) Únicamente las Administraciones Públicas.",
+      "d) Colectivos de personas físicas a los que así obligue una norma con rango de Ley."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "5. En relación con el derecho y obligación de relacionarse electrónicamente con las AAPP:",
+    "options": [
+      "a) Las personas físicas nunca pueden elegir medio electrónico.",
+      "b) Las personas físicas están obligadas en todo caso a relacionarse electrónicamente.",
+      "c) Las personas físicas pueden elegir si se comunican electrónicamente salvo que estén obligadas.",
+      "d) El medio elegido no puede modificarse durante el procedimiento."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "6. Los registros electrónicos de apoderamientos deben permi4r:",
+    "options": [
+      "a) Solo la inscripción de poderes notariales.",
+      "b) La inscripción de poderes generales, para trámites concretos y para actuar ante determinadas Administraciones.",
+      "c) Únicamente poderes otorgados presencialmente.",
+      "d) Exclusivamente poderes para procedimientos tributarios."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "7. ¿Qué sucede si un sujeto obligado electrónicamente presenta una solicitud presencialmente?",
+    "options": [
+      "a) La solicitud será inadmitida automáticamente.",
+      "b) La Administración requerirá su subsanación mediante presentación electrónica.",
+      "c) Se considerará válida desde la presentación presencial.",
+      "d) El procedimiento finalizará por desistimiento tácito."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "8. En materia de asistencia en el uso de medios electrónicos:",
+    "options": [
+      "a) Las oficinas de asistencia solo atienden a personas jurídicas.",
+      "b) Las Administraciones deben asistir especialmente a quienes no estén obligados al uso electrónico.",
+      "c) La asistencia electrónica es potestativa para la Administración.",
+      "d) Solo puede prestarse telefónicamente."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "9. Sobre los sistemas de iden4ﬁcación de los interesados:",
+    "options": [
+      "a) Solo se admite el DNI electrónico.",
+      "b) Las Administraciones deben aceptar cualquier sistema existente en Internet.",
+      "c) Pueden utilizarse sistemas basados en certificados electrónicos cualificados y otros sistemas admitidos por la Administración.",
+      "d) La identificación nunca puede realizarse mediante claves concertadas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "10. La ﬁrma electrónica en el procedimiento administra4vo sirve para:",
+    "options": [
+      "a) Determinar exclusivamente la identidad del interesado.",
+      "b) Acreditar voluntad y consentimiento del interesado.",
+      "c) Sustituir cualquier trámite administrativo.",
+      "d) Evitar la conservación del expediente."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "11. Respecto a los documentos aportados por los interesados:",
+    "options": [
+      "a) La Administración puede exigir documentos originales en cualquier caso.",
+      "b) Los interesados no están obligados a aportar documentos ya presentados ante cualquier Administración Pública.",
+      "c) Siempre deben aportarse copias compulsadas.",
+      "d) Los documentos electrónicos carecen de validez si no se imprimen."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "12. Según el arTculo 28, las Administraciones Públicas:",
+    "options": [
+      "a) Deben exigir siempre autorización expresa para consultar datos.",
+      "b) Recabarán electrónicamente los documentos elaborados por cualquier Administración, salvo oposición del interesado en determinados casos.",
+      "c) No pueden consultar datos tributarios.",
+      "d) Solo pueden intercambiar documentos en papel."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "13. ¿Cuál de los siguientes forma parte del expediente administra4vo?",
+    "options": [
+      "a) Información auxiliar o de apoyo no incorporada formalmente.",
+      "b) Notas internas sin relevancia procedimental.",
+      "c) Los documentos y actuaciones que sirven de antecedente y fundamento a la resolución.",
+      "d) Conversaciones informales entre funcionarios."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "14. Los documentos administra4vos electrónicos deberán:",
+    "options": [
+      "a) Incorporar obligatoriamente firma manuscrita digitalizada.",
+      "b) Emitirse en papel y digitalizarse después.",
+      "c) Contener información de cualquier naturaleza archivada en soporte electrónico y susceptible de identificación.",
+      "d) Carecer de metadatos."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "15. Sobre la validez y eﬁcacia de las copias realizadas por las Administraciones Públicas:",
+    "options": [
+      "a) Nunca tendrán la misma validez que el original.",
+      "b) Tendrán validez cuando exista constancia de su autenticidad.",
+      "c) Solo serán válidas si están compulsadas judicialmente.",
+      "d) Las copias electrónicas no pueden sustituir originales en papel."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "16. ¿Qué regula principalmente el arTculo 30 de la Ley 39/2015?",
+    "options": [
+      "a) La nulidad de los actos administrativos.",
+      "b) El cómputo de plazos.",
+      "c) La responsabilidad patrimonial.",
+      "d) La revisión de oficio."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "17. Cuando los plazos se señalen por horas:",
+    "options": [
+      "a) Se entienden referidos exclusivamente a horas hábiles.",
+      "b) No podrán tener duración superior a veinticuatro horas.",
+      "c) Se contarán de momento a momento y de hora a hora.",
+      "d) Siempre incluirán sábados, domingos y festivos."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "18. Si el úl4mo día de un plazo es inhábil:",
+    "options": [
+      "a) El plazo vence igualmente ese día.",
+      "b) Se entiende prorrogado al primer día hábil siguiente.",
+      "c) Es motivo de anulabilidad del procedimiento.",
+      "d) Debe iniciarse nuevamente el cómputo."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "19. Según el arTculo 31, el Registro Electrónico General:",
+    "options": [
+      "a) Solo permite presentación en días hábiles.",
+      "b) Funciona exclusivamente de lunes a sábado.",
+      "c) Permitirá la presentación de documentos todos los días del año durante las veinticuatro horas.",
+      "d) Impido la presentación de instancias durante festivos nacionales."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "20. Respecto a la ampliación de plazos:",
+    "options": [
+      "a) Nunca puede acordarse a petición de interesado.",
+      "b) Puede acordarse si no perjudica derechos de terceros.",
+      "c) Solo procede a petición de la Administración actuante.",
+      "d) La ampliación puede exceder la mitad del plazo inicial en cualquier caso."
+    ],
+    "correct": 1
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

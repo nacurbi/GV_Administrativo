@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Practico8</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015 · TEST PRÁCTICO 8</strong></p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = ["<p>Dña. patricia rodríguez, vecina de vitoria y mayor de edad, presenta en el ayuntamiento de vitoria con fecha 23 de enero de 2021 solicitud a este ayuntamiento de petición de reserva de entrada de vehículos a través de la acera en su vivienda. en su escrito consta:</p><p>nombre y apellidos de la interesada, hechos, razones y petición en que se concreta su solicitud, lugar y fecha del documento, y copia de su documento nacional de identidad.</p><p>La encargada del registro, que conoce esta solicitud porque es muy común, le informa de que para dicha petición existe un modelo específico para la presentación de solicitudes, contestándole la solicitante que se lo han realizado en una gestoría y que prefiere presentar el suyo.</p><p>con fecha 10 de febrero de 2021, la solicitante recibe en su domicilio requerimiento de subsanación de la solicitud por no reunir los requisitos legalmente exigidos, requerimiento que atiende con fecha 18 de febrero de 2021, manifestando, que a partir de dicha fecha, todas las notificaciones y comunicaciones se realicen por medios electrónicos y señala una dirección electrónica habilitada.</p>", "<p>El Ayuntamiento de Getxo decide aprobar una ordenanza para limitar el horario de cierre de los locales nocturnos. Tras la aprobación inicial, se abre plazo de información pública y audiencia. El ayuntamiento recibe dos alegaciones, una presentada por el Sr. García, vecino del municipio de Bilbao, y otra, presentada por un grupo de hosteleros de GETXO. Sin embargo, del enunciado del escrito de alegaciones presentado por este grupo, no se deduce quién es el representante de los mismos, por LO QUE el Ayuntamiento decide contestar al afectado de mayor edad, al que entiende como representante.</p><p>El Ayuntamiento desestima las alegaciones del Sr. García por entender que no está legitimado para presentarlas, toda vez que no posee un interés legítimo y directo.</p><p>Resueltas las alegaciones presentadas, se aprueba definitivamente la Ordenanza. Una vez publicada, un grupo de propietarios de locales nocturnos impugna la norma de forma conjunta, interponiendo un recurso contencioso administrativo, al haber transcurrido el plazo para la interposición del recurso de alzada. El Sr. García, por su parte, decide impugnarlo por entender que no se han tenido en cuenta sus pretensiones y presenta un recurso de alzada.</p>"];
+            let preguntas = [
+  {
+    "question": "1. ¿De qué datos o documentos adolece la solicitud presentada?",
+    "options": [
+      "a) Identificación del medio electrónico, o en su defecto, lugar físico en que desea que se practique la notificación.",
+      "b) Firma del solicitante o acreditación de la autenticidad de su voluntad expresada por cualquier medio.",
+      "c) Órgano, centro o unidad administrativa a la que se dirige.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "2. Si en la solicitud presentada se hubieran incluido todos los datos obligatorios preceptuados por el artículo 66 de la Ley 39/2015, ¿habría sido válido pese a no utilizarse el modelo específico existente?",
+    "options": [
+      "a) No, el modelo normalizado es obligatorio, siendo nula de pleno derecho su presentación mediante otro modelo.",
+      "b) No, el modelo normalizado es obligatorio, siendo anulable su presentación mediante otro modelo.",
+      "c) Sí, es válido, siempre y cuando vengan todos los datos preceptuados en el artículo 66 Ley 39/2015.",
+      "d) Sí, el error o la ausencia del modelo normalizado respecto de la solicitud no será obstáculo para su tramitación, siempre que se deduzca su verdadero carácter."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "3. ¿Cuántos días tiene Dª Patricia para subsanar la documentación?",
+    "options": [
+      "a) 10 días naturales",
+      "b) 10 días hábiles.",
+      "c) 15 días naturales",
+      "d) 15 días hábiles."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "4. Como ya se ha señalado, Dª Patricia recibe el 10 de febrero de 2021 el requerimiento de subsanación, ¿qué día comienza el plazo para subsanar?",
+    "options": [
+      "a) El 10 de febrero de 2021.",
+      "b) El 11 de febrero de 2021.",
+      "c) El día que conste en el documento con registro de salida.",
+      "d) El día siguiente al que conste en el documento con registro de salida."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "5. Respecto a esta subsanación, ¿Qué día finaliza el plazo para subsanar?",
+    "options": [
+      "a) El 24 de febrero de 2021.",
+      "b) El 25 de febrero de 2021.",
+      "c) El 26 de febrero de 2021.",
+      "d) El 27 de febrero de 2021."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "6. La presentación de la subsanación se hace en Zuzenean como registro de la Comunidad Autónoma del País Vasco, ¿es esto correcto?",
+    "options": [
+      "a) Sí, cabe la presentación en los registros de cualquier órgano administrativo que pertenezca a cualquier Administración de las Comunidades Autónomas.",
+      "b) No, en ningún caso.",
+      "c) Sí, siempre y cuando venga así previsto en las bases reguladoras correspondientes.",
+      "d) No, la subsanación debe presentarse siempre donde se haga la presentación originaria."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "7. En fecha 11 de junio de 2021, a Dña. Patricia no le consta notificación alguna de Acuerdo sobre su solicitud. ¿Ha finalizado el plazo para resolver y, en su caso, qué sentido tiene esta finalización del plazo sin resolver?",
+    "options": [
+      "a) No ha finalizado, pues el plazo en este supuesto será de 6 meses.",
+      "b) Ha finalizado el plazo y el silencio será negativo, por tratarse de facultades relativas al dominio público.",
+      "c) Ha finalizado el plazo y el silencio será positivo, por tratarse de facultades relativas al dominio público.",
+      "d) Ha finalizado el plazo y el silencio será negativo, por tratarse de un procedimiento relativo al ejercicio del derecho de petición."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "8. Si Patricia quiere pedir el certificado de silencio administrativo, ¿en qué plazo debe hacerlo?",
+    "options": [
+      "a) En el plazo de 15 días desde que expire el plazo máximo para resolver el procedimiento.",
+      "b) En el plazo de 10 días desde que expire el plazo máximo para resolver el",
+      "c) No existe plazo.",
+      "d) En el plazo de 1 mes desde que expire el plazo máximo para resolver el procedimiento."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "9. Aprovechando su presencia en las dependencias municipales, el ordenanza municipal le hace entrega de la notificación de la Resolución por la que se accede a su petición. ¿Es correcta la notificación efectuada?",
+    "options": [
+      "a) No, porque toda vez que señaló la comunicación por medios electrónicos esta debe practicarse necesariamente por medios electrónicos.",
+      "b) Sí, porque aunque señaló medios electrónicos para recibir notificaciones, se puede realizar la notificación personal con ocasión de la comparecencia espontánea del interesado.",
+      "c) No, porque la excepción a la comunicación por medios electrónicos es comparecencia espontánea y solicitud expresa del interesado en ese momento.",
+      "d) Sí, ya que puede cambiarse la notificación por medios electrónicos a no electrónicos en cualquier momento."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "10. Dª Justina RECIBE una comunicación del Ayuntamiento el viernes día 23 de abril mediante un aviso del funcionario notificador del Ayuntamiento para que SE persone en las dependencias del Ayuntamiento a recoger una notificación. AcudE al Ayuntamiento el lunes 26 de abril y aceptA la notificación y al leerla LE comunican que como vecino colindante de un local en el que se está tramitando la próxima apertura de actividad molesta (pub con música), LE conceden un periodo de audiencia para que manifieste lo que tenga por conveniente y presente alegaciones en su caso. ¿Qué día empieza a contar el plazo?",
+    "options": [
+      "a) El 26 de abril.",
+      "b) El 27 de abril.",
+      "c) El 1 de mayo.",
+      "d) Ninguna."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "11. En relación con la pregunta anterior, si dª justina está interesada en presentar alegaciones en el trámite de audiencia que le ha ofrecido el Ayuntamiento porque entiende que la zona donde vive es una zona saturada de establecimientos que generan ruido y residuos y está en contra de que se conceda una nueva licencia de apertura de un pub en mi calle. ¿Ante qué órgano PUEDE presentar sus alegaciones?",
+    "options": [
+      "a) Ante las oficinas de atención ciudadana (OAC) del Ayuntamiento",
+      "b) Ante el solicitante de la licencia",
+      "c) Ante el Presidente de la comunidad de propietarios.",
+      "d) Ninguna."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "12. ¿Está legitimado el Sr. García para presentar alegaciones?",
+    "options": [
+      "a) No, porque no posee un interés legítimo y directo",
+      "b) Sí, siempre y cuando tenga derechos que puedan resultar afectados por la decisión que en el procedimiento se adopte.",
+      "c) Sí, siempre y cuando se persone en el procedimiento en cualquier momento posterior al trámite de audiencia.",
+      "d) No, por no haber promovido el procedimiento."
+    ],
+    "correct": 1,
+    "caso": 1
+  },
+  {
+    "question": "13. ¿Es correcta la actuación del Ayuntamiento al entender como representante al recurrente de mayor edad?",
+    "options": [
+      "a) Sí, así lo señala expresamente el artículo 7 de la Ley 39/2015.",
+      "b) No, será el que figure en primer lugar.",
+      "c) No, será el primero por orden alfabético.",
+      "d) Sí, cuando no figura expresamente el representante, la Administración tiene libertad para decidir quién es el representante."
+    ],
+    "correct": 1,
+    "caso": 1
+  },
+  {
+    "question": "14. Ante el Ayuntamiento de Vitoria D Felipe desea solicitar licencia para tenencia de perro potencialmente peligroso. Para realizar esta solicitud va a hacerlo a través de su hermano, D Juan Carlos, que es estudiante de Derecho de último curso. Así, D Juan Carlos presenta escrito señalando que presenta la solicitud en nombre de D Felipe, sin mayor acreditación. ¿ES CORRECTA ESTA REPRESENTACIÓN?",
+    "options": [
+      "a) Sí, ya que en este caso la representación se presume.",
+      "b) No, la representación debe acreditarse a través de documento notarial.",
+      "c) No, la representación debe acreditarse mediante cualquier medio válido en Derecho que deje constancia fidedigna de su existencia.",
+      "d) Sí, ya que la representación mediante mención apud acta en la solicitud es suficiente."
+    ],
+    "correct": 2,
+    "caso": 1
+  },
+  {
+    "question": "15. En el caso de que la representación no fuera correcta, ¿QUÉ CONSECUENCIAS TENDRÍA?",
+    "options": [
+      "a) No se tiene por presentada la solicitud, sin perjuicio de que se subsane en el plazo de 10 días hábiles.",
+      "b) No se tiene por presentada la solicitud, sin perjuicio de que se subsane en el plazo de 15 días hábiles.",
+      "c) Se tiene por presentada la solicitud, siempre que se subsane en el plazo de 10 días hábiles.",
+      "d) Se tiene por presentada la solicitud, siempre que se subsane en el plazo de 15 días hábiles."
+    ],
+    "correct": 2,
+    "caso": 1
+  },
+  {
+    "question": "16. En este caso, el ayuntamiento de vitoria notifica a d juan carlos el 15 de febrero este requerimiento de subsanación. ¿desde qué día podrá d juan carlos acreditar debidamente la representación?",
+    "options": [
+      "a) 15 de febrero.",
+      "b) 16 de febrero.",
+      "c) Dependerá del sello de salida correspondiente.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 1,
+    "caso": 1
+  },
+  {
+    "question": "17. Dª Justina es funcionaria de carrera de la diputación foral de Álava y desea solicitar reducción de jornada. para presentar la solicitud desea hacerlo a través de representante. ¿cómo deberá hacerlo?",
+    "options": [
+      "a) El representante deberá hacer la presentación vía electrónica y la representación deberá ser necesariamente mediante comparecencia electrónica en la correspondiente sede electrónica.",
+      "b) El representante podrá hacer la presentación vía electrónica o no electrónica y la representación podrá acreditarse mediante cualquier medio válido en Derecho que deje constancia fidedigna de su existencia.",
+      "c) El representante deberá hacer la presentación vía electrónica y la representación podrá acreditarse mediante cualquier medio válido en Derecho que deje constancia fidedigna de su existencia.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2,
+    "caso": 1
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

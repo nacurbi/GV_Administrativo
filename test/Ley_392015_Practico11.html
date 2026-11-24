@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Practico11</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015 · TEST PRÁCTICO 11</strong> (Responsabilidad patrimonial)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = ["<p>Julen vecino de Basauri, mientras paseaba por su ciudad sufrió un accidente el día 3 de enero de 2019 al pisar una alcantarilla levantada. Tras la caída tuvo que permanecer hasta el 7 de junio ingresado en el hospital, fecha en la cual se produjo el alta hospitalaria.</p>"];
+            let preguntas = [
+  {
+    "question": "1. ¿Cómo se iniciará el procedimiento de responsabilidad patrimonial?",
+    "options": [
+      "a) deberá iniciarse por la AAPP",
+      "b) deberá iniciarse por Julen.",
+      "c) se podrá iniciar de oficio o a instancia de parte.",
+      "d) en caso de lesiones, siempre se iniciará a instancia del interesado."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "2. En el supuesto de que se iniciase de oficio por la AAPP ¿En qué plazo tiene que ser resuelto?",
+    "options": [
+      "a) el que fije la norma reguladora en ese procedimiento",
+      "b) como no se dice nada un plazo máximo de 3 meses",
+      "c) plazo máximo de 6 meses",
+      "d) 1 año"
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "3. Si se iniciase de oficio, ¿desde cuándo empezaría a contarse el plazo máximo de resolución?",
+    "options": [
+      "a) desde que la solicitud haya tenido entrada en el organismo competente.",
+      "b) desde el día en que se produjo la lesión, es decir el 3 de enero.",
+      "c) desde la fecha del acuerdo de iniciación.",
+      "d) desde la fecha del alta hospitalaria o estabilización de las lesiones."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "4. Si el procedimiento de iniciase a instancia de parte ¿desde cuándo empezará a contarse el plazo máximo de resolución?",
+    "options": [
+      "a) desde que la solicitud haya tenido entrada en el organismo competente.",
+      "b) desde el día en que se produjo la lesión, es decir el 3 de enero.",
+      "c) desde la fecha del acuerdo de iniciación.",
+      "d) desde la fecha del alta hospitalaria o estabilización de las lesiones."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "5. Si Julen presentase la solicitud en el registro electrónico de Bilbao con fecha 9 de junio de 2019 y esta tuviera entrada en Basauri el 12 de junio ¿cuándo empezaría a contarse el plazo máximo de resolución?",
+    "options": [
+      "a) el día 3 de junio al producirse la lesión.",
+      "b) desde el día 7 de junio al producirse el alta hospitalaria.",
+      "c) desde el día 9 de junio cuando la solicitud tuvo entrada en Bilbao.",
+      "d) desde el día 12 de junio cuando la solicitud tuvo entrada en Basauri."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "6. Transcurrido el plazo máximo de resolución ¿cómo se entendería la solicitud?",
+    "options": [
+      "a) estimada",
+      "b) desestimada",
+      "c) caducada",
+      "d) ninguna es correcta."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "7. ¿Qué recurso tendría que interponer si no estuviese conforme con la resolución?",
+    "options": [
+      "a) alzada",
+      "b) reposición",
+      "c) extraordinario de revisión",
+      "d) reforma."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "8. Si una vez resuelto el recurso se hubiera incurrido en un error al transcribir los apellidos de Julen ¿en qué plazo se puede subsanar estos errores aritméticos por parte de la AAPP?",
+    "options": [
+      "a) en el plazo de 10 días,",
+      "b) en el plazo de 10 días con la posibilidad de ampliación",
+      "c) en el plazo de 3 meses",
+      "d) en cualquier momento."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "9. Si al iniciar Julen el procedimiento la AAPP se da cuenta de que existe otro procedimiento que guarda identidad sustancial porque su representante inició otro con la misma finalidad ¿por quién se podría acordar la acumulación?",
+    "options": [
+      "a) solo de oficio",
+      "b) a instancia del interesado.",
+      "c) tanto de oficio como a instancia de parte.",
+      "d) solo por Julen."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "10. Contra el acuerdo de acumulación tanto en sentido afirmativo como negativo, si los interesados no están conformes ¿qué recursos podrían interponer?",
+    "options": [
+      "a) alzada",
+      "b) reposición.",
+      "c) extraordinario de revisión.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "11. Si una vez iniciado el procedimiento se solicitase por Julen medidas provisionales ¿quién será el órgano competente para adoptarlas?",
+    "options": [
+      "a) el órgano competente para resolver",
+      "b) el órgano competente para instruir",
+      "c) una vez iniciado el procedimiento no se pueden adoptar medidas provisionales",
+      "d) las medidas provisionales solo pueden adoptarse de oficio."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "12. Si el procedimiento de responsabilidad patrimonial se iniciase de oficio ¿qué plazo otorgará la AAPP competente para que los interesados puedan efectuar alegaciones, aportar documentos o cualquier otra información que estimen conveniente?",
+    "options": [
+      "a) 1 mes",
+      "b) 2 meses",
+      "c) 10 días.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "13. Si iniciado el procedimiento de responsabilidad patrimonial por la AAPP los interesados no se personaren la AAPP:",
+    "options": [
+      "a) archivará el procedimiento",
+      "b) continuará instruyendo el procedimiento",
+      "c) concederá un plazo de subsanación.",
+      "d) dictará a continuación la resolución que pone fin al procedimiento."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "14. ¿Qué consideración tienen los informes que se emiten en los procedimientos de responsabilidad patrimonial?",
+    "options": [
+      "a) facultativos",
+      "b) preceptivos",
+      "c) facultativos y vinculantes",
+      "d) potestativos y no vinculantes."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "15. Si el importe de la lesión que se reclama asciende a 30.000 euros ¿por quién será emitido el informe?",
+    "options": [
+      "a) al Consejo de Estado",
+      "b) al Consejo Consultivo de la Comunidad Autónoma.",
+      "c) al servicio cuyo funcionamiento haya ocasionado la lesión.",
+      "d) al Consejo de Estado o al servicio cuyo funcionamiento haya ocasionado la lesión."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "16. ¿En qué plazo se emitirá?",
+    "options": [
+      "a) 2 meses",
+      "b) 10 días.",
+      "c) 3 meses",
+      "d) 1 mes."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "17. ¿Se puede suspender el plazo hasta se recibe el informe?",
+    "options": [
+      "a) no",
+      "b) si hasta un máximo de 10 días.",
+      "c) si hasta un máximo de 3 meses",
+      "d) si hasta un máximo de 2 meses."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "18. Si el importe a reclamar por la lesión fuese de 50.000 euros ¿quién emitirá el informe?",
+    "options": [
+      "a) al Consejo de Estado",
+      "b) al Consejo Consultivo de la Comunidad Autónoma.",
+      "c) al servicio cuyo funcionamiento haya ocasionado la lesión.",
+      "d) a y b son correctas."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "19. ¿En qué plazo se emitirá dicho informe?",
+    "options": [
+      "a) 10 días",
+      "b) 2 meses",
+      "c) 3 meses",
+      "d) 1 mes."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "20. Si transcurrido el plazo máximo de resolución Julen no interpone recurso en plazo ¿cómo se entenderá dicha resolución?",
+    "options": [
+      "a) desestimada",
+      "b) caducada",
+      "c) firme",
+      "d) estimada."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "21. Si el procedimiento se iniciase a instancia de Julen ¿cuánto tiempo tiene que transcurrir para que se produzca la caducidad?",
+    "options": [
+      "a) 1 mes por causa imputable al mismo",
+      "b) 3 meses por causa no imputable al mismo.",
+      "c) 2 meses por causa imputable al mismo",
+      "d) 3 meses por causa imputable al mismo."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "22. Si se produje la caducidad ¿podría interponer Julen algún tipo de recurso?",
+    "options": [
+      "a) no cabe recurso contra la caducidad",
+      "b) solo cuando fuese imputable a la AAPP",
+      "c) solo cuando haya prescrito la acción.",
+      "d) los recursos pertinentes."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "23. ¿Qué plazo máximo tiene Julen para reclamar la indemnización a la AAPP?",
+    "options": [
+      "a) 6 meses",
+      "b) 1 mes al ser acto expreso.",
+      "c) 1 año",
+      "d) 3 años."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "24. ¿Desde qué fecha empezará a contar?",
+    "options": [
+      "a) desde la fecha del accidente",
+      "b) desde que empieza a tramitarse el procedimiento en Basauri",
+      "c) desde el alta hospitalaria",
+      "d) desde que la solicitud tuvo entrada en Bilbao."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "25. Si una vez iniciado el procedimiento se produjese la caducidad del mismo ¿interrumpe la caducidad el plazo de prescripción?",
+    "options": [
+      "a) si",
+      "b) no",
+      "c) solo en los iniciados de parte",
+      "d) solo en los iniciados de oficio."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "26. ¿En qué supuestos se podría llevar a cabo la tramitación de este procedimiento por la vía de la tramitación simplificada?",
+    "options": [
+      "a) cuando lo solicite el interesado.",
+      "b) cuando lo acuerde la AAPP sin más requisitos.",
+      "c) cuando exista una inequívoca relación de causalidad entre el funcionamiento del servicio público y la lesión, así como la valoración del daño y el cálculo de la indemnización y así se acuerde de oficio",
+      "d) cuando exista una inequívoca relación de causalidad entre el funcionamiento del servicio público y la lesión, así como la valoración del daño y el cálculo de la indemnización y así lo solicite el interesado."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "27. Si se acuerda la tramitación simplificada ¿En qué plazo tiene que ser resuelto?",
+    "options": [
+      "a) 30 días a contar desde el día siguiente a que se notifique al interesado el acuerdo de tramitación de este tipo de procedimiento.",
+      "b) 60 días a contar desde el día siguiente a que se notifique al interesado el acuerdo de tramitación de este tipo de procedimiento.",
+      "c) 30 días teniéndose en cuenta el tiempo transcurrido con anterioridad.",
+      "d) no se puede llevar a cabo la tramitación simplificada en procedimientos de responsabilidad patrimonial."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "28. Si el interesado tuviere conocimiento que al resolverse el procedimiento el órgano competente hubiere sido condenado por prevaricación ¿qué recurso podría interponer?",
+    "options": [
+      "a) alzada",
+      "b) reposición",
+      "c) contencioso administrativo",
+      "d) extraordinario de revisión."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "29. ¿En qué plazo?",
+    "options": [
+      "a) 3 meses desde que la sentencia judicial quedo firme.",
+      "b) 3 meses desde que tuvo conocimiento de la sentencia judicial",
+      "c) en cualquier momento",
+      "d) 2 meses."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "30. Si Julen interpone el recurso extraordinario de revisión ¿le perjudicaría para acudir con posterioridad a la revisión de oficio del artículo 106?",
+    "options": [
+      "a) si",
+      "b) no",
+      "c) depende de la resolución del recurso.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "31. ¿Podría Julen acudir a la vía de la declaración de lesividad de actos anulables?",
+    "options": [
+      "a) solo cuando considere que el acto es anulable",
+      "b) solo cuando considere que el acto es nulo",
+      "c) esta vía se inicia por parte de la AAPP",
+      "d) siempre que no haya transcurrido un plazo de 4 años."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "32. ¿De qué plazo dispone Julen para acudir a la vía de la revisión de oficio una vez que ya agotado todos los mecanismos de impugnación?",
+    "options": [
+      "a) 6 meses",
+      "b) 1 año",
+      "c) en cualquier momento",
+      "d) solo se inicia de oficio."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "33. ¿A quién exigirá Julen la responsabilidad por la lesión sufrida?",
+    "options": [
+      "a) directamente contra el operario que quedó levantada la alcantarilla",
+      "b) contra la AAPP responsable.",
+      "c) contra el técnico de prevención de riesgos laborales",
+      "d) contra la encargada de obras."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "34. ¿Podría la AAPP exigir responsabilidad a las autoridades y demás personal a su servicio?",
+    "options": [
+      "a) si en todo caso",
+      "b) solo cuando se trate de dolo o culpa muy grave",
+      "c) solo cuando se trate de dolo o culpa o negligencia grave",
+      "d) solo en caso de dolo, culpa o negligencia leve."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "35. Si la AAPP no actuó de manera anormal ¿podría ser responsable?",
+    "options": [
+      "a) no",
+      "b) si",
+      "c) sí, pero podría quedar exonerada en los casos de fuerza mayor.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "36. El importe de la lesión que se tiene que abonar a Julen ¿desde cuándo empieza a calcularse?",
+    "options": [
+      "a) desde la fecha del alta médica.",
+      "b) desde la fecha de estabilización de las lesiones",
+      "c) desde la fecha en que la lesión se produjo actualizándose conforme al Índice de Garantía de Competitividad.",
+      "d) desde la fecha del alta médica actualizándose conforme al Índice de Garantía de Competitividad."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "37. ¿Podría llevarse a cabo por pagos progresivos?",
+    "options": [
+      "a) si",
+      "b) por compensación en especie únicamente.",
+      "c) por compensación en especie o pagos periódicos.",
+      "d) por un puesto de trabajo en el ayuntamiento."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "38. Si en la gestión del alcantarillado concurrieran varias AAPP y no se pudiese determinar la responsable ¿cómo será la responsabilidad?",
+    "options": [
+      "a) mancomunada",
+      "b) solidaria",
+      "c) directa",
+      "d) indirecta."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "39. En estos casos ¿quién será la competente para incoar, instruir y resolver?",
+    "options": [
+      "a) aquella donde se produjo la lesión.",
+      "b) la fijada en las reglas de constitución y en su defecto aquella con mayor participación en la financiación del servicio.",
+      "c) la de mayor participación en la financiación del servicio y en su defecto la fijada en las reglas de constitución.",
+      "d) la que tenga menor participación en la financiación del servicio."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "40. La responsabilidad patrimonial por el funcionamiento de la Administración de Justicia se rige por:",
+    "options": [
+      "a) la ley 40/15",
+      "b) ley 39/15",
+      "c) la LOPJ",
+      "d) ninguna es correcta."
+    ],
+    "correct": 2,
+    "caso": 0
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

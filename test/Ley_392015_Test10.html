@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Test10</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN:</strong> Test 10 (Arts. 53 a 105)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. NO PODRÁ IMPONERSE A LOS ADMINISTRADOS UNA OBLIGACIÓN PECUNIARIA QUE NO ESTUVIESE ESTABLECIDA CON ARREGLO A:",
+    "options": [
+      "a) una Ley.",
+      "b) una norma de rango legal.",
+      "c) una norma reglamentaria.",
+      "d) una norma de rango legal o reglamentaria."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "2. EL TÍTULO IV DE LA LEY 39/2015, DE 1 DE OCTUBRE, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN DE LAS ADMINISTRACIONES PÚBLICAS COMPRENDE LOS ARTÍCULOS:",
+    "options": [
+      "a) 66 a 100.",
+      "b) 53 a 105.",
+      "c) 49 a 107.",
+      "d) 58 a 99."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "3. CUANDO HAYA LUGAR A LA EJECUCIÓN SUBSIDIARIA LAS ADMINISTRACIONES PÚBLICAS REALIZARÁN EL ACTO:",
+    "options": [
+      "a) a través de las personas que determinen, a costa del obligado.",
+      "b) por sí, a costa del obligado.",
+      "c) por sí, a costa de las personas que determinen.",
+      "d) por sí o a través de las personas que determinen, a costa del obligado"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "4. EN LA EJECUCIÓN SUBSIDIARIA EL IMPORTE DE LOS GASTOS, DAÑOS Y PERJUICIOS:",
+    "options": [
+      "a) podrá liquidarse de forma provisional y realizarse antes de la ejecución, a reserva de la liquidación definitiva.",
+      "b) no podrá liquidarse de forma provisional ni realizarse antes de la ejecución, a reserva de la liquidación definitiva.",
+      "c) podrá liquidarse de forma provisional pero no podrá realizarse antes de la ejecución, a reserva de la liquidación definitiva.",
+      "d) no podrá liquidarse de forma provisional pero podrá realizarse antes de la ejecución, a reserva de la liquidación definitiva."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "5. EL TÍTULO IV DE LA LEY 39/2015, DE 1 DE OCTUBRE, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN DE LAS ADMINISTRACIONES PÚBLICAS TIENE:",
+    "options": [
+      "a) 3 capítulos.",
+      "b) 4 capítulos.",
+      "c) 5 capítulos.",
+      "d) 7 capítulos."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "6. LA MULTA COERCITIVA ES:",
+    "options": [
+      "a) dependiente de las sanciones que puedan imponerse con tal carácter e incompatible con ellas.",
+      "b) independiente de las sanciones que puedan imponerse con tal carácter y compatible con ellas.",
+      "c) dependiente de las sanciones que puedan imponerse con tal carácter y compatible con ellas.",
+      "d) independiente de las sanciones que puedan imponerse con tal carácter e incompatible con ellas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "7. PODRÁN SER EJECUTADOS POR COMPULSIÓN DIRECTA SOBRE LAS PERSONAS:",
+    "options": [
+      "a) los actos administrativos que impongan una obligación personalísima de no hacer o soportar.",
+      "b) los actos administrativos que impongan una obligación personalísima de hacer o soportar.",
+      "c) los actos administrativos que impongan una obligación personalísima de hacer o no soportar.",
+      "d) los actos administrativos que impongan una obligación personalísima de no hacer o no soportar."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "8. UN ACTO ADMINISTRATIVO PODRÁ SER EJECUTADO POR COMPULSIÓN DIRECTA SOBRE LAS PERSONAS:",
+    "options": [
+      "a) en los casos en que la ley expresamente lo autorice.",
+      "b) dentro siempre del respeto debido a su dignidad.",
+      "c) dentro siempre del respeto debido a los derechos reconocidos en la Constitución.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "9. EL OBLIGADO DEBERÁ RESARCIR LOS DAÑOS Y PERJUICIOS, A CUYA LIQUIDACIÓN Y COBRO SE PROCEDERÁ EN VÍA ADMINISTRATIVA SI, TRATÁNDOSE DE:",
+    "options": [
+      "a) obligaciones personalísimas de no hacer, se realizase la prestación.",
+      "b) obligaciones personalísimas de hacer, se realizase la prestación.",
+      "c) obligaciones personalísimas de hacer, no se realizase la prestación.",
+      "d) obligaciones personalísimas de no hacer, no se realizase la prestación."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "10. EL TÍTULO IV DE LA LEY 39/2015, DE 1 DE OCTUBRE, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN DE LAS ADMINISTRACIONES PÚBLICAS SE DENOMINA:",
+    "options": [
+      "a) De la actividad de las Administraciones Públicas.",
+      "b) De los actos administrativos.",
+      "c) De las disposiciones sobre el procedimiento administrativo común.",
+      "d) De la revisión de los actos en vía administrativa."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "11. LAS ACCIONES POSESORIAS CONTRA LAS ACTUACIONES DE LOS ÓRGANOS ADMINISTRATIVOS REALIZADAS EN MATERIA DE SU COMPETENCIA Y DE ACUERDO CON EL PROCEDIMIENTO LEGALMENTE ESTABLECIDO:",
+    "options": [
+      "a) en ningún caso se admitirán a trámite.",
+      "b) excepcionalmente podrán admitirse a trámite.",
+      "c) se admitirán a trámite como regla general.",
+      "d) se admitirán a trámite en todo caso."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "12. CUANDO ASÍ LO AUTORICEN LAS LEYES, Y EN LA FORMA Y CUANTÍA QUE ÉSTAS DETERMINEN, LAS ADMINISTRACIONES PÚBLICAS PUEDEN, PARA LA EJECUCIÓN DE DETERMINADOS ACTOS, IMPONER MULTAS COERCITIVAS, REITERADAS POR LAPSOS DE TIEMPO QUE SEAN SUFICIENTES PARA CUMPLIR LO ORDENADO, EN LOS SIGUIENTES SUPUESTOS (SEÑALA LA INCORRECTA):",
+    "options": [
+      "a) actos personalísimos en que no proceda la compulsión directa sobre la persona del obligado.",
+      "b) actos en que, procediendo la compulsión, la Administración no la estimara conveniente.",
+      "c) actos cuya ejecución no pueda el obligado encargar a otra persona.",
+      "d) todas son correctas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "13. HABRÁ LUGAR A LA EJECUCIÓN SUBSIDIARIA CUANDO SE TRATE DE ACTOS QUE:",
+    "options": [
+      "a) por ser personalísimos puedan ser realizados por sujeto distinto del obligado.",
+      "b) por no ser personalísimos no puedan ser realizados por sujeto distinto del obligado.",
+      "c) por no ser personalísimos puedan ser realizados por sujeto distinto del obligado.",
+      "d) por ser personalísimos no puedan ser realizados por sujeto distinto del obligado."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "14. LOS INTERESADOS EN UN PROCEDIMIENTO ADMINISTRATIVO, TIENEN DERECHO A (SEÑALA LA INCORRECTA):",
+    "options": [
+      "a) conocer, antes del trámite de audiencia, el estado de la tramitación de los procedimientos en los que tengan la condición de interesados.",
+      "b) conocer el sentido del silencio administrativo que corresponda, en caso de que la Administración no dicte ni notifique resolución expresa en plazo.",
+      "c) conocer el órgano competente para la instrucción de los procedimientos en los que tengan la condición de interesados.",
+      "d) acceder y a obtener copia de los documentos contenidos en los procedimientos en los que tengan la condición de interesados."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "15. LOS INTERESADOS EN UN PROCEDIMIENTO ADMINISTRATIVO, TIENEN DERECHO A (SEÑALA LA INCORRECTA):",
+    "options": [
+      "a) obtener información y orientación acerca de los requisitos jurídicos o técnicos que las disposiciones vigentes impongan a los proyectos, actuaciones o solicitudes que se propongan realizar.",
+      "b) actuar asistidos de asesor cuando lo consideren conveniente en defensa de sus intereses.",
+      "c) cumplir las obligaciones de pago a través de los medios electrónicos.",
+      "d) cualesquiera que les reconozcan la Constitución, las leyes o los reglamentos."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "16. RESPECTO A LA INICIACIÓN DEL PROCEDIMIENTO NO ES CORRECTO:",
+    "options": [
+      "a) los procedimientos podrán iniciarse de oficio o a solicitud del interesado.",
+      "b) con anterioridad al inicio del procedimiento, el órgano competente abrirá un período de información o actuaciones previas con el fin de conocer las circunstancias del caso concreto y la conveniencia o no de iniciar el procedimiento.",
+      "c) en el caso de procedimientos de naturaleza sancionadora las actuaciones previas se orientarán a determinar, con la mayor precisión posible, los hechos susceptibles de motivar la incoación del procedimiento, la identificación de la persona o personas que pudieran resultar responsables y las circunstancias relevantes que concurran en unos y otros.",
+      "d) las actuaciones previas serán realizadas por los órganos que tengan atribuidas funciones de investigación, averiguación e inspección en la materia y, en defecto de éstos, por la persona u órgano administrativo que se determine por el órgano competente para la iniciación o resolución del procedimiento."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "17. EN LOS CASOS DE URGENCIA INAPLAZABLE Y PARA LA PROTECCIÓN PROVISIONAL DE LOS INTERESES IMPLICADOS, PODRÁ ADOPTAR DE FORMA MOTIVADA LAS MEDIDAS PROVISIONALES QUE RESULTEN NECESARIAS Y PROPORCIONADAS:",
+    "options": [
+      "a) el órgano competente para iniciar o instruir el procedimiento, de oficio, iniciado el procedimiento administrativo.",
+      "b) el órgano competente para resolver el procedimiento, de oficio, antes de la iniciación del procedimiento administrativo.",
+      "c) el órgano competente para iniciar o instruir el procedimiento, de oficio o a instancia de parte, antes de la iniciación del procedimiento administrativo.",
+      "d) el órgano competente para resolver el procedimiento, de oficio o a instancia de parte, iniciado el procedimiento administrativo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "18. PODRÁN ACORDARSE LAS SIGUIENTES MEDIDAS PROVISIONALES (SEÑALA LA INCORRECTA):",
+    "options": [
+      "a) suspensión definitiva de actividades.",
+      "b) prestación de fianzas.",
+      "c) suspensión temporal de servicios por razones de sanidad, higiene o seguridad.",
+      "d) embargo preventivo de bienes, rentas y cosas fungibles computables en metálico por aplicación de precios ciertos."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "19. RESPECTO A LAS MEDIDAS PROVISIONALES:",
+    "options": [
+      "a) no se podrán adoptar si pueden causar perjuicio de difícil o imposible reparación a los interesados o implicar violación de derechos amparados por las leyes.",
+      "b) no podrán ser alzadas o modificadas durante la tramitación del procedimiento en virtud de circunstancias sobrevenidas o que no pudieron ser tenidas en cuenta en el momento de su adopción.",
+      "c) se consolidarán cuando surta efectos la resolución administrativa que ponga fin al procedimiento correspondiente.",
+      "d) todas son correctas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "20. CONTRA EL ACUERDO DE ACUMULACIÓN:",
+    "options": [
+      "a) podrá imponerse recurso de alzada.",
+      "b) podrá imponerse recurso potestativo de reposición.",
+      "c) podrá imponerse recurso extraordinario de revisión.",
+      "d) no procederá recurso alguno."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "21. SE ENTIENDE POR INICIO DEL PROCEDIMIENTO A PROPIA INICIATIVA:",
+    "options": [
+      "a) el acto por el que cualquier persona, en cumplimiento o no de una obligación legal, pone en conocimiento de un órgano administrativo la existencia de un determinado hecho que pudiera justificar la iniciación de oficio de un procedimiento administrativo.",
+      "b) la actuación derivada del conocimiento directo o indirecto de las circunstancias, conductas o hechos objeto del procedimiento por el órgano que tiene atribuida la competencia de iniciación",
+      "c) la propuesta de iniciación del procedimiento formulada por cualquier órgano administrativo que no tiene competencia para iniciar el mismo y que ha tenido conocimiento de las circunstancias, conductas o hechos objeto del procedimiento.",
+      "d) la orden emitida por un órgano administrativo superior jerárquico del competente para la iniciación del procedimiento."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "22. EN LOS PROCEDIMIENTOS DE NATURALEZA SANCIONADORA, LA ORDEN DE INICIO DEL PROCEDIMIENTO EXPRESARÁ, EN LA MEDIDA DE LO POSIBLE:",
+    "options": [
+      "a) las conductas o hechos que pudieran constituir infracción administrativa y su tipificación.",
+      "b) el lugar, la fecha, fechas o período de tiempo continuado en que los hechos se produjeron.",
+      "c) la persona o personas presuntamente responsables.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "23. UNA VEZ REALIZADA LA PROPUESTA DE INICIACIÓN DEL PROCEDIMIENTO:",
+    "options": [
+      "a) la petición vincula al órgano competente para iniciar el procedimiento.",
+      "b) la petición no vincula al órgano competente para iniciar el procedimiento, y tampoco es necesario comunicar al órgano que la hubiera formulado los motivos por los que no procede la iniciación.",
+      "c) la petición no vincula al órgano competente para iniciar el procedimiento, si bien deberá comunicar al órgano que la hubiera formulado los motivos por los que, en su caso, no procede la iniciación.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "24. RESPECTO AL INICIO DEL PROCEDIMIENTO DE OFICIO SE ENTIENDE POR DENUNCIA:",
+    "options": [
+      "a) el acto por el que cualquier persona, en cumplimiento o no de una obligación legal, pone en conocimiento de un órgano administrativo la existencia de un determinado hecho que pudiera justificar la iniciación de oficio de un procedimiento administrativo.",
+      "b) la actuación derivada del conocimiento directo o indirecto de las circunstancias, conductas o hechos objeto del procedimiento por el órgano que tiene atribuida la competencia de iniciación.",
+      "c) la propuesta de iniciación del procedimiento formulada por cualquier órgano administrativo que no tiene competencia para iniciar el mismo y que ha tenido conocimiento de las circunstancias, conductas o hechos objeto del procedimiento.",
+      "d) la orden emitida por un órgano administrativo superior jerárquico del competente para la iniciación del procedimiento"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "25. RESPECTO AL INICIO DEL PROCEDIMIENTO POR DENUNCIA, CUANDO EL DENUNCIANTE HAYA PARTICIPADO EN LA COMISIÓN DE UNA INFRACCIÓN DE ESTA NATURALEZA Y EXISTAN OTROS INFRACTORES, EL ÓRGANO COMPETENTE PARA RESOLVER EL PROCEDIMIENTO, SIEMPRE Y CUANDO EN EL MOMENTO DE APORTARSE AQUELLOS NO SE DISPONGA DE ELEMENTOS SUFICIENTES PARA ORDENAR LA MISMA, DEBERÁ EXIMIR AL DENUNCIANTE DEL PAGO DE LA MULTA QUE LE CORRESPONDERÍA U OTRO TIPO DE SANCIÓN DE CARÁCTER NO PECUNIARIO:",
+    "options": [
+      "a) cuando aporte elementos de prueba que permitan iniciar el procedimiento o comprobar la infracción, independientemente de que se repare o no el perjuicio causado.",
+      "b) cuando sea el primero en aportar elementos de prueba que permitan iniciar el procedimiento o comprobar la infracción, y se repare el perjuicio causado.",
+      "c) cuando aporte elementos de prueba que permitan iniciar el procedimiento o comprobar la infracción, y se repare el perjuicio causado.",
+      "d) cuando sea el primero en aportar elementos de prueba que permitan iniciar el procedimiento o comprobar la infracción, independientemente de que se repare o no el perjuicio causado."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "26. LOS PROCEDIMIENTOS DE NATURALEZA SANCIONADORA SE INICIARÁN:",
+    "options": [
+      "a) de oficio por acuerdo del órgano competente o a instancia de parte y establecerán la debida separación entre la fase instructora y la sancionadora, que se encomendarán a los mismos órganos.",
+      "b) siempre de oficio por acuerdo del órgano competente y establecerán la debida separación entre la fase instructora y la sancionadora, que se encomendará a órganos distintos.",
+      "c) de oficio por acuerdo del órgano competente o a instancia de parte y establecerán la debida separación entre la fase instructora y la sancionadora, que se encomendará a órganos distintos.",
+      "d) siempre de oficio por acuerdo del órgano competente y establecerán la debida separación entre la fase instructora y la sancionadora, que se encomendarán a los mismos órganos."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "27. EL ACUERDO DE INICIACIÓN EN LOS PROCEDIMIENTOS DE NATURALEZA SANCIONADORA SE COMUNICARÁ A:",
+    "options": [
+      "a) el órgano encargado de resolver el procedimiento, con traslado de la documentación generada hasta ese momento, y se notificará a los interesados, con excepción, en su caso, del inculpado.",
+      "b) el órgano encargado de resolver el procedimiento, con traslado de cuantas actuaciones existan al respecto, y se notificará a los interesados, entendiendo en todo caso por tal al inculpado.",
+      "c) el instructor del procedimiento, con traslado de la documentación generada hasta ese momento, y se notificará a los interesados, con excepción, en su caso, del inculpado.",
+      "d) el instructor del procedimiento, con traslado de cuantas actuaciones existan al respecto, y se notificará a los interesados, entendiendo en todo caso por tal al inculpado."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "28. EL ACUERDO DE INICIACIÓN EN LOS PROCEDIMIENTOS DE NATURALEZA SANCIONADORA DEBERÁ CONTENER AL MENOS:",
+    "options": [
+      "a) órgano competente para la resolución del procedimiento y norma que le atribuya tal competencia, indicando la prohibición de que el presunto responsable pueda reconocer voluntariamente su responsabilidad.",
+      "b) medidas de carácter provisional que se hayan acordado por el órgano competente para iniciar el procedimiento sancionador, sin perjuicio de las que se puedan adoptar durante el mismo.",
+      "c) indicación del derecho a formular alegaciones y a la audiencia en el procedimiento y de los plazos para su ejercicio, así como indicación de que, en caso de no efectuar alegaciones en el plazo previsto sobre el contenido del acuerdo de iniciación, éste en ningún caso podrá ser considerado propuesta de resolución.",
+      "d) todas son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "29. RESPECTO AL INICIO DE OFICIO DE LOS PROCEDIMIENTOS DE RESPONSABILIDAD PATRIMONIAL:",
+    "options": [
+      "a) cuando las Administraciones Públicas decidan iniciar de oficio un procedimiento de responsabilidad patrimonial será necesario que haya prescrito el derecho a la reclamación del interesado.",
+      "b) el acuerdo de iniciación del procedimiento se notificará a los particulares presuntamente lesionados, concediéndoles un plazo de diez días para que aporten cuantas alegaciones, documentos o información estimen conveniente a su derecho y propongan cuantas pruebas sean pertinentes para el reconocimiento del mismo.",
+      "c) el procedimiento iniciado se instruirá siempre que los particulares presuntamente lesionados se personen en el plazo establecido.",
+      "d) todas son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "30. RESPECTO AL INICIO DEL PROCEDIMIENTO A SOLICITUD DEL INTERESADO LAS SOLICITUDES QUE SE FORMULEN DEBERÁN CONTENER (SEÑALA LA INCORRECTA):",
+    "options": [
+      "a) lugar y fecha.",
+      "b) firma del solicitante o acreditación de la autenticidad de su voluntad expresada mediante poder notarial.",
+      "c) órgano, centro o unidad administrativa a la que se dirige y su correspondiente código de identificación.",
+      "d) todas son incorrectas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "31. RESPECTO AL INICIO DEL PROCEDIMIENTO A SOLICITUD DEL INTERESADO NO ES CORRECTO:",
+    "options": [
+      "a) las Administraciones Públicas deberán establecer modelos y sistemas de presentación masiva que permitan a los interesados presentar simultáneamente varias solicitudes.",
+      "b) los modelos y sistemas de presentación masiva, de uso voluntario, estarán a disposición de los interesados en las correspondientes sedes electrónicas y en las oficinas de asistencia en materia de registros de las Administraciones Públicas.",
+      "c) los solicitantes podrán acompañar los elementos que estimen convenientes para precisar o completar los datos del modelo, los cuales podrán no ser admitidos por el órgano al que se dirijan.",
+      "d) cuando la Administración en un procedimiento concreto establezca expresamente modelos específicos de presentación de solicitudes, éstos serán de uso obligatorio por los interesados."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "32. SI LA SOLICITUD DE INICIACIÓN NO REÚNE LOS REQUISITOS QUE SEÑALA EL ARTÍCULO 66, Y, EN SU CASO, LOS QUE SEÑALA EL ARTÍCULO 67 U OTROS EXIGIDOS POR LA LEGISLACIÓN ESPECÍFICA APLICABLE, SE REQUERIRÁ AL INTERESADO PARA QUE SUBSANE LA FALTA O ACOMPAÑE LOS DOCUMENTOS PRECEPTIVOS EN UN PLAZO DE:",
+    "options": [
+      "a) 5 días.",
+      "b) 10 días.",
+      "c) 15 días.",
+      "d) 20 días."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "33. RESPECTO A LA SUBSANACIÓN Y MEJORA DE LA SOLICITUD NO ES CORRECTO:",
+    "options": [
+      "a) en los procedimientos iniciados a solicitud de los interesados, el órgano competente podrá recabar del solicitante la modificación o mejora voluntarias de los términos de aquélla.",
+      "b) de la modificación o mejora voluntarias se levantará acta sucinta, que se incorporará al procedimiento.",
+      "c) si alguno de los sujetos obligados a relacionarse a través de medios electrónicos con las Administraciones Públicas presenta su solicitud presencialmente, éstas requerirán al interesado para que la subsane a través de su presentación electrónica.",
+      "d) en caso de haber presentado solicitud presencialmente y ser requerido para la presentación electrónica, se considerará como fecha de presentación la de la solicitud presencial."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "34. SI EN VIRTUD DE ACTO ADMINISTRATIVO HUBIERA DE SATISFACERSE CANTIDAD LÍQUIDA:",
+    "options": [
+      "a) se seguirá el procedimiento previsto en las normas reguladoras del procedimiento de apremio.",
+      "b) habrá lugar a la ejecución subsidiaria.",
+      "c) podrá ser ejecutado por compulsión directa sobre las personas.",
+      "d) podrán imponerse multas coercitivas, reiteradas por lapsos de tiempo."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "35. SI PARA LA EJECUCIÓN FORZOSA FUESE NECESARIO ENTRAR EN EL DOMICILIO DEL AFECTADO O EN LOS RESTANTES LUGARES QUE REQUIERAN LA AUTORIZACIÓN DE SU TITULAR LAS ADMINISTRACIONES PÚBLICAS:",
+    "options": [
+      "a) deberán obtener el consentimiento del afectado.",
+      "b) deberán obtener la oportuna autorización judicial.",
+      "c) a y b son correctas.",
+      "d) a y b son incorrectas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "36. SI FUERAN VARIOS LOS MEDIOS DE EJECUCIÓN ADMISIBLES SE ELEGIRÁ:",
+    "options": [
+      "a) el que decida el afectado.",
+      "b) el que decida el órgano administrativo competente.",
+      "c) el que se pueda llevar a cabo con mayor rapidez.",
+      "d) el menos restrictivo de la libertad individual."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "37. CUANDO LA TRAMITACIÓN SIMPLIFICADA DEL PROCEDIMIENTO SEA ACORDADA POR LA ADMINISTRACIÓN:",
+    "options": [
+      "a) de oficio, deberá notificarlo a los interesados, si alguno de ellos manifestara su oposición expresa, la Administración deberá seguir la tramitación ordinaria.",
+      "b) de oficio, deberá notificarlo a los interesados, aunque alguno de ellos manifestara su oposición expresa, la Administración seguirá con la tramitación simplificada.",
+      "c) a solicitud de los interesados, deberá notificarlo a éstos, si alguno de ellos manifestara su oposición expresa, la Administración deberá seguir la tramitación ordinaria.",
+      "d) a solicitud de los interesados, deberá notificarlo a éstos y aunque alguno de ellos manifestara su oposición expresa, la Administración seguirá con la tramitación simplificada."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "38. TRANSCURRIDO EL PLAZO QUE TIENE EL ÓRGANO COMPETENTE PARA PODER DESESTIMAR LA SOLICITUD DE LA TRAMITACIÓN SIMPLIFICADA DEL PROCEDIMIENTO:",
+    "options": [
+      "a) se entenderá estimada la solicitud.",
+      "b) se entenderá desestimada la solicitud.",
+      "c) se producirá la caducidad de la solicitud.",
+      "d) se producirá la suspensión del procedimiento."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "39. LA EJECUCIÓN FORZOSA POR LAS ADMINISTRACIONES PÚBLICAS SE EFECTUARÁ, RESPETANDO SIEMPRE EL PRINCIPIO DE PROPORCIONALIDAD, POR LOS SIGUIENTES MEDIOS (SEÑALA LA CORRECTA):",
+    "options": [
+      "a) apremio sobre el patrimonio.",
+      "b) ejecución coercitiva.",
+      "c) multa subsidiaria.",
+      "d) compulsión sobre el patrimonio."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "40. LAS ADMINISTRACIONES PÚBLICAS, A TRAVÉS DE SUS ÓRGANOS COMPETENTES EN CADA CASO, PODRÁN PROCEDER PREVIO APERCIBIMIENTO, A LA EJECUCIÓN FORZOSA DE LOS ACTOS ADMINISTRATIVOS SALVO:",
+    "options": [
+      "a) en los supuestos en que se suspenda la ejecución de acuerdo con la Ley.",
+      "b) cuando la Constitución exija la intervención de un órgano judicial.",
+      "c) cuando la Ley exija la intervención de un órgano judicial.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "41. LOS INTERESADOS PODRÁN SOLICITAR LA TRAMITACIÓN SIMPLIFICADA DEL PROCEDIMIENTO. EL ÓRGANO COMPETENTE PARA LA TRAMITACIÓN PODRÁ DESESTIMAR DICHA SOLICITUD, EN EL PLAZO DE:",
+    "options": [
+      "a) 5 días desde su presentación, sin perjuicio de los recursos que pueda interponer el interesado.",
+      "b) 10 días desde su presentación, sin que exista posibilidad de recurso por parte del interesado.",
+      "c) 5 días desde su presentación, sin que exista posibilidad de recurso por parte del interesado.",
+      "d) 10 días desde su presentación, sin perjuicio de los recursos que pueda interponer el interesado."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "42. LOS ACTOS DE LAS ADMINISTRACIONES PÚBLICAS SUJETOS AL DERECHO ADMINISTRATIVO SERÁN INMEDIATAMENTE EJECUTIVOS, SALVO QUE (SEÑALA LA INCORRECTA):",
+    "options": [
+      "a) se produzca la suspensión de la ejecución del acto.",
+      "b) se trate de una resolución de un procedimiento de naturaleza sancionadora contra la que quepa algún recurso en vía administrativa, salvo el potestativo de reposición.",
+      "c) una disposición establezca lo contrario.",
+      "d) se necesite aprobación o autorización superior"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "43. CUANDO DE UNA RESOLUCIÓN ADMINISTRATIVA NAZCA UNA OBLIGACIÓN DE PAGO DERIVADA DE UNA SANCIÓN PECUNIARIA, MULTA O CUALQUIER OTRO DERECHO QUE HAYA DE ABONARSE A LA HACIENDA PÚBLICA, ÉSTE SE EFECTUARÁ PREFERENTEMENTE, SALVO QUE SE JUSTIFIQUE LA IMPOSIBILIDAD DE HACERLO, UTILIZANDO:",
+    "options": [
+      "a) tarjeta de crédito y débito.",
+      "b) transferencia bancaria o domiciliación bancaria.",
+      "c) cualesquiera que se autoricen por el órgano competente en materia de Hacienda Pública.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "44. EN EL CASO DE PROCEDIMIENTOS DE NATURALEZA SANCIONADORA, SE PODRÁ ADOPTAR LA TRAMITACIÓN SIMPLIFICADA DEL PROCEDIMIENTO CUANDO EL ÓRGANO COMPETENTE PARA INICIAR EL PROCEDIMIENTO CONSIDERE QUE, DE ACUERDO CON LO PREVISTO EN SU NORMATIVA REGULADORA, EXISTEN ELEMENTOS DE JUICIO SUFICIENTES PARA CALIFICAR LA INFRACCIÓN COMO:",
+    "options": [
+      "a) leve, sin perjuicio de la oposición expresa por parte del interesado.",
+      "b) grave, sin que quepa la oposición expresa por parte del interesado.",
+      "c) leve, sin que quepa la oposición expresa por parte del interesado.",
+      "d) grave, sin perjuicio de la oposición expresa por parte del interesado."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "45. SALVO QUE RESTE MENOS PARA SU TRAMITACIÓN ORDINARIA, LOS PROCEDIMIENTOS ADMINISTRATIVOS TRAMITADOS DE MANERA SIMPLIFICADA DEBERÁN SER RESUELTOS EN:",
+    "options": [
+      "a) 10 días.",
+      "b) 20 días.",
+      "c) 30 días.",
+      "d) 60 días."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "46. LAS ADMINISTRACIONES PÚBLICAS NO INICIARÁN NINGUNA ACTUACIÓN MATERIAL DE EJECUCIÓN DE RESOLUCIONES QUE LIMITE DERECHOS DE LOS PARTICULARES:",
+    "options": [
+      "a) en ningún caso.",
+      "b) salvo que dichos particulares den su consentimiento expreso.",
+      "c) sin que previamente haya sido adoptada la resolución que le sirva de fundamento jurídico.",
+      "d) salvo casos de fuerza mayor."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "47. LOS PROCEDIMIENTOS ADMINISTRATIVOS TRAMITADOS DE MANERA SIMPLIFICADA CONSTARÁN DE:",
+    "options": [
+      "a) inicio del procedimiento de oficio o a solicitud del interesado.",
+      "b) subsanación de la solicitud presentada, en todo caso.",
+      "c) alegaciones formuladas al final del procedimiento durante el plazo de 5 días.",
+      "d) trámite de audiencia, únicamente cuando la resolución vaya a ser favorable para el interesado."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "48. LOS PROCEDIMIENTOS ADMINISTRATIVOS TRAMITADOS DE MANERA SIMPLIFICADA CONSTARÁN DE (SEÑALA LA INCORRECTA):",
+    "options": [
+      "a) informe del servicio jurídico, cuando éste sea preceptivo.",
+      "b) informe del Consejo General del Poder Judicial, en todo caso.",
+      "c) dictamen del Consejo de Estado u órgano consultivo equivalente de la Comunidad Autónoma en los casos en que sea preceptivo.",
+      "d) Resolución."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "49. RESPECTO A LA DECLARACIÓN RESPONSABLE, LAS ADMINISTRACIONES PODRÁN REQUERIR QUE SE APORTE LA DOCUMENTACIÓN QUE ACREDITE EL CUMPLIMIENTO DE LOS REQUISITOS PARA OBTENER EL RECONOCIMIENTO DE UN DERECHO O FACULTAD O PARA SU EJERCICIO:",
+    "options": [
+      "a) en cualquier momento y el interesado podrá no aportarla.",
+      "b) durante la fase de ordenación y el interesado podrá no aportarla.",
+      "c) en cualquier momento y el interesado deberá aportarla.",
+      "d) durante la fase de ordenación y el interesado deberá aportarla."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "50. SIN PERJUICIO DE LAS FACULTADES DE COMPROBACIÓN, CONTROL E INSPECCIÓN QUE TENGAN ATRIBUIDAS LAS ADMINISTRACIONES PÚBLICAS, LAS DECLARACIONES RESPONSABLES Y LAS COMUNICACIONES PERMITIRÁN, EL RECONOCIMIENTO O EJERCICIO DE UN DERECHO O BIEN EL INICIO DE UNA ACTIVIDAD:",
+    "options": [
+      "a) desde el día de su presentación.",
+      "b) desde el día siguiente de su presentación.",
+      "c) desde el día de su publicación.",
+      "d) desde el día de su creación"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "51. DETERMINARÁ LA IMPOSIBILIDAD DE CONTINUAR CON EL EJERCICIO DEL DERECHO O ACTIVIDAD AFECTADA DESDE EL MOMENTO EN QUE SE TENGA CONSTANCIA DE TALES HECHOS, SIN PERJUICIO DE LAS RESPONSABILIDADES PENALES, CIVILES O ADMINISTRATIVAS A QUE HUBIERA LUGAR:",
+    "options": [
+      "a) la inexactitud, falsedad u omisión, de carácter esencial, de cualquier dato o información que se incorpore a una declaración responsable o a una comunicación.",
+      "b) la no presentación ante la Administración competente de la declaración responsable o la comunicación.",
+      "c) la no presentación ante la Administración competente de la documentación que sea en su caso requerida para acreditar el cumplimiento de lo declarado.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "52. RESPECTO A LA DECLARACIÓN RESPONSABLE Y LA COMUNICACIÓN:",
+    "options": [
+      "a) las Administraciones Públicas tendrán permanentemente publicados y actualizados modelos de declaración responsable y de comunicación, fácilmente accesibles a los interesados.",
+      "b) para iniciar una actividad u obtener el reconocimiento de un derecho o facultad para su ejercicio, será exigible tanto una declaración responsable como una comunicación.",
+      "c) a y b son correctas.",
+      "d) a y b son incorrectas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "53. RESPECTO A LOS EXPEDIENTES ADMINISTRATIVOS NO ES CORRECTO:",
+    "options": [
+      "a) tendrán formato no electrónico.",
+      "b) se formarán mediante la agregación ordenada de cuantos documentos, pruebas, dictámenes, informes, acuerdos, notificaciones y demás diligencias deban integrarlos.",
+      "c) tendrán un índice numerado de todos los documentos que contenga cuando se remita.",
+      "d) deberá constar en el expediente copia electrónica certificada de la resolución adoptada."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "54. LA AUTENTICACIÓN DEL ÍNDICE GARANTIZARÁ LA INTEGRIDAD E INMUTABILIDAD DEL EXPEDIENTE ELECTRÓNICO GENERADO DESDE EL MOMENTO DE:",
+    "options": [
+      "a) su presentación y permitirá su recuperación siempre que sea preciso, siendo admisible que un mismo documento forme parte de distintos expedientes electrónicos.",
+      "b) su firma y permitirá su recuperación siempre que sea preciso, siendo admisible que un mismo documento forme parte de distintos expedientes electrónicos.",
+      "c) su presentación y permitirá su recuperación siempre que sea preciso, no siendo admisible que un mismo documento forme parte de distintos expedientes electrónicos.",
+      "d) su firma y permitirá su recuperación siempre que sea preciso, no siendo admisible que un mismo documento forme parte de distintos expedientes electrónicos."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "55. EL PROCEDIMIENTO, SOMETIDO AL PRINCIPIO DE CELERIDAD, SE IMPULSARÁ DE OFICIO EN TODOS SUS TRÁMITES Y:",
+    "options": [
+      "a) a través de medios electrónicos, respetando los principios de transparencia, publicidad y buena fe.",
+      "b) a través de medios electrónicos, respetando los principios de transparencia y publicidad.",
+      "c) a través de medios no electrónicos, respetando los principios de transparencia, publicidad y buena fe.",
+      "d) a través de medios no electrónicos, respetando los principios de transparencia y publicidad."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "56. DE ACUERDO CON EL PRINCIPIO DE SIMPLIFICACIÓN ADMINISTRATIVA:",
+    "options": [
+      "a) se acordarán en un solo acto todos los trámites que, por su naturaleza, admitan un impulso simultáneo y sea obligado su cumplimiento sucesivo.",
+      "b) se acordarán en sucesivos actos todos los trámites que, por su naturaleza, admitan un impulso simultáneo y no sea obligado su cumplimiento sucesivo.",
+      "c) se acordarán en un solo acto todos los trámites que, por su naturaleza, admitan un impulso simultáneo y no sea obligado su cumplimiento sucesivo.",
+      "d) se acordarán en sucesivos actos todos los trámites que, por su naturaleza, admitan un impulso simultáneo y sea obligado su cumplimiento sucesivo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "57. CUANDO LA ADMINISTRACIÓN CONSIDERE QUE ALGUNO DE LOS ACTOS DE LOS INTERESADOS NO REÚNE LOS REQUISITOS NECESARIOS, LO PONDRÁ EN CONOCIMIENTO DE SU AUTOR:",
+    "options": [
+      "a) con anterioridad trámite de audiencia, concediéndole un plazo de 5 días para cumplimentarlo.",
+      "b) en cualquier momento del procedimiento, concediéndole un plazo de 5 días para cumplimentarlo.",
+      "c) en cualquier momento del procedimiento, concediéndole un plazo de 10 días para cumplimentarlo.",
+      "d) con anterioridad trámite de audiencia, concediéndole un plazo de 10 días para cumplimentarlo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "58. LAS CUESTIONES INCIDENTALES QUE SE SUSCITEN EN EL PROCEDIMIENTO:",
+    "options": [
+      "a) incluso las que se refieran a la nulidad de actuaciones, suspenderán la tramitación del mismo, salvo la abstención.",
+      "b) excepto las que se refieran a la nulidad de actuaciones, suspenderán la tramitación del mismo, salvo la recusación.",
+      "c) incluso las que se refieran a la nulidad de actuaciones, no suspenderán la tramitación del mismo, salvo la recusación.",
+      "d) excepto las que se refieran a la nulidad de actuaciones, no suspenderán la tramitación del mismo, salvo la abstención."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "59. LAS ADMINISTRACIONES PÚBLICAS PODRÁN CELEBRAR ACUERDOS, PACTOS, CONVENIOS O CONTRATOS, SIEMPRE QUE:",
+    "options": [
+      "a) no sean contrarios al ordenamiento jurídico.",
+      "b) versen sobre materias no susceptibles de transacción.",
+      "c) no tengan por objeto satisfacer el interés público que tienen encomendado.",
+      "d) todas son correctas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "60. LAS ADMINISTRACIONES PÚBLICAS PODRÁN CELEBRAR ACUERDOS, PACTOS, CONVENIOS O CONTRATOS, CON EL ALCANCE, EFECTOS Y RÉGIMEN JURÍDICO ESPECÍFICO QUE, EN SU CASO, PREVEA LA DISPOSICIÓN QUE LO REGULE:",
+    "options": [
+      "a) pudiendo tales actos tener la consideración de finalizadores de los procedimientos administrativos o insertarse en los mismos con carácter posterior, vinculante, a la resolución que les ponga fin.",
+      "b) no pudiendo tales actos tener la consideración de finalizadores de los procedimientos administrativos o insertarse en los mismos con carácter previo, vinculante o no, a la resolución que les ponga fin.",
+      "c) no pudiendo tales actos tener la consideración de finalizadores de los procedimientos administrativos o insertarse en los mismos con carácter posterior, vinculante, a la resolución que les ponga fin.",
+      "d) pudiendo tales actos tener la consideración de finalizadores de los procedimientos administrativos o insertarse en los mismos con carácter previo, vinculante o no, a la resolución que les ponga fin."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "61. RESPECTO A LA RESOLUCIÓN EN LOS PROCEDIMIENTOS SANCIONADORES:",
+    "options": [
+      "a) en la resolución se podrán aceptar hechos distintos de los determinados en el curso del procedimiento, con independencia de su diferente valoración jurídica.",
+      "b) la resolución que ponga fin al procedimiento será ejecutiva cuando no quepa contra ella ningún recurso ordinario en vía administrativa.",
+      "c) en la resolución que ponga fin al procedimiento se podrán adoptar las disposiciones cautelares precisas para garantizar su eficacia cuando sea ejecutiva y que podrán consistir en el mantenimiento de las medidas provisionales que en su caso se hubieran adoptado.",
+      "d) todas son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "62. RESPECTO A LA PROPUESTA DE RESOLUCIÓN EN LOS PROCEDIMIENTOS DE CARÁCTER SANCIONADOR NO ES CORRECTO:",
+    "options": [
+      "a) en el caso de procedimientos de carácter sancionador, una vez concluida la instrucción del procedimiento, el órgano instructor formulará una propuesta de resolución que no se notificará a los interesados en determinados supuestos previstos en la ley",
+      "b) la propuesta de resolución deberá indicar la puesta de manifiesto del procedimiento y el plazo para formular alegaciones y presentar los documentos e informaciones que se estimen pertinentes.",
+      "c) en la propuesta de resolución se fijarán de forma motivada los hechos que se consideren probados y su exacta calificación jurídica, se determinará la infracción que, en su caso, aquéllos constituyan, la persona o personas responsables y la sanción que se proponga.",
+      "d) en la propuesta de resolución se fijará la valoración de las pruebas practicadas, en especial aquellas que constituyan los fundamentos básicos de la decisión, así como las medidas provisionales que, en su caso, se hubieran adoptado."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "63. RESPECTO A LA PROPUESTA DE RESOLUCIÓN EN LOS PROCEDIMIENTOS DE CARÁCTER SANCIONADOR, EL ÓRGANO INSTRUCTOR RESOLVERÁ LA FINALIZACIÓN DEL PROCEDIMIENTO, CON ARCHIVO DE LAS ACTUACIONES, SIN QUE SEA NECESARIA LA FORMULACIÓN DE LA PROPUESTA DE RESOLUCIÓN, CUANDO EN LA INSTRUCCIÓN PROCEDIMIENTO SE PONGA DE MANIFIESTO QUE CONCURRE ALGUNA DE LAS SIGUIENTES CIRCUNSTANCIAS (SEÑALA LA INCORRECTA):",
+    "options": [
+      "a) la inexistencia de los hechos que pudieran constituir la infracción.",
+      "b) cuando los hechos resulten acreditados.",
+      "c) los hechos probados no constituyan, de modo manifiesto, infracción administrativa.",
+      "d) Cuando se concluyera, en cualquier momento, que ha prescrito la infracción."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "64. EN NINGÚN CASO PODRÁ LA ADMINISTRACIÓN ABSTENERSE DE RESOLVER SO PRETEXTO DE SILENCIO, OSCURIDAD O INSUFICIENCIA DE LOS PRECEPTOS LEGALES APLICABLES AL CASO:",
+    "options": [
+      "a) ni podrá acordarse la inadmisión de las solicitudes de reconocimiento de derechos no previstos en el ordenamiento jurídico o manifiestamente carentes de fundamento, sin perjuicio del derecho de petición previsto por el artículo 27 de la Constitución.",
+      "b) aunque podrá acordarse la inadmisión de las solicitudes de reconocimiento de derechos no previstos en el ordenamiento jurídico o manifiestamente carentes de fundamento, sin perjuicio del derecho de petición previsto por el artículo 27 de la Constitución.",
+      "c) aunque podrá acordarse la inadmisión de las solicitudes de reconocimiento de derechos no previstos en el ordenamiento jurídico o manifiestamente carentes de fundamento, sin perjuicio del derecho de petición previsto por el artículo 29 de la Constitución.",
+      "d) ni podrá acordarse la inadmisión de las solicitudes de reconocimiento de derechos no previstos en el ordenamiento jurídico o manifiestamente carentes de fundamento, sin perjuicio del derecho de petición previsto por el artículo 29 de la Constitución."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "65. LOS ACUERDOS, PACTOS, CONVENIOS O CONTRATOS QUE CELEBREN LAS ADMINISTRACIONES PÚBLICAS:",
+    "options": [
+      "a) deberán publicarse en el Diario oficial correspondiente en el plazo de 10 días desde su firma.",
+      "b) deberán publicarse en la sede electrónica correspondiente en el plazo de 15 días desde su firma.",
+      "c) deberán publicarse o no según su naturaleza y las personas a las que estuvieran destinados.",
+      "d) deberán publicarse cuando así se establezca en los mismos"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "66. RESPECTO A LAS ACTUACIONES COMPLEMENTARIAS:",
+    "options": [
+      "a) antes de dictar resolución, el órgano competente para resolver podrá decidir, mediante acuerdo motivado, la realización de las actuaciones complementarias indispensables para resolver el procedimiento.",
+      "b) los informes que preceden inmediatamente a la resolución final del procedimiento tendrán la consideración de actuaciones complementarias.",
+      "c) la realización de las actuaciones complementarias no supondrá la suspensión del plazo para resolver el procedimiento.",
+      "d) todas son correctas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "67. LAS ACTUACIONES COMPLEMENTARIAS DEBERÁN PRACTICARSE EN UN PLAZO:",
+    "options": [
+      "a) superior a 10 días.",
+      "b) no superior a 10 días.",
+      "c) superior a 15 días.",
+      "d) no superior a 15 días."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "68. RESPECTO AL CONTENIDO DE LA RESOLUCIÓN CUANDO SE TRATE DE CUESTIONES CONEXAS QUE NO HUBIERAN SIDO PLANTEADAS POR LOS INTERESADOS, EL ÓRGANO COMPETENTE PODRÁ PRONUNCIARSE SOBRE LAS MISMAS, PONIÉNDOLO ANTES DE MANIFIESTO A AQUÉLLOS PARA QUE FORMULEN LAS ALEGACIONES QUE ESTIMEN PERTINENTES Y APORTEN, EN SU CASO, LOS MEDIOS DE PRUEBA POR UN PLAZO:",
+    "options": [
+      "a) superior a 10 días.",
+      "b) no superior a 10 días.",
+      "c) superior a 15 días.",
+      "d) no superior a 15 días."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "69. LOS ACTOS DE INSTRUCCIÓN NECESARIOS PARA LA DETERMINACIÓN, CONOCIMIENTO Y COMPROBACIÓN DE LOS HECHOS EN VIRTUD DE LOS CUALES DEBA PRONUNCIARSE LA RESOLUCIÓN SE REALIZARÁN DE OFICIO, SIN PERJUICIO DEL DERECHO DE LOS INTERESADOS A PROPONER AQUELLAS ACTUACIONES:",
+    "options": [
+      "a) que requieran su intervención.",
+      "b) que constituyan trámites legalmente establecidos.",
+      "c) que constituyan trámites reglamentariamente establecidos.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "70. LOS ACTOS DE INSTRUCCIÓN QUE REQUIERAN LA INTERVENCIÓN DE LOS INTERESADOS HABRÁN DE PRACTICARSE EN LA FORMA QUE RESULTE MÁS CONVENIENTE PARA ELLOS Y SEA COMPATIBLE, EN LA MEDIDA DE LO POSIBLE, CON SUS OBLIGACIONES:",
+    "options": [
+      "a) familiares.",
+      "b) laborales o profesionales.",
+      "c) Personales.",
+      "d) Administrativas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "71. SI EL INFORME DEBIERA SER EMITIDO POR UNA ADMINISTRACIÓN PÚBLICA DISTINTA DE LA QUE TRAMITA EL PROCEDIMIENTO EN ORDEN A EXPRESAR EL PUNTO DE VISTA CORRESPONDIENTE A SUS COMPETENCIAS RESPECTIVAS, Y TRANSCURRIERA EL PLAZO SIN QUE AQUÉL SE HUBIERA EMITIDO:",
+    "options": [
+      "a) se podrán proseguir las actuaciones.",
+      "b) se suspenderá el procedimiento.",
+      "c) se podrá ampliar el plazo para emitir el informe hasta 5 días más.",
+      "d) se podrá ampliar el plazo para emitir el informe hasta 10 días más."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "72. LOS INFORMES SERÁN EMITIDOS A TRAVÉS DE MEDIOS ELECTRÓNICOS Y, SALVO QUE UNA DISPOSICIÓN O EL CUMPLIMIENTO DEL RESTO DE LOS PLAZOS DEL PROCEDIMIENTO PERMITA O EXIJA OTRO PLAZO MAYOR O MENOR, EN EL PLAZO DE:",
+    "options": [
+      "a) 10 días.",
+      "b) 15 días.",
+      "c) 20 días.",
+      "d) 30 días."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "73. LOS INTERESADOS PODRÁN, ADUCIR ALEGACIONES Y APORTAR DOCUMENTOS U OTROS ELEMENTOS DE JUICIO:",
+    "options": [
+      "a) en todo momento",
+      "b) en cualquier momento del procedimiento anterior al acuerdo de iniciación.",
+      "c) en cualquier momento del procedimiento anterior al trámite de audiencia.",
+      "d) en cualquier momento del procedimiento anterior al trámite de información pública."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "74. LOS INTERESADOS PODRÁN ALEGAR LOS DEFECTOS DE TRAMITACIÓN Y, EN ESPECIAL, LOS QUE SUPONGAN PARALIZACIÓN, INFRACCIÓN DE LOS PLAZOS PRECEPTIVAMENTE SEÑALADOS O LA OMISIÓN DE TRÁMITES QUE PUEDEN SER SUBSANADOS ANTES DE LA RESOLUCIÓN DEFINITIVA DEL ASUNTO:",
+    "options": [
+      "a) en todo momento.",
+      "b) en cualquier momento del procedimiento anterior al acuerdo de iniciación.",
+      "c) en cualquier momento del procedimiento anterior al trámite de audiencia.",
+      "d) en cualquier momento del procedimiento anterior al trámite de información pública."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "75. CUANDO LA ADMINISTRACIÓN NO TENGA POR CIERTOS LOS HECHOS ALEGADOS POR LOS INTERESADOS O LA NATURALEZA DEL PROCEDIMIENTO LO EXIJA, EL INSTRUCTOR DEL MISMO ACORDARÁ LA APERTURA DE UN PERÍODO DE PRUEBA POR UN PLAZO:",
+    "options": [
+      "a) no superior a 30 días ni inferior a 10.",
+      "b) no superior a 20 días ni inferior a 10.",
+      "c) no superior a 15 días ni inferior a 10.",
+      "d) no superior a 30 días ni inferior a 20."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "76. EL INSTRUCTOR DEL PROCEDIMIENTO:",
+    "options": [
+      "a) podrá rechazar libremente las pruebas que considere innecesarias.",
+      "b) sólo podrá rechazar las pruebas propuestas por los interesados cuando sean manifiestamente improcedentes o innecesarias, mediante resolución motivada.",
+      "c) no podrá rechazar ninguna de las pruebas propuestas por los interesados.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "77. RESPECTO A LA PETICIÓN DE INFORMES:",
+    "options": [
+      "a) a efectos de la resolución del procedimiento, se solicitarán aquellos informes que sean preceptivos por las disposiciones legales.",
+      "b) a efectos de la resolución del procedimiento, se solicitarán aquellos informes que se juzguen necesarios para resolver, citándose el precepto que los exija o fundamentando, en su caso, la conveniencia de reclamarlos.",
+      "c) en la petición de informe se concretará el extremo o extremos acerca de los que se solicita.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "78. LA ADMINISTRACIÓN COMUNICARÁ A LOS INTERESADOS EL INICIO DE LAS ACTUACIONES NECESARIAS PARA LA REALIZACIÓN DE LAS PRUEBAS QUE HAYAN SIDO ADMITIDAS:",
+    "options": [
+      "a) con 24 horas de antelación.",
+      "b) con 48 horas de antelación.",
+      "c) con 72 horas de antelación.",
+      "d) con antelación suficiente."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "79. EN EL CASO DE LOS PROCEDIMIENTOS DE RESPONSABILIDAD PATRIMONIAL SERÁ:",
+    "options": [
+      "a) facultativo solicitar informe al servicio cuyo funcionamiento haya ocasionado la presunta lesión indemnizable, no pudiendo exceder de 5 días el plazo de su emisión.",
+      "b) preceptivo solicitar informe al servicio cuyo funcionamiento haya ocasionado la presunta lesión indemnizable, no pudiendo exceder de 10 días el plazo de su emisión.",
+      "c) facultativo solicitar informe al servicio cuyo funcionamiento haya ocasionado la presunta lesión indemnizable, no pudiendo exceder de 10 días el plazo de su emisión.",
+      "d) preceptivo solicitar informe al servicio cuyo funcionamiento haya ocasionado la presunta lesión indemnizable, no pudiendo exceder de 5 días el plazo de su emisión."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "80. EL DICTAMEN DEL CONSEJO DE ESTADO O, EN SU CASO, DEL ÓRGANO CONSULTIVO DE LA COMUNIDAD AUTÓNOMA DEBERÁ PRONUNCIARSE:",
+    "options": [
+      "a) sobre la existencia o no de relación de causalidad entre el funcionamiento del servicio público y la lesión producida.",
+      "b) en su caso, sobre la valoración del daño causado.",
+      "c) en su caso, sobre la cuantía y modo de la indemnización de acuerdo con los criterios establecidos en esta Ley.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "81. EN AMBOS CASOS, CUANDO LA SANCIÓN TENGA ÚNICAMENTE CARÁCTER PECUNIARIO, EL ÓRGANO COMPETENTE PARA RESOLVER EL PROCEDIMIENTO APLICARÁ REDUCCIONES DE, AL MENOS:",
+    "options": [
+      "a) el 10 % sobre el importe de la sanción propuesta, siendo éstos acumulables entre sí.",
+      "b) el 20 % sobre el importe de la sanción propuesta, siendo éstos acumulables entre sí.",
+      "c) el 10 % sobre el importe de la sanción propuesta, no siendo éstos acumulables entre sí.",
+      "d) el 20 % sobre el importe de la sanción propuesta, no siendo éstos acumulables entre sí."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "82. LA LEY 39/2015, DE 1 DE OCTUBRE, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN DE LAS ADMINISTRACIONES PÚBLICAS EN SU ARTÍCULO 85 ESTABLECE RESPECTO A LA TERMINACIÓN EN LOS PROCEDIMIENTOS SANCIONADORES:",
+    "options": [
+      "a) iniciado un procedimiento sancionador, aunque el infractor no reconozca su responsabilidad, se podrá resolver el procedimiento con la imposición de la sanción que proceda.",
+      "b) iniciado un procedimiento sancionador, si el infractor reconoce su responsabilidad, se podrá resolver el procedimiento con la imposición de la sanción que proceda.",
+      "c) iniciado un procedimiento sancionador, en ningún caso se podrá resolver el procedimiento con la imposición de una sanción.",
+      "d) iniciado un procedimiento sancionador, en todo caso se podrá resolver el procedimiento con la imposición de una sanción."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "83. EL TRÁMITE DE AUDIENCIA SE REALIZA:",
+    "options": [
+      "a) inmediatamente después de la práctica de la prueba.",
+      "b) inmediatamente antes de la información pública.",
+      "c) inmediatamente antes de redactar la propuesta de resolución.",
+      "d) inmediatamente después del acuerdo de iniciación del procedimiento."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "84. LOS INTERESADOS PODRÁN ALEGAR Y PRESENTAR LOS DOCUMENTOS Y JUSTIFICACIONES QUE ESTIMEN PERTINENTES:",
+    "options": [
+      "a) en un plazo no inferior a 10 días ni superior a 30",
+      "b) en un plazo no inferior a 10 días ni superior a 20.",
+      "c) en un plazo no inferior a 10 días ni superior a 15.",
+      "d) en un plazo no inferior a 15 días ni superior a 30"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "85. CUANDO LA NATURALEZA DEL PROCEDIMIENTO LO REQUIERA, PODRÁ ACORDAR UN PERÍODO DE INFORMACIÓN PÚBLICA:",
+    "options": [
+      "a) el órgano al que corresponda iniciar el procedimiento.",
+      "b) el órgano al que corresponda la instrucción del procedimiento.",
+      "c) el órgano al que corresponda la resolución del procedimiento.",
+      "d) cualquiera de los anteriores."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "86. EL ANUNCIO DEL ACUERDO DE INFORMACIÓN PÚBLICA SEÑALARÁ EL LUGAR DE EXHIBICIÓN, DEBIENDO ESTAR EN TODO CASO A DISPOSICIÓN DE LAS PERSONAS QUE LO SOLICITEN A TRAVÉS DE MEDIOS ELECTRÓNICOS EN LA SEDE ELECTRÓNICA CORRESPONDIENTE, Y DETERMINARÁ EL PLAZO PARA FORMULAR ALEGACIONES, QUE EN NINGÚN CASO PODRÁ SER:",
+    "options": [
+      "a) inferior a 10 días.",
+      "b) superior a 20 días.",
+      "c) superior a 10 días.",
+      "d) inferior a 20 días."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "87. PONDRÁN FIN AL PROCEDIMIENTO (SEÑALA LA INCORRECTA):",
+    "options": [
+      "a) la resolución.",
+      "b) el desistimiento.",
+      "c) la renuncia al derecho en que se funde la solicitud, cuando tal renuncia esté prohibida por el ordenamiento jurídico.",
+      "d) la declaración de caducidad."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "88. LOS INTERESADOS EN UN PROCEDIMIENTO ADMINISTRATIVO, TIENEN DERECHO A (SEÑALA LA INCORRECTA):",
+    "options": [
+      "a) identificar a las autoridades y al personal al servicio de las Administraciones Públicas bajo cuya responsabilidad se tramiten los procedimientos.",
+      "b) no presentar documentos originales en ningún caso.",
+      "c) no presentar datos y documentos no exigidos por las normas aplicables al procedimiento de que se trate, que ya se encuentren en poder de las Administraciones Públicas o que hayan sido elaborados por éstas.",
+      "d) formular alegaciones, utilizar los medios de defensa admitidos por el Ordenamiento Jurídico, y a aportar documentos en cualquier fase del procedimiento anterior al trámite de audiencia, que deberán ser tenidos en cuenta por el órgano competente al redactar la propuesta de resolución."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "89. EN EL CASO DE PROCEDIMIENTOS ADMINISTRATIVOS DE NATURALEZA SANCIONADORA, LOS PRESUNTOS RESPONSABLES TENDRÁN DERECHO A:",
+    "options": [
+      "a) ser notificado de los hechos que se le imputen, de las infracciones que tales hechos puedan constituir y de las sanciones que, en su caso, se les pudieran imponer.",
+      "b) ser notificado de la identidad del instructor, de la autoridad competente para imponer la sanción y de la norma que atribuya tal competencia.",
+      "c) la presunción de no existencia de responsabilidad administrativa mientras no se demuestre lo contrario.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "90. SE ENTIENDE POR INICIO DEL PROCEDIMIENTO POR PETICIÓN RAZONADA DE OTROS ÓRGANOS:",
+    "options": [
+      "a) el acto por el que cualquier persona, en cumplimiento o no de una obligación legal, pone en conocimiento de un órgano administrativo la existencia de un determinado hecho que pudiera justificar la iniciación de oficio de un procedimiento administrativo.",
+      "b) la actuación derivada del conocimiento directo o indirecto de las circunstancias, conductas o hechos objeto del procedimiento por el órgano que tiene atribuida la competencia de iniciación.",
+      "c) la propuesta de iniciación del procedimiento formulada por cualquier órgano administrativo que no tiene competencia para iniciar el mismo y que ha tenido conocimiento de las circunstancias, conductas o hechos objeto del procedimiento.",
+      "d) la orden emitida por un órgano administrativo superior jerárquico del competente para la iniciación del procedimiento."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "91. LA PRESENTACIÓN DE UNA DENUNCIA:",
+    "options": [
+      "a) no confiere, por sí sola, la condición de interesado en el procedimiento.",
+      "b) confiere la condición de interesado en el procedimiento cuando aporte elementos de prueba que permitan iniciarlo.",
+      "c) confiere, por sí sola, la condición de interesado en el procedimiento.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "92. A LOS EFECTOS DE ESTA LEY, SE ENTENDERÁ POR DECLARACIÓN RESPONSABLE EL DOCUMENTO SUSCRITO POR UN INTERESADO EN EL QUE ÉSTE MANIFIESTA, BAJO SU RESPONSABILIDAD:",
+    "options": [
+      "a) que cumple con los requisitos establecidos en la normativa vigente para obtener el reconocimiento de un derecho o facultad o para su ejercicio y que dispone de la documentación que así lo acredita.",
+      "b) que pondrá a disposición de la Administración la documentación cuando le sea requerida.",
+      "c) que se compromete a mantener el cumplimiento de las obligaciones anteriores durante el período de tiempo inherente a dicho reconocimiento o ejercicio",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "93. A PETICIÓN DEL INTERESADO O A INICIATIVA DEL ÓRGANO, CUANDO LA APORTACIÓN DE LOS DOCUMENTOS REQUERIDOS PRESENTE DIFICULTADES ESPECIALES:",
+    "options": [
+      "a) siempre que se trate de procedimientos selectivos o de concurrencia competitiva, este plazo podrá ser ampliado prudencialmente, hasta 5 días.",
+      "b) siempre que no se trate de procedimientos selectivos o de concurrencia competitiva, este plazo podrá ser ampliado prudencialmente, hasta 5 días.",
+      "c) siempre que se trate de procedimientos selectivos o de concurrencia competitiva, este plazo podrá ser ampliado prudencialmente, hasta 7 días.",
+      "d) siempre que no se trate de procedimientos selectivos o de concurrencia competitiva, este plazo podrá ser ampliado prudencialmente, hasta 7 días."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "94. RESPECTO AL INICIO DEL PROCEDIMIENTO A SOLICITUD DEL INTERESADO NO ES CORRECTO:",
+    "options": [
+      "a) las oficinas de asistencia en materia de registros estarán obligadas a facilitar a los interesados el código de identificación si el interesado lo desconoce.",
+      "b) las Administraciones Públicas deberán mantener y actualizar en la sede electrónica correspondiente un listado con los códigos de identificación vigentes.",
+      "c) cuando las pretensiones correspondientes a una pluralidad de personas tengan un contenido y fundamento idéntico o sustancialmente similar, serán en todo caso formuladas en una única solicitud.",
+      "d) de las solicitudes, comunicaciones y escritos que presenten los interesados electrónicamente o en las oficinas de asistencia en materia de registros de la Administración, podrán éstos exigir el correspondiente recibo que acredite la fecha y hora de presentación."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "95. RESPECTO A LOS PROCEDIMIENTOS DE NATURALEZA SANCIONADORA CUANDO EN EL MOMENTO DE DICTAR EL ACUERDO DE INICIACIÓN NO EXISTAN ELEMENTOS SUFICIENTES PARA LA CALIFICACIÓN INICIAL DE LOS HECHOS QUE MOTIVAN LA INCOACIÓN DEL PROCEDIMIENTO, LA CITADA CALIFICACIÓN PODRÁ REALIZARSE:",
+    "options": [
+      "a) en una fase posterior mediante la elaboración de un Pliego de cargos, que deberá ser notificado a los interesados.",
+      "b) en ese mismo momento mediante la elaboración de un Pliego de cargos provisional, que deberá ser notificado a los interesados.",
+      "c) en ese mismo momento mediante la elaboración de un Pliego de cargos provisional, que únicamente será notificado a los interesados cuando se convierta en definitivo.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 0
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Practico7</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015 · TEST PRÁCTICO 7</strong></p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = [];
+            let preguntas = [
+  {
+    "question": "1. EL DEPARTAMENTO DE MEDIO AMBIENTE DE LA DFA DECIDE INICIAR EXPEDIENTE SANCIONADOR CONTRA LA MERCANTIL TRAGSA POR PRESUNTAS IRREGULARIDADES COMETIDAS EN SU ESTABLECIMIENTO SITO EN LA CALLE JÚNDIZ, Nº 45. EN EL ACUERDO DE INICIACIÓN PUEDE LEERSE LO SIGUIENTE: “SE CONCEDE AL INTERESADO UN PLAZO DE 10 DÍAS HÁBILES PARA QUE PUEDA ALEGAR LO QUE CONSIDERE CONVENIENTE Y/O APORTE LO QUE ESTIME OPORTUNO. EN EL CASO DE NO EFECTUAR ALEGACIONES EN ESTE PLAZO DE 10 DÍAS, ESTE ACUERDO DE INICIACIÓN SE CONSIDERARÁ PROPUESTA DE RESOLUCIÓN” ¿ES ESTO CORRECTO?",
+    "options": [
+      "a) No, en el procedimiento sancionador el trámite de propuesta de resolución no puede sustituirse por el acuerdo de iniciación por falta de oposición del infractor.",
+      "b) Sí, en todo caso.",
+      "c) Sí, siempre y cuando el acuerdo de iniciación contenga un pronunciamiento preciso acerca de la responsabilidad imputada.",
+      "d) Sí, siempre y cuando el acuerdo de iniciación conceda el correspondiente trámite de puesta de manifiesto dentro de los límites establecidos en el artículo 47 de la Ley 39/2015."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "2. ESTE PROCEDIMIENTO SANCIONADOR VIENE REGULADO EN LA NORMA FORAL 54/2015, DE 2 DE JUNIO, QUE ESTABLECE QUE EL PLAZO MÁXIMO PARA NOTIFICAR Y RESOLVER ES EL DE 9 MESES. ¿ES ESTO CORRECTO?",
+    "options": [
+      "a) No, el período máximo no puede exceder de 2 meses.",
+      "b) No, el período máximo no puede exceder de 3 meses.",
+      "c) No, el período máximo no puede exceder de 6 meses.",
+      "d) Sí, puede establecer como período máximo el de 9 meses."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "3. DURANTE ESTE PROCEDIMIENTO, LA DFA EVACÚA LA CORRESPONDIENTE DILIGENCIA PARA QUE SE EMITA INFORME POR EL DEPARTAMENTO DE MEDIO AMBIENTE DEL AYUNTAMIENTO DE VITORIA-GASTEIZ, RELATIVO A LOS DAÑOS PRODUCIDOS Y AFECCIÓN AL MEDIOAMBIENTE, TODO ELLO EN EL PLAZO DE 30 DÍAS HÁBILES DE ACUERDO CON EL PLAZO PREVISTO EN LA MENCIONADA NORMA FORAL 54/2015. ESTE INFORME TIENE CARÁCTER VINCULANTE. PASADO EL PLAZO DE 30 DÍAS, EL INFORME NO SE HA RECIBIDO. ¿QUÉ PUEDE HACER LA DFA?",
+    "options": [
+      "a) Podrá suspender el transcurso del plazo máximo legal para resolver el procedimiento, toda vez que el plazo de 30 días es conforme a la normativa.",
+      "b) Deberá suspender el transcurso del plazo máximo legal para resolver el procedimiento, toda vez que el plazo de 30 días es conforme a la normativa.",
+      "c) No podrá suspender el transcurso del plazo máximo legal para resolver el procedimiento, toda vez que el plazo de 30 días es superior al plazo máximo legal de 10 días.",
+      "d) No podrá suspender el transcurso del plazo máximo legal para resolver el procedimiento, toda vez que el plazo de 30 días es superior al plazo máximo legal de 15 días."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "4. SUPONIENDO QUE EL ACUERDO DE INICIACIÓN NO SUSTITUYESE LA PROPUESTA DE RESOLUCIÓN, Y EN EL CASO DE QUE EL INSTRUCTOR CORRESPONDIENTE CONSIDERARA QUE LOS HECHOS NO HAN RESULTADO DEBIDAMENTE ACREDITADOS ¿QUÉ ES LO QUE DEBERÍA INCLUIR EN LA MENCIONADA PROPUESTA DE RESOLUCIÓN?",
+    "options": [
+      "a) Propondrá al órgano competente la finalización del procedimiento, con el archivo de las actuaciones.",
+      "b) Resolverá la finalización del procedimiento, con archivo de las actuaciones, sin que sea necesaria la propuesta de resolución",
+      "c) Se inhibirá en favor del órgano competente.",
+      "d) Deberá indicar la puesta de manifiesto del procedimiento y el plazo para formular alegaciones."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "5. FINALMENTE HA PASADO EL PLAZO MÁXIMO, SIN QUE SE HAYA DICTADO LA CORRESPONDIENTE RESOLUCIÓN. ¿CUÁL SERÁ EL EFECTO DE ESTA FALTA DE RESOLUCIÓN EXPRESA EN PLAZO?",
+    "options": [
+      "a) Se podrán entender desestimadas las pretensiones de sancionar al infractor.",
+      "b) Caducidad del procedimiento.",
+      "c) Prescripción del derecho.",
+      "d) Imposición de la sanción correspondiente."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "6. SI CON POSTERIORIDAD AL PLAZO DE 9 MESES LA DFA DICTA RESOLUCIÓN, ¿QUÉ SENTIDO DEBE TENER ESTA RESOLUCIÓN?",
+    "options": [
+      "a) La resolución expresa posterior sólo podrá dictarse de ser confirmatoria del mismo.",
+      "b) La resolución expresa posterior se adoptará por la Administración sin vinculación alguna al sentido del silencio.",
+      "c) La resolución declarará la caducidad, con el archivo de actuaciones.",
+      "d) La resolución declarará la prescripción correspondiente, con el archivo total de actuaciones."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "7. SI SE HUBIESE DECLARADO LA CADUCIDAD, ¿PODRÍA INICIARSE DE NUEVO EL PROCEDIMIENTO?",
+    "options": [
+      "a) No, la caducidad impide el inicio de un nuevo procedimiento.",
+      "b) Sí, la caducidad no impide el inicio de un nuevo procedimiento, siempre que no se haya producido la prescripción, pudiendo incorporarse a este nuevo procedimiento los actos y trámites cuyo contenido se hubiera mantenido igual de no haberse producido la caducidad.",
+      "c) Sí, la caducidad no impide el inicio de un nuevo procedimiento, siempre que no se haya producido la prescripción, debiendo incorporarse a este nuevo procedimiento los actos y trámites cuyo contenido se hubiera mantenido igual de no haberse producido la caducidad.",
+      "d) Sí, la caducidad no impide el inicio de un nuevo procedimiento, siempre que no se haya producido la prescripción, pudiendo incorporarse a este nuevo procedimiento los actos y trámites cuyo contenido se hubiera mantenido igual de no haberse producido la caducidad."
+    ],
+    "correct": [
+      1,
+      3
+    ]
+  },
+  {
+    "question": "8. LA DFA ANTE EL TRASCURSO DEL PLAZO MÁXIMO ALEGA QUE LA CAUSA FUE QUE EN EL DOMICILIO SOCIAL DE TRAGSA NO FUE POSIBLE NOTIFICAR NI EL ACUERDO DE INICIACIÓN NI LA PROPUESTA DE RESOLUCIÓN, POR LO QUE TODO ESTO HA DEMORADO EN EXCESO LA TRAMITACIÓN DEL EXPEDIENTE, AL TENER QUE RECURRIR AL BOE PARA ELLO. ¿PUEDE ALEGAR ESTOS HECHOS EN ALGÚN SENTIDO?",
+    "options": [
+      "a) No.",
+      "b) Puede considerar que el procedimiento se ha paralizado por causa imputable al interesado, acordando la nulidad del procedimiento.",
+      "c) Puede considerar que el procedimiento se ha paralizado por causa imputable al interesado, acordando la anulabilidad del procedimiento.",
+      "d) Puede considerar que el procedimiento se ha paralizado por causa imputable al interesado, acordando la interrupción del cómputo del plazo para resolver y notificar."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "9. EN EL SUPUESTO DE QUE LA CONDUCTA DE TRAGSA HAYA CAUSADO DAÑOS A LA DFA, PERO ESTOS NO HAN QUEDADO DETERMINADOS EN EL EXPEDIENTE, ¿CÓMO SE FIJARÁ LA CUANTÍA DE ESTOS DAÑOS?",
+    "options": [
+      "a) Mediante un procedimiento complementario, cuya resolución será inmediatamente ejecutiva.",
+      "b) Mediante un procedimiento de responsabilidad patrimonial, cuya resolución será inmediatamente ejecutiva. La resolución del procedimiento no pondrá fin a la vía administrativa.",
+      "c) Se fijará a tanto alzado, en la resolución que ponga fin al procedimiento.",
+      "d) Deberá extenderse acta de precio público, que podrá ser ejecutada de acuerdo con las reglas establecidas en el artículo 98 de la Ley 39/2015."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "10. DE CONFORMIDAD CON EL DECRETO FORAL 37/2019, DE 25 DE MAYO (PUBLICADO EN EL BOTHA Nº 57, DE 27 DE MAYO), SON APROBADAS LAS BASES REGULADORAS Y LA CONVOCATORIA DE SOLICITUDES DE SUBVENCIÓN DESTINADAS A TRABAJOS DE INVESTIGACIÓN CIENTÍFICA, REALIZADOS EN EL TH DE ÁLAVA. EL PLAZO PARA LA PRESENTACIÓN ES DE 15 DÍAS, SIENDO OBLIGATORIA SU PRESENTACIÓN EN EL REGISTRO ELECTRÓNICO DE ÁLAVA. D FILOMENO ES RESIDENTE EN LOGROÑO, SIENDO EL DÍA 10 DE JUNIO DÍA INHÁBIL POR SER EL DÍA DE LA RIOJA. ¿DURANTE QUÉ PLAZO PODRÁ PRESENTAR FILOMENO SU SOLICITUD ANTE EL REGISTRO ELECTRÓNICO?",
+    "options": [
+      "a) Del 28 de mayo al 11 de junio, al ser el 10 de junio inhábil en la Comunidad Autónoma en que reside el interesado.",
+      "b) Del 27 de mayo al 11 de junio, al ser el 10 de junio inhábil en la Comunidad Autónoma en que reside el interesado.",
+      "c) Del 28 de mayo al 10 de junio, pues es indiferente que el 10 de junio sea inhábil en la Comunidad Autónoma en que reside el interesado.",
+      "d) Del 27 de mayo al 10 de junio, pues es indiferente que el 10 de junio sea inhábil en la Comunidad Autónoma en que reside el interesado."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "11. D PEDRO Y D ALFONSO SON SOCIOS DE UNA COMUNIDAD DE BIENES QUE SOLICITA UNA SUBVENCIÓN POR ACTIVIDADES DE INSERCIÓN SOCIAL DE COLECTIVOS DESFAVORECIDOS, SOLICITUD QUE REALIZAN EN EL REGISTRO GENERAL DE LA DIPUTACIÓN FORAL DE ÁLAVA, SITO EN LA PLAZA DE LA PROVINCIA S/N. ¿DEBEN REALIZAR LA SOLICITUD POR MEDIOS ELECTRÓNICOS?",
+    "options": [
+      "a) Sí, en todo caso.",
+      "b) Sí, salvo que reglamentariamente la DFA haya establecido la obligación de relacionarse con ella a través de medios no electrónicos para este procedimiento por razón de su capacidad económica, técnica, dedicación profesional u otros motivos.",
+      "c) No.",
+      "d) Dependerá de si se considera que tiene personalidad jurídica o no."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "12. SI REALIZAN LA SOLICITUD POR MEDIOS NO ELECTRÓNICOS, ESTANDO OBLIGADOS A COMUNICARSE POR VÍA ELECTRÓNICA, EN RELACIÓN CON LA ACTUACIÓN POSTERIOR DE LA ADMINISTRACIÓN, ¿CUÁL DE LAS SIGUIENTES AFIRMACIONES ES INCORRECTA?",
+    "options": [
+      "a) La DFA le requerirá la subsanación al interesado a través de su presentación electrónica.",
+      "b) En estos casos de requerimiento de subsanación, se considerará como fecha de presentación de la solicitud aquella en la que haya sido realizada la subsanación.",
+      "c) Con independencia de la correspondiente notificación, la DFA enviará un aviso al dispositivo electrónico y/o a la dirección de correo electrónico del interesado que este haya comunicado, informándole de la puesta a disposición de una notificación en la sede electrónica de la DFA o en la dirección electrónica habilitada única.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "13. Dª HERMINIA SUFRE UN ACCIDENTE DE TRÁFICO EN LA AP 1 POR EL MAL ESTADO DEL FIRME Y DECIDE INTERPONER ACCIÓN DE RESPONSABILIDAD PATRIMONIAL CONTRA LA DFA. EN SU ESCRITO DE SOLICITUD ADEMÁS DE LO PREVISTO EN EL ART. 66 LEY 39/2015, INCLUYE LO SIGUIENTE: ESPECIFICACIÓN DE LAS LESIONES PRODUCIDAS, LA PRESUNTA RELACIÓN DE CAUSALIDAD ENTRE ÉSTAS Y EL FUNCIONAMIENTO DEL SERVICIO PÚBLICO, LA EVALUACIÓN ECONÓMICA CORRESPONDIENTE (6.000 €) Y EL MOMENTO EN QUE LA LESIÓN EFECTIVAMENTE SE PRODUJO, ASÍ COMO DIVERSOS PRECEPTOS LEGALES Y JURISPRUDENCIA APLICABLE AL CASO. ¿ES CORRECTA ESTA SOLICITUD?",
+    "options": [
+      "a) No, deberá incluir la acreditación justificativa de la inexistencia del deber jurídico de soportar los daños sufridos de acuerdo con la Ley, defecto que deberá ser objeto de subsanación en el plazo de 15 días.",
+      "b) No, deberá incluir la acreditación justificativa de la inexistencia del deber jurídico de soportar los daños sufridos de acuerdo con la Ley, defecto que deberá ser objeto de subsanación en el plazo de 10 días.",
+      "c) No, deberá incluir la correspondiente proposición de prueba, concretando los medios de que pretenda valerse el reclamante, defecto que deberá ser objeto de subsanación en el plazo de 15 días.",
+      "d) No, deberá incluir la correspondiente proposición de prueba, concretando los medios de que pretenda valerse el reclamante, defecto que deberá ser objeto de subsanación en el plazo de 10 días."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "14. POR LA FALTA DEL REQUISITO DE LA PREGUNTA ANTERIOR, ¿PUEDE LA DFA SUSPENDER EL PROCEDIMIENTO HASTA EL EFECTIVO CUMPLIMIENTO DEL CORRESPONDIENTE REQUERIMIENTO?",
+    "options": [
+      "a) Sí, siendo que si al final del plazo no lo ha aportado se le tendrá por desistido de su petición.",
+      "b) Sí, siendo que si al final del plazo no lo ha aportado se le tendrá por desistido del trámite.",
+      "c) No, siendo que si al final del plazo no lo ha aportado se le tendrá por desistido de su petición.",
+      "d) No, siendo que si al final del plazo no lo ha aportado se le tendrá por desistido del trámite."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "15. EN ESTE PROCEDIMIENTO DE RESPONSABILIDAD PATRIMONIAL, ¿CABE LA TERMINACIÓN CONVENCIONAL DEL PROCEDIMIENTO MEDIANTE ACUERDO INDEMNIZATORIO?",
+    "options": [
+      "a) Sí, y contra el mismo cabrá el recurso administrativo correspondiente.",
+      "b) Sí, y contra el mismo no cabrá recurso en vía administrativa.",
+      "c) No, y contra la denegación de esta terminación convencional cabrá el recurso administrativo correspondiente.",
+      "d) No, y contra la denegación de esta terminación convencional no cabrá recurso en vía administrativa."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "16. LA ORDEN FORAL 45/2018, DE NOMBRAMIENTO DE FUNCIONARIOS DE CARRERA, ES RECURRIDA POR EL INTERESADO D AGUSTÍN. AGUSTÍN SOLICITA QUE HASTA QUE SE RESUELVA SU RECURSO SE SUSPENDAN LOS NOMBRAMIENTOS CORRESPONDIENTES, Y NO SE EFECTÚEN LAS RESPECTIVAS TOMAS DE POSESIÓN. ¿ES ESTO POSIBLE?",
+    "options": [
+      "a) Sí, el órgano a quien competa resolver el recurso podrá suspender la ejecución del acto cuando la ejecución pudiera causar perjuicios importantes.",
+      "b) Sí, el órgano a quien competa resolver el recurso deberá suspender la ejecución del acto cuando la ejecución pudiera causar perjuicios importantes.",
+      "c) Sí, el órgano a quien competa resolver el recurso podrá suspender la ejecución del acto cuando la impugnación se fundamente en alguna de las causas de nulidad previstas legalmente.",
+      "d) Sí, el órgano a quien competa resolver el recurso deberá suspender, la ejecución del acto cuando la impugnación se fundamente en alguna de las causas de nulidad previstas legalmente."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "17. EN EL PROCEDIMIENTO DE RECURSO CONTRA ESTA ORDEN FORAL LA DFA ACUERDA LA APERTURA DE UN PERIODO DE PRUEBA. RESPECTO A ESTE PERÍODO SEÑALE LA AFIRMACIÓN CORRECTA:",
+    "options": [
+      "a) Dicho período deberá tener una duración no inferior a treinta días, dada la naturaleza del procedimiento.",
+      "b) En dicho período solo podrán admitirse pruebas propuestas por la propia Administración, ya que las personas interesadas solo pueden proponer pruebas en la apertura de períodos extraordinarios.",
+      "c) La Administración deberá en todo caso admitir y asumir los gastos de las pruebas propuestas por el interesado, salvo que estas sean manifiestamente improcedentes o innecesarias y así se determine mediante resolución motivada.",
+      "d) Todas las respuestas anteriores son incorrectas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "18. SI EN EL PROCEDIMIENTO AL QUE SE ALUDE EN LA PREGUNTA ANTERIOR D AGUSTÍN PROPONE LA PRÁCTICA DE UNA PRUEBA Y LA DFA LA INADMITE DE FORMA MOTIVADA:",
+    "options": [
+      "a) Agustín podrá formular alegaciones contra esa inadmisión pero no formular recurso administrativo, al tratarse de un acto de trámite.",
+      "b) Agustín podrá formular recurso administrativo contra esa inadmisión, pese a tratarse de un acto de trámite, porque la inadmisión causa indefensión.",
+      "c) Agustín podrá formular recurso administrativo contra esa inadmisión, al tratarse de un acto resolutorio.",
+      "d) Agustín solo podrá discutir la inadmisión mediante recurso contra la resolución que ponga fin al procedimiento."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "19. ANTE LAS ARGUMENTACIONES PLANTEADAS POR AGUSTÍN, EN EL RECURSO CONTRA LA ORDEN FORAL, EL ÓRGANO DE LA DFA QUE TRAMITA EL PROCEDIMIENTO CONSIDERA OPORTUNO SOLICITAR INFORME DE UN ÓRGANO ADMINISTRATIVO DE LA DFA DEDICADO ESPECÍFICAMENTE A TAREAS INFORMÁTICAS. SI HAN TRANSCURRIDO 20 DÍAS DESDE LA PETICIÓN DEL INFORME Y ESTE NO HA SIDO RECIBIDO, EL ÓRGANO COMPETENTE:",
+    "options": [
+      "a) Deberá necesariamente suspender el procedimiento de recurso, con el fin de que no transcurra el plazo máximo legal para resolverlo.",
+      "b) Podrá proceder a resolver el recurso a pesar de que el informe no haya sido emitido.",
+      "c) Podrá proceder a resolver el recurso, pero si el informe es recibido antes de que la resolución sea dictada, aquel deberá ser tenido en cuenta necesariamente.",
+      "d) Podrá proceder a resolver el recurso, salvo que el interesado exija que se suspenda el procedimiento hasta la recepción del informe."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "20. EN UN PROCEDIMIENTO SANCIONADOR, RECAE RESOLUCIÓN QUE PONE FIN A LA VÍA ADMINISTRATIVA. ¿ESTA RESOLUCIÓN ES EJECUTIVA?",
+    "options": [
+      "a) Sí, las resoluciones que ponen fin a la vía administrativa son ejecutivas.",
+      "b) Sí, las resoluciones que ponen fin a la vía administrativa son ejecutivas, siempre y cuando no quepa contra ella recurso extraordinario de revisión.",
+      "c) Sí, las resoluciones que ponen fin a la vía administrativa son ejecutivas, siempre y cuando no quepa contra ella recurso potestativo de reposición.",
+      "d) Sí, las resoluciones que ponen fin a la vía administrativa son ejecutivas, siempre y cuando no quepa contra ella recurso de alzada."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "21. EN EL PROCEDIMIENTO SANCIONADOR ANTERIOR, EN EL CASO DE QUE SE HUBIESE DECRETADO LA SUSPENSIÓN DEL ACTO EN DICHO PROCEDIMIENTO, Y SIENDO LA RESOLUCIÓN SANCIONADORA EJECUTIVA, ¿SE PODRÍA PRORROGAR ESTA SUSPENSIÓN EN LA VÍA CONTENCIOSO-ADMINISTRATIVA?",
+    "options": [
+      "a) Sí, sin necesidad de manifestación alguna por parte del interesado.",
+      "b) Sí, siempre que el interesado manifieste a la Administración su intención de interponer recurso contencioso-administrativo contra la resolución administrativa, hasta que se interponga dicho recurso solicitando la suspensión.",
+      "c) Sí, siempre que el interesado manifieste a la Administración su intención de interponer recurso contencioso-administrativo contra la resolución administrativa, hasta que se interponga dicho recurso sin solicitar la suspensión.",
+      "d) No."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "22. EN UN PROCEDIMIENTO SANCIONADOR SUSCEPTIBLE DE RECURSO DE ALZADA QUE HA FINALIZADO CON RESOLUCIÓN DE IMPOSICIÓN DE SANCIÓN MUY GRAVE, INTERPUESTO DICHO RECURSO Y FINALIZADO EL PLAZO LEGAL PARA RESOLVER DICHO RECURSO, ¿CUÁNDO EMPEZARÍA A COMPUTARSE EL PLAZO DE PRESCRIPCIÓN DE LA SANCIÓN IMPUESTA?",
+    "options": [
+      "a) Desde el día siguiente a aquel en que finalice el plazo de un mes para la resolución del recurso de alzada.",
+      "b) Desde el día siguiente a aquel en que finalice el plazo de tres meses para la resolución del recurso de alzada.",
+      "c) Si ha finalizado el plazo legal para resolver dicho recurso, pero con posterioridad se produce la resolución expresa, desde el día siguiente a aquel en que se notificó esta resolución expresa",
+      "d) El plazo no empezará a computarse hasta que se produzca la resolución expresa."
+    ],
+    "correct": 1
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>
