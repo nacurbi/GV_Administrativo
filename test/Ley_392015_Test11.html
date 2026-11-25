@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Test11</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN:</strong> Test 11 (Arts. 53 a 69)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. Los interesados en un procedimiento administrativo, tienen derecho a (señala la incorrecta):",
+    "options": [
+      "a) Conocer, antes del trámite de audiencia, el estado de la tramitación de los procedimientos en los que tengan la condición de interesados",
+      "b) Conocer el sentido del silencio administrativo que corresponda, en caso de que la Administración no dicte ni notifique resolución expresa en plazo",
+      "c) Conocer el órgano competente para la instrucción de los procedimientos en los que tengan la condición de interesados",
+      "d) Acceder y a obtener copia de los documentos contenidos en los procedimientos en los que tengan la condición de interesados"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "2. En el caso de procedimientos administrativos de naturaleza sancionadora, los presuntos responsables tendrán derecho a:",
+    "options": [
+      "a) Ser notificado de los hechos que se le imputen, de las infracciones que tales hechos puedan constituir y de las sanciones que, en su caso, se les pudieran imponer.",
+      "b) Ser notificado de la identidad del instructor, de la autoridad competente para imponer la sanción y de la norma que atribuya tal competencia.",
+      "c) La presunción de no existencia de responsabilidad administrativa mientras no se demuestre lo contrario.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "3. Respecto a la iniciación del procedimiento no es correcto:",
+    "options": [
+      "a) Los procedimientos podrán iniciarse de oficio o a solicitud del interesado",
+      "b) Con anterioridad al inicio del procedimiento, el órgano competente abrirá un período de información o actuaciones previas con el fin de conocer las circunstancias del caso concreto y la conveniencia o no de iniciar el procedimiento",
+      "c) en el caso de procedimientos de naturaleza sancionadora las actuaciones previas se orientarán a determinar, con la mayor precisión posible, los hechos susceptibles de motivar la incoación del procedimiento, la identificación de la persona o personas que pudieran resultar responsables y las circunstancias relevantes que concurran en unos y otros",
+      "d) Las actuaciones previas serán realizadas por los órganos que tengan atribuidas funciones de investigación, averiguación e inspección en la materia y, en defecto de éstos, por la persona u órgano administrativo que se determine por el órgano competente para la iniciación o resolución del procedimiento."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "4. En los casos de urgencia inaplazable y para la protección provisional de los intereses implicados, antes de iniciado el procedimiento podrá adoptar de forma motivada las medidas provisionales que resulten necesarias y proporcionadas:",
+    "options": [
+      "a) el órgano competente para iniciar o instruir el procedimiento, de oficio, iniciado el procedimiento administrativo.",
+      "b) el órgano competente para resolver el procedimiento, de oficio, antes de la iniciación del procedimiento administrativo.",
+      "c) el órgano competente para iniciar o instruir el procedimiento, de oficio o a instancia de parte, antes de la iniciación del procedimiento administrativo.",
+      "d) el órgano competente para resolver el procedimiento, de oficio o a instancia de parte, iniciado el procedimiento administrativo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "5. Las medidas provisionales deberán ser confirmadas, modificadas o levantadas en el acuerdo de iniciación del procedimiento, que deberá efectuarse dentro de los:",
+    "options": [
+      "a) 10 días siguientes a su adopción, el cual no podrá ser objeto de recurso",
+      "b) 15 días siguientes a su adopción, el cual podrá ser objeto del recurso que proceda",
+      "c) 15 días siguientes a su adopción, el cual no podrá ser objeto de recurso",
+      "d) 10 días siguientes a su adopción, el cual podrá ser objeto del recurso que proceda."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "6. Respecto a las medidas provisionales:",
+    "options": [
+      "a) No se podrán adoptar si pueden causar perjuicio de difícil o imposible reparación a los interesados o implicar violación de derechos amparados por las leyes.",
+      "b) No podrán ser alzadas o modificadas durante la tramitación del procedimiento en virtud de circunstancias sobrevenidas o que no pudieron ser tenidas en cuenta en el momento de su adopción.",
+      "c) Se consolidarán cuando surta efectos la resolución administrativa que ponga fin al procedimiento correspondiente.",
+      "d) Todas son correctas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "7. El órgano administrativo que inicie o tramite un procedimiento siempre que sea el mismo órgano quien deba tramitar y resolver el procedimiento:",
+    "options": [
+      "a) cuando se haya iniciado de oficio, podrá disponer, también de oficio, su acumulación a otros con los que guarde identidad sustancial o íntima conexión.",
+      "b) cuando se haya iniciado a instancia de parte, podrá disponer, también a instancia de parte, su acumulación a otros con los que guarde identidad sustancial o íntima conexión.",
+      "c) cualquiera que haya sido la forma de su iniciación, podrá disponer, de oficio, su acumulación a otros con los que guarde identidad sustancial o íntima conexión.",
+      "d) cualquiera que haya sido la forma de su iniciación, podrá disponer, de oficio o a instancia de parte, su acumulación a otros con los que guarde identidad sustancial o íntima conexión."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "8. Contra el acuerdo de acumulación:",
+    "options": [
+      "a) Podrá imponerse recurso de alzada.",
+      "b) Podrá imponerse recurso potestativo de reposición.",
+      "c) Podrá imponerse recurso extraordinario de revisión.",
+      "d) No procederá recurso alguno."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "9. Se entiende por inicio del procedimiento por denuncia:",
+    "options": [
+      "a) el acto por el que cualquier persona, en cumplimiento o no de una obligación legal, pone en conocimiento de un órgano administrativo la existencia de un determinado hecho que pudiera justificar la iniciación de oficio de un procedimiento administrativo.",
+      "b) la actuación derivada del conocimiento directo o indirecto de las circunstancias, conductas o hechos objeto del procedimiento por el órgano que tiene atribuida la competencia de iniciación.",
+      "c) la propuesta de iniciación del procedimiento formulada por cualquier órgano administrativo que no tiene competencia para iniciar el mismo y que ha tenido conocimiento de las circunstancias, conductas o hechos objeto del procedimiento.",
+      "d) la orden emitida por un órgano administrativo superior jerárquico del competente para la iniciación del procedimiento."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "10. En los procedimientos de naturaleza sancionadora, la orden de inicio del procedimiento expresará, en la medida de lo posible:",
+    "options": [
+      "a) las conductas o hechos que pudieran constituir infracción administrativa y su tipificación",
+      "b) el lugar, la fecha, fechas o período de tiempo continuado en que los hechos se produjeron",
+      "c) la persona o personas presuntamente responsables",
+      "d) todas son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "11. Se entiende por inicio del procedimiento por petición razonada de otros órganos:",
+    "options": [
+      "a) el acto por el que cualquier persona, en cumplimiento o no de una obligación legal, pone en conocimiento de un órgano administrativo la existencia de un determinado hecho que pudiera justificar la iniciación de oficio de un procedimiento administrativo.",
+      "b) la actuación derivada del conocimiento directo o indirecto de las circunstancias, conductas o hechos objeto del procedimiento por el órgano que tiene atribuida la competencia de iniciación.",
+      "c) la propuesta de iniciación del procedimiento formulada por cualquier órgano administrativo que no tiene competencia para iniciar el mismo y que ha tenido conocimiento de las circunstancias, conductas o hechos objeto del procedimiento.",
+      "d) la orden emitida por un órgano administrativo superior jerárquico del competente para la iniciación del procedimiento."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "12. En los procedimientos de responsabilidad patrimonial, la petición deberá individualizar (señala la incorrecta):",
+    "options": [
+      "a) la lesión producida en una persona o grupo de personas.",
+      "b) su relación de causalidad con el funcionamiento del servicio público.",
+      "c) su evaluación económica en todo caso.",
+      "d) el momento en que la lesión efectivamente se produjo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "13. Respecto a la declaración responsable y la comunicación:",
+    "options": [
+      "a) Las Administraciones Públicas tendrán permanentemente publicados y actualizados modelos de declaración responsable y de comunicación, fácilmente accesibles a los interesados.",
+      "b) Para iniciar una actividad u obtener el reconocimiento de un derecho o facultad para su ejercicio, será exigible tanto una declaración responsable como una comunicación.",
+      "c) a y b son correctas.",
+      "d) a y b son incorrectas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "14. Señala la correcta:",
+    "options": [
+      "a) La declaración responsable y la comunicación podrán presentarse dentro de un plazo posterior al inicio de la actividad cuando la legislación correspondiente lo prevea expresamente.",
+      "b) La declaración responsable podrá presentarse dentro de un plazo posterior al inicio de la actividad cuando la legislación correspondiente lo prevea expresamente.",
+      "c) La comunicación podrá presentarse dentro de un plazo posterior al inicio de la actividad cuando la legislación correspondiente lo prevea expresamente.",
+      "d) La declaración responsable y la comunicación, en ningún caso, podrán presentarse con posterioridad al inicio de la actividad."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "15. Respecto al inicio del procedimiento a solicitud del interesado no es correcto:",
+    "options": [
+      "a) Las Administraciones Públicas deberán establecer modelos y sistemas de presentación masiva que permitan a los interesados presentar simultáneamente varias solicitudes.",
+      "b) Los modelos y sistemas de presentación masiva, de uso voluntario, estarán a disposición de los interesados en las correspondientes sedes electrónicas y en las oficinas de asistencia en materia de registros de las Administraciones Públicas.",
+      "c) Los solicitantes podrán acompañar los elementos que estimen convenientes para precisar o completar los datos del modelo, los cuales podrán no ser admitidos por el órgano al que se dirijan.",
+      "d) Cuando la Administración en un procedimiento concreto establezca expresamente modelos específicos de presentación de solicitudes, éstos serán de uso obligatorio por los interesados."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "16. Respecto al inicio de oficio de los procedimientos de responsabilidad patrimonial:",
+    "options": [
+      "a) cuando las Administraciones Públicas decidan iniciar de oficio un procedimiento de responsabilidad patrimonial será necesario que haya prescrito el derecho a la reclamación del interesado.",
+      "b) el acuerdo de iniciación del procedimiento se notificará a los particulares presuntamente lesionados, concediéndoles un plazo de diez días para que aporten cuantas alegaciones, documentos o información estimen conveniente a su derecho y propongan cuantas pruebas sean pertinentes para el reconocimiento del mismo.",
+      "c) el procedimiento iniciado se instruirá siempre que los particulares presuntamente lesionados se personen en el plazo establecido.",
+      "d) todas son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "17. El acuerdo de iniciación en los procedimientos de naturaleza sancionadora deberá contener al menos:",
+    "options": [
+      "a) órgano competente para la resolución del procedimiento y norma que le atribuya tal competencia, indicando la prohibición de que el presunto responsable pueda reconocer voluntariamente su responsabilidad.",
+      "b) medidas de carácter provisional que se hayan acordado por el órgano competente para iniciar el procedimiento sancionador, sin perjuicio de las que se puedan adoptar durante el mismo.",
+      "c) indicación del derecho a formular alegaciones y a la audiencia en el procedimiento y de los plazos para su ejercicio, así como indicación de que, en caso de no efectuar alegaciones en el plazo previsto sobre el contenido del acuerdo de iniciación, éste en ningún caso podrá ser considerado propuesta de resolución.",
+      "d) todas son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "18. Respecto a los procedimientos de naturaleza sancionadora no es correcto:",
+    "options": [
+      "a) se considerará que un órgano es competente para iniciar el procedimiento cuando así lo determinen las normas reguladoras del mismo.",
+      "b) excepcionalmente por razones de urgencia se podrá imponer una sanción sin que se haya tramitado el oportuno procedimiento.",
+      "c) no se podrán iniciar nuevos procedimientos de carácter sancionador por hechos o conductas tipificadas como infracciones en cuya comisión el infractor persista de forma continuada, en tanto no haya recaído una primera resolución sancionadora, con carácter ejecutivo.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "19. La presentación de una denuncia:",
+    "options": [
+      "a) no confiere, por sí sola, la condición de interesado en el procedimiento",
+      "b) confiere la condición de interesado en el procedimiento cuando aporte elementos de prueba que permitan iniciarlo",
+      "c) confiere, por sí sola, la condición de interesado en el procedimiento",
+      "d) ninguna es correcta"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "20. Respecto al inicio del procedimiento por denuncia, cuando el denunciante haya participado en la comisión de una infracción de esta naturaleza y existan otros infractores, el órgano competente para resolver el procedimiento, siempre y cuando en el momento de aportarse aquellos no se disponga de elementos suficientes para ordenar la misma, deberá eximir al denunciante del pago de la multa que le correspondería u otro tipo de sanción de carácter no pecuniario:",
+    "options": [
+      "a) Cuando aporte elementos de prueba que permitan iniciar el procedimiento o comprobar la infracción, independientemente de que se repare o no el perjuicio causado.",
+      "b) Cuando sea el primero en aportar elementos de prueba que permitan iniciar el procedimiento o comprobar la infracción, y se repare el perjuicio causado.",
+      "c) Cuando aporte elementos de prueba que permitan iniciar el procedimiento o comprobar la infracción, y se repare el perjuicio causado.",
+      "d) Cuando sea el primero en aportar elementos de prueba que permitan iniciar el procedimiento o comprobar la infracción, independientemente de que se repare o no el perjuicio causado."
+    ],
+    "correct": 1
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

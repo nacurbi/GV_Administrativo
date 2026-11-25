@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema 17_Practico_1</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>TEMA 17. LEY 19/2013 · SUPUESTO PRÁCTICO 1</strong></p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = ["<p>Josu es vecino de la localidad de Basauri y desea información sobre los contratos de obras que ha realizado su ayuntamiento en el año 2018, así como quiénes han sido los contratistas de las obras y si éstos últimos son mayores de 30 años o no.</p><p>Josu realiza la solicitud indicando su dni xxxxxxxxx-x, su email josu@xxxx.com , pero no indica su teléfono. La solicitud se hace sin motivación.</p><p>Nota: En este supuesto, dado que se refiere a una Administración Pública del País Vasco, se ha cambiado el órgano que nos marca la Ley, el Consejo de Transparencia y Buen Gobierno, sustituyéndolo por el órgano que ostenta sus atribuciones en la CAPV, la Comisión Vasca de Acceso a la Información Púbica. (Ver www.gardena.euskadi.eus)</p>"];
+            let preguntas = [
+  {
+    "question": "1. Josu realiza la solicitud a la diputación de Bizkaia por desconocimiento. ¿Sería causa de inadmisión?",
+    "options": [
+      "a) En virtud del principio de cooperación se podría facilitar dicha información",
+      "b) La diputación no se puede negar a facilitar información",
+      "c) La solicitud tendría que ser inadmitida conforme art 18.1.d pero sin indicar el órgano competente para conocer la solicitud",
+      "d) La solicitud tendría que ser inadmitida conforme art 18.1d, indicando el órgano que a su juicio es competente para conocer de la solicitud"
+    ],
+    "correct": 3,
+    "caso": 0,
+    "ref": "Art. 18.1 d)"
+  },
+  {
+    "question": "2. Una vez inadmitida, Josu se dirige al ayuntamiento de Basauri y éste comprueba que la solicitud no identifica suficientemente la información que solicita ¿Qué hará el ayuntamiento?",
+    "options": [
+      "a) Inadmitirá su solicitud por falta de identificación suficiente",
+      "b) Concederá un plazo de 10 días para subsanación, con indicación de que, en caso de no atenderlo, se continuarán los trámites, con pérdida del derecho a la referida subsanación",
+      "c) Concederá un plazo de 10 días para subsanación, con indicación de que, en caso de no atenderlo se le tendrá por desistido, con indicación de la suspensión del plazo para dictar resolución",
+      "d) Concederá un plazo de 20 días para subsanación"
+    ],
+    "correct": 2,
+    "caso": 0,
+    "ref": "Art. 17.2 y 19.2"
+  },
+  {
+    "question": "3. Una vez subsanada la información ¿por qué motivos puede ser inadmitida?",
+    "options": [
+      "a) Por estar la información en curso de elaboración o publicación general",
+      "b) Cuando se trate de información para cuya divulgación sea necesaria una acción previa de reelaboración",
+      "c) Que sean manifiestamente repetitivas o tengan carácter abusivo no justificado con la finalidad de transparencia de esta ley",
+      "d) Todas son correctas"
+    ],
+    "correct": 3,
+    "caso": 0,
+    "ref": "Art. 18.1 a), c) y e)"
+  },
+  {
+    "question": "4. Si la solicitud ha tenido entrada el día 1 de octubre de 2020, ¿en qué plazo tiene que resolverse por el Ayuntamiento?",
+    "options": [
+      "a) En el plazo máximo de 3 meses desde que la solicitud haya tenido entrada en el órgano competente",
+      "b) En el plazo máximo de 1 mes desde que la solicitud ha tenido entrada en el ayuntamiento de Basauri",
+      "c) En el plazo máximo de 1 mes desde que la solicitud ha tenido entrada en la diputación de Bizkaia",
+      "d) En el plazo máximo de 3 meses desde que la solicitud ha tenido entrada en la diputación de Bizkaia"
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Art. 20.1"
+  },
+  {
+    "question": "5. En el caso de que la información fuese voluminosa o la complejidad de la información lo requiera ¿es posible la ampliación del plazo?",
+    "options": [
+      "a) Si automáticamente se ampliará 1 mes",
+      "b) Se podrá ampliar el plazo otro mes más",
+      "c) No es posible la ampliación del plazo",
+      "d) ninguna es correcta"
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Art. 20.1"
+  },
+  {
+    "question": "6. ¿Sería causa de inadmisión que la solicitud que formula Josu no estuviera motivada?",
+    "options": [
+      "a) Sí, conforme art 17",
+      "b) No sería causa de inadmisión por no estar obligado a motivar su solicitud"
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Art. 17.3"
+  },
+  {
+    "question": "7. Si transcurre el plazo máximo de resolución ¿Cómo se entenderá la resolución?",
+    "options": [
+      "a) estimada",
+      "b) admitida",
+      "c) inadmitida",
+      "d) desestimada"
+    ],
+    "correct": 3,
+    "caso": 0,
+    "ref": "Art. 20.4"
+  },
+  {
+    "question": "8. ¿Se podría recurrir?",
+    "options": [
+      "a) sí, son recurribles directamente ante la jurisdicción- contenciosa administrativa",
+      "b) no son recurribles",
+      "c) se podría interponer una reclamación administrativa conforme art. 24",
+      "d) a y c son correctas"
+    ],
+    "correct": 3,
+    "caso": 0,
+    "ref": "Art. 20.5"
+  },
+  {
+    "question": "9. En el supuesto de que el Ayuntamiento de Basauri no resolviera en plazo de modo reiterado las solicitudes de información realizadas… ¿Qué consideración tiene a efectos de infracción administrativa?",
+    "options": [
+      "a) leve",
+      "b) grave",
+      "c) muy grave",
+      "d) ninguna es correcta"
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Art. 20.6"
+  },
+  {
+    "question": "10. ¿Cómo puede Josu solicitar el acceso a la información y recibirla en su caso?",
+    "options": [
+      "a) de manera telemática obligatoriamente",
+      "b) puede elegir vía papel o telemático",
+      "c) si la información ha sido publicada, el Ayuntamiento le puede indicar cómo puede acceder a ella",
+      "d) b y c son correctas"
+    ],
+    "correct": 3,
+    "caso": 0,
+    "ref": "Art. 22.1 y 22.3"
+  },
+  {
+    "question": "11. Suponiendo que la información la solicita Josu porque es abogado y quiere preparar un juicio… ¿Cómo sería la forma de comunicarse con el ayuntamiento?",
+    "options": [
+      "a) papel o telemático, a su elección",
+      "b) telemático obligatoriamente",
+      "c) preferentemente vía telemática, aunque puede elegir papel.",
+      "d) papel obligatoriamente"
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Art. 14.2, Ley 39/2015"
+  },
+  {
+    "question": "12. ¿puede Josu nombrar un representante para que solicite la información?",
+    "options": [
+      "a) si",
+      "b) no"
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "13. La información suministrada ¿es gratuita?",
+    "options": [
+      "a) si, pero la expedición de copias o trasposición de la información a formato diferente al original puede dar lugar a la exigencia de exacciones",
+      "b) es gratuita en todo caso",
+      "c) siempre habrá que abonar la tasa que indique la AAPP",
+      "d) ninguna es correcta"
+    ],
+    "correct": 0,
+    "caso": 0,
+    "ref": "Art. 22.4"
+  },
+  {
+    "question": "14. Si Josu no está de acuerdo y decide interponer una reclamación conforme al art. 24… ¿qué órgano tendrá que conocer de la misma?",
+    "options": [
+      "a) la Comisión Vasca de acceso a la información pública",
+      "b) el propio Ayuntamiento de Basauri",
+      "c) resolverá la Diputación de Bizkaia",
+      "d) resolverá el Consejo de Transparencia y Buen Gobierno"
+    ],
+    "correct": 0,
+    "caso": 0,
+    "ref": "Art. 24.6"
+  },
+  {
+    "question": "15. ¿En qué plazo tiene que interponerse dicha reclamación?",
+    "options": [
+      "a) En el plazo de 1 mes a contar desde la notificación o desestimación por silencio",
+      "b) En el plazo de 1 mes a contar desde el día siguiente a la notificación o desestimación por silencio",
+      "c) En el plazo de 3 meses a contar desde el día siguiente a la notificación o desestimación por silencio",
+      "d) ninguna es correcta"
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Art. 24.2"
+  },
+  {
+    "question": "16. ¿en qué plazo tiene que resolverse dicha reclamación?",
+    "options": [
+      "a) 1 mes",
+      "b) 2 meses",
+      "c) 3 meses",
+      "d) 15 días"
+    ],
+    "correct": 2,
+    "caso": 0,
+    "ref": "Art. 24.4"
+  },
+  {
+    "question": "17. ¿son públicas estas resoluciones?",
+    "options": [
+      "a) sí, se publicarán en los términos que se establezcan reglamentariamente",
+      "b) no, solo se notificarán a los interesados, y éstos darán o no su consentimiento para publicar",
+      "c) no, solo se publicarán si los terceros afectados lo permiten",
+      "d) ninguna es correcta"
+    ],
+    "correct": 0,
+    "caso": 0,
+    "ref": "Art. 24.5"
+  },
+  {
+    "question": "18. La resolución de estas reclamaciones, ¿a quién se tienen que comunicar por parte del Presidente de la Comisión Vasca de Acceso a la Información Pública?",
+    "options": [
+      "a) a la Administración Pública que haya denegado el acceso contra el que se reclama",
+      "b) a los interesados y terceros afectados",
+      "c) al Ararteko",
+      "d) a las Cortes Generales"
+    ],
+    "correct": 2,
+    "caso": 0,
+    "ref": "Art. 24.5, 2º Párrafo"
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index] || '';
+                    boton.classList.toggle('hidden', pregunta.options[index] === undefined);
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

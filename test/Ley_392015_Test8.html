@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Test8</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN:</strong> Test 8</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. LOS ORGANISMOS PÚBLICOS VINCULADOS O DEPENDIENTES DE CADA ADMINISTRACIÓN:",
+    "options": [
+      "a) Deberán disponer de su propio registro electrónico plenamente interoperable e interconectado al General.",
+      "b) Podrán disponer de su propio registro electrónico plenamente interoperable e interconectado al General de la Administración de la que dependen.",
+      "c) Registrarán las entradas y salidas a través del Registro Electrónico General de la Administración de la que dependen.",
+      "d) Ninguna de las respuestas anteriores es correcta."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "2. ¿CUÁL DE LAS SIGUIENTES ES LA RESPUESTA CORRECTA EN VIRTUD DEL ARTÍCULO 3 RELATIVO A LA CAPACIDAD DE OBRAR?",
+    "options": [
+      "a) Los menores de edad para el ejercicio de aquellos de sus derechos e intereses cuya actuación esté permitida por el ordenamiento jurídico sin la asistencia de la persona que ejerza la patria potestad, tutela o curatela. Se exceptúa el supuesto de los menores incapacitados, cuando la extensión de la incapacitación afecte al ejercicio y defensa de los derechos o intereses de que se trate.",
+      "b) Los menores de edad para el ejercicio y defensa de aquellos de sus derechos e intereses cuya actuación esté permitida por el ordenamiento jurídico con la asistencia de la persona que ejerza la patria potestad, tutela o curatela. Se exceptúa el supuesto de los menores incapacitados, cuando la extensión de la incapacitación afecte al ejercicio y defensa de los derechos o intereses de que se trate.",
+      "c) Los menores de edad para el ejercicio y defensa de aquellos de sus derechos e intereses cuya actuación esté permitida por el ordenamiento jurídico sin la asistencia de la persona que ejerza la patria potestad, tutela o curatela. Se exceptúa el supuesto de los menores incapacitados, cuando la extensión de la incapacitación afecte al ejercicio y defensa de los derechos o intereses de que se trate.",
+      "d) Los menores de edad para el ejercicio y defensa de aquellos de sus derechos e intereses cuya actuación esté permitida por el ordenamiento jurídico sin la asistencia de la persona que ejerza la patria potestad, tutela o curatela. Sin excepción del supuesto de los menores incapacitados, cuando la extensión de la incapacitación afecte al ejercicio y defensa de los derechos o intereses de que se trate."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "3. SERÁ/N INTEROPERABLE/S CON LOS REGISTROS ELECTRÓNICOS GENERALES Y PARTICULARES DE APODERAMIENTOS:",
+    "options": [
+      "a) los registros mercantiles.",
+      "b) los registros de la propiedad.",
+      "c) los protocolos notariales.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "4. LOS ASIENTOS QUE SE REALICEN EN LOS REGISTROS ELECTRÓNICOS GENERALES Y PARTICULARES DE APODERAMIENTOS DEBERÁN CONTENER, AL MENOS: (SEÑALE LA RESPUESTA INCORRECTA)",
+    "options": [
+      "a) nombre y apellidos o la denominación o razón social, documento nacional de identidad, número de identificación fiscal o documento equivalente del poderdante y del apoderado.",
+      "b) causas de anulación del apoderamiento.",
+      "c) período de tiempo por el cual se otorga el poder.",
+      "d) tipo de poder según las facultades que otorgue."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "5. EL INTERESADO PODRÁ PEDIR CERTIFICADO ACREDITATIVO DEL SILENCIO PRODUCIDO:",
+    "options": [
+      "a) en cualquier momento.",
+      "b) a los 15 días desde que expire el plazo máximo para resolver el procedimiento.",
+      "c) al día siguiente desde que expire el plazo máximo para resolver el procedimiento.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "6. PARA SER CONSIDERADOS VÁLIDOS, LOS DOCUMENTOS ELECTRÓNICOS ADMINISTRATIVOS DEBERÁN:",
+    "options": [
+      "a) disponer de los datos de identificación que permitan su individualización.",
+      "b) incorporar una referencia temporal del momento en que han sido emitidos.",
+      "c) incorporar las firmas electrónicas que correspondan de acuerdo con lo previsto en la normativa aplicable.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "7. UNA VEZ VENCIDO EL PLAZO PARA DICTAR Y NOTIFICAR RESOLUCIÓN, EN PROCEDIMIENTOS INICIADOS DE OFICIO DE LOS QUE PUDIERA DERIVARSE EL RECONOCIMIENTO O LA CONSTITUCIÓN DE DERECHOS U OTRAS SITUACIONES JURÍDICAS FAVORABLES:",
+    "options": [
+      "a) los interesados que hubieren comparecido podrán entender estimadas sus pretensiones por silencio administrativo.",
+      "b) los interesados que hubieren comparecido podrán entender desestimadas sus pretensiones por silencio administrativo.",
+      "c) se producirá la caducidad.",
+      "d) se producirá la prescripción."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "8. SEÑALE LA RESPUESTA INCORRECTA:",
+    "options": [
+      "a) los interesados podrán solicitar, en cualquier momento, la expedición de copias auténticas de los documentos públicos administrativos que hayan sido válidamente emitidos por las Administraciones Públicas.",
+      "b) las Administraciones Públicas estarán obligadas a expedir copias auténticas electrónicas de cualquier documento en papel que presenten los interesados y que se vaya a incorporar a un expediente administrativo.",
+      "c) cuando las Administraciones Públicas expidan copias auténticas electrónicas, deberá quedar expresamente así indicado en el documento de la copia.",
+      "d) la expedición de copias auténticas de documentos públicos notariales, registrales y judiciales, así como de los diarios oficiales, se regirá por la presente ley."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "9. LAS COPIAS AUTÉNTICAS REALIZADAS POR UNA ADMINISTRACIÓN PÚBLICA:",
+    "options": [
+      "a) surten únicamente efectos administrativos.",
+      "b) no tendrán ningún efecto administrativo.",
+      "c) únicamente tendrán validez en la misma Administración.",
+      "d) tendrán validez en las restantes Administraciones."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "10. LOS PLAZOS EXPRESADOS POR HORAS NO PODRÁN TENER UNA DURACIÓN:",
+    "options": [
+      "a) inferior a 1 hora, en cuyo caso se expresarán en minutos.",
+      "b) inferior a 2 horas, en cuyo caso se expresarán en minutos.",
+      "c) superior a 24 horas, en cuyo caso se expresarán en días.",
+      "d) superior a 48 horas, en cuyo caso se expresarán en días."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "11. UNA VEZ VENCIDO EL PLAZO PARA DICTAR Y NOTIFICAR RESOLUCIÓN, EN PROCEDIMIENTOS EN QUE LA ADMINISTRACIÓN EJERCITE POTESTADES SANCIONADORAS O, EN GENERAL, DE INTERVENCIÓN, SUSCEPTIBLES DE PRODUCIR EFECTOS DESFAVORABLES O DE GRAVAMEN:",
+    "options": [
+      "a) los interesados que hubieren comparecido podrán entender estimadas sus pretensiones por silencio administrativo.",
+      "b) los interesados que hubieren comparecido podrán entender desestimadas sus pretensiones por silencio administrativo.",
+      "c) se producirá la caducidad.",
+      "d) se producirá la prescripción."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "12. RESPECTO A LOS DOCUMENTOS ELECTRÓNICOS EMITIDOS POR LAS ADMINISTRACIONES PÚBLICAS SERÁ NECESARIO, EN TODO CASO, IDENTIFICAR:",
+    "options": [
+      "a) la validez de estos documentos.",
+      "b) el origen de estos documentos.",
+      "c) el alcance de estos documentos.",
+      "d) el destino de estos documentos."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "13. EN LOS PROCEDIMIENTOS DE REVISIÓN DE OFICIO INICIADOS A SOLICITUD DE LOS INTERESADOS EL SENTIDO DEL SILENCIO:",
+    "options": [
+      "a) será estimatorio.",
+      "b) será desestimatorio.",
+      "c) producirá la caducidad del procedimiento.",
+      "d) todas son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "14. EN LOS PROCEDIMIENTOS DE IMPUGNACIÓN DE ACTOS Y DISPOSICIONES EL SENTIDO DEL SILENCIO:",
+    "options": [
+      "a) será estimatorio.",
+      "b) será desestimatorio.",
+      "c) producirá la caducidad del procedimiento.",
+      "d) todas son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "15. RESPECTO A LOS REGISTROS:",
+    "options": [
+      "a) podrán hacerse efectivos mediante transferencia dirigida a la oficina pública correspondiente cualesquiera cantidades que haya que satisfacer en el momento de la presentación de documentos a las Administraciones Públicas, sin perjuicio de la posibilidad de su abono por otros medios.",
+      "b) las Administraciones Públicas deberán hacer pública y mantener actualizada una relación de las oficinas en las que se prestará asistencia para la presentación electrónica de documentos.",
+      "c) no se tendrán por presentados en el registro aquellos documentos e información cuyo régimen especial establezca otra forma de presentación.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "16. LA ELIMINACIÓN DE LOS DOCUMENTOS ELECTRÓNICOS:",
+    "options": [
+      "a) deberá ser autorizada de acuerdo a lo dispuesto en la normativa aplicable.",
+      "b) se hará de oficio transcurridos 20 años.",
+      "c) requerirá resolución judicial.",
+      "d) no será posible en ningún caso."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "17. LAS ADMINISTRACIONES PÚBLICAS DEBEN PUBLICAR Y MANTENER ACTUALIZADAS EN EL PORTAL WEB, A EFECTOS INFORMATIVOS, LAS RELACIONES DE PROCEDIMIENTOS DE SU COMPETENCIA, CON INDICACIÓN DE:",
+    "options": [
+      "a) los recursos que procedan contra el procedimiento.",
+      "b) los plazos mínimos de duración de los mismos.",
+      "c) los recursos que procedan contra el procedimiento y los efectos que produzca el silencio administrativo.",
+      "d) los plazos máximos de duración de los mismos y los efectos que produzca el silencio administrativo."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "18. LA COMPARECENCIA DE LAS PERSONAS ANTE LAS OFICINAS PÚBLICAS:",
+    "options": [
+      "a) presencialmente, sólo será obligatoria cuando así esté previsto en una norma reglamentaria.",
+      "b) ya sea presencialmente o por medios electrónicos, sólo será obligatoria cuando así esté previsto en una norma con rango de ley.",
+      "c) presencialmente, sólo será obligatoria cuando así esté previsto en una norma con rango de ley.",
+      "d) ya sea presencialmente o por medios electrónicos, sólo será obligatoria cuando así esté previsto en una norma reglamentaria."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "19. LOS MEDIOS O SOPORTES EN QUE SE ALMACENEN DOCUMENTOS ASEGURARÁN:",
+    "options": [
+      "a) la identificación de los usuarios.",
+      "b) el control de accesos.",
+      "c) el cumplimiento de las garantías previstas en la legislación de protección de datos.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "20. LOS ACTOS ADMINISTRATIVOS PRODUCIDOS POR SILENCIO ADMINISTRATIVO SE PODRÁN HACER VALER ANTE:",
+    "options": [
+      "a) la Administración.",
+      "b) cualquier persona física.",
+      "c) cualquier persona jurídica, pública o privada.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "21. EL PLAZO PARA NOTIFICAR LA RESOLUCIÓN EXPRESA EN LOS PROCEDIMIENTOS INICIADOS A SOLICITUD DEL INTERESADO SE CONTARÁ:",
+    "options": [
+      "a) desde la fecha del acuerdo de iniciación.",
+      "b) desde la fecha en que la solicitud haya tenido entrada en el registro electrónico de la Administración u Organismo competente para su tramitación.",
+      "c) desde el día siguiente a la fecha en que la solicitud haya tenido entrada en el registro electrónico de la Administración u Organismo competente para su tramitación.",
+      "d) desde el día siguiente a la fecha del acuerdo de iniciación."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "22. EL TRANSCURSO DEL PLAZO MÁXIMO LEGAL PARA RESOLVER UN PROCEDIMIENTO Y NOTIFICAR LA RESOLUCIÓN SE SUSPENDERÁ CUANDO:",
+    "options": [
+      "a) una Administración Pública requiera a otra para que anule o revise un acto que entienda que es legal y que constituya la base para el que la primera haya de dictar en el ámbito de sus competencias.",
+      "b) el órgano competente para resolver decida realizar alguna actuación complementaria de las previstas en el artículo 87.",
+      "c) cualquier persona promueva la recusación en cualquier momento de la tramitación de un procedimiento.",
+      "d) todas son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "23. LAS DISPOSICIONES DE CREACIÓN DE LOS REGISTROS ELECTRÓNICOS SE PUBLICARÁN EN:",
+    "options": [
+      "a) el diario oficial correspondiente y su índice deberá estar disponible para consulta en la sede electrónica de acceso al registro.",
+      "b) la sede electrónica de acceso al registro y su texto íntegro deberá estar disponible para consulta en el diario oficial correspondiente.",
+      "c) el diario oficial correspondiente y su texto íntegro deberá estar disponible para consulta en la sede electrónica de acceso al registro.",
+      "d) la sede electrónica de acceso al registro y su índice deberá estar disponible para consulta en el diario oficial correspondiente."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "24. EL ARTÍCULO 25.2 DE LA LEY 39/2015, DE 1 DE OCTUBRE, ESTABLECE QUE EN LOS SUPUESTOS EN LOS QUE EL PROCEDIMIENTO SE HUBIERA PARALIZADO POR:",
+    "options": [
+      "a) causa imputable al interesado se interrumpirá el cómputo del plazo para resolver y notificar la resolución.",
+      "b) causa no imputable al interesado se interrumpirá el cómputo del plazo para resolver y notificar la resolución.",
+      "c) causa imputable al interesado no se interrumpirá el cómputo del plazo para resolver y notificar la resolución.",
+      "d) causa no imputable al interesado no se interrumpirá el cómputo del plazo para resolver y notificar la resolución."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "25. COMO REGLA GENERAL, EN LOS PROCEDIMIENTOS INICIADOS A SOLICITUD DEL INTERESADO, EL VENCIMIENTO DEL PLAZO MÁXIMO SIN HABERSE NOTIFICADO RESOLUCIÓN EXPRESA, LEGITIMA AL INTERESADO O INTERESADOS PARA ENTENDERLA:",
+    "options": [
+      "a) estimada por silencio administrativo.",
+      "b) desestimada por silencio administrativo.",
+      "c) caducada por silencio administrativo.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "26. SE ENTIENDE POR DOCUMENTOS PÚBLICOS ADMINISTRATIVOS:",
+    "options": [
+      "a) los válidamente emitidos por los órganos de las Administraciones Públicas.",
+      "b) los remitidos por personas físicas o jurídicas a los órganos de las Administraciones Públicas.",
+      "c) a y b son correctas.",
+      "d) a y b son incorrectas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "27. PARA GARANTIZAR LA IDENTIDAD Y CONTENIDO DE LAS COPIAS ELECTRÓNICAS O EN PAPEL, Y POR TANTO SU CARÁCTER DE COPIAS AUTÉNTICAS, LAS ADMINISTRACIONES PÚBLICAS DEBERÁN AJUSTARSE A LO PREVISTO EN:",
+    "options": [
+      "a) el Esquema Nacional de Interoperabilidad.",
+      "b) el Esquema Nacional de Seguridad.",
+      "c) las normas técnicas de desarrollo del Esquema Nacional de Seguridad.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "28. EL SILENCIO TENDRÁ EFECTO DESESTIMATORIO EN LOS PROCEDIMIENTOS: (SEÑALE LA RESPUESTA INCORRECTA)",
+    "options": [
+      "a) relativos al ejercicio del derecho de petición.",
+      "b) cuya estimación tuviera como consecuencia que se transfirieran al solicitante o a terceros facultades relativas al dominio público o al servicio público.",
+      "c) que impliquen el ejercicio de actividades que puedan dañar el medio ambiente.",
+      "d) de responsabilidad civil de las Administraciones Públicas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "29. RESPECTO AL SILENCIO ADMINISTRATIVO: (SEÑALE LA RESPUESTA INCORRECTA)",
+    "options": [
+      "a) la estimación por silencio administrativo tiene a todos los efectos la consideración de acto administrativo finalizador del procedimiento.",
+      "b) la desestimación por silencio administrativo tiene los solos efectos de permitir a los interesados la interposición del recurso que proceda.",
+      "c) en los casos de estimación por silencio administrativo, la resolución expresa posterior a la producción del acto sólo podrá dictarse de ser confirmatoria del mismo.",
+      "d) en los casos de desestimación por silencio administrativo, la resolución expresa posterior al vencimiento del plazo se adoptará por la Administración teniendo en cuenta el sentido del silencio."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "30. LAS COPIAS AUTÉNTICAS DE DOCUMENTOS PRIVADOS:",
+    "options": [
+      "a) surten únicamente efectos administrativos.",
+      "b) no tendrán ningún efecto administrativo.",
+      "c) tendrán validez en todas las Administraciones.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "31. LOS TÉRMINOS Y PLAZOS ESTABLECIDOS EN ÉSTA U OTRAS LEYES OBLIGAN A:",
+    "options": [
+      "a) las autoridades al servicio de las Administraciones Públicas competentes para la tramitación de los asuntos.",
+      "b) el personal al servicio de las Administraciones Públicas competentes para la tramitación de los asuntos.",
+      "c) los interesados en la tramitación de los asuntos.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "32. LOS ACTOS ADMINISTRATIVOS PRODUCIDOS POR SILENCIO ADMINISTRATIVO PRODUCEN EFECTOS:",
+    "options": [
+      "a) desde el vencimiento del plazo máximo en el que debe dictarse y notificarse la resolución expresa sin que la misma se haya expedido",
+      "b) desde que se obtenga el certificado acreditativo del silencio producido.",
+      "c) pasados tres meses desde el vencimiento del plazo máximo en el que debía haber dictado y notificado la resolución expresa.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "33. CUANDO LAS NORMAS REGULADORAS DE LOS PROCEDIMIENTOS NO FIJEN EL PLAZO MÁXIMO PARA NOTIFICAR LA RESOLUCIÓN EXPRESA, ÉSTE SERÁ DE:",
+    "options": [
+      "a) 10 días hábiles.",
+      "b) 1 mes.",
+      "c) 3 meses.",
+      "d) 6 meses."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "34. EL PLAZO PARA NOTIFICAR LA RESOLUCIÓN EXPRESA EN LOS PROCEDIMIENTOS INICIADOS DE OFICIO SE CONTARÁ:",
+    "options": [
+      "a) desde la fecha del acuerdo de iniciación.",
+      "b) desde la fecha en que la solicitud haya tenido entrada en el registro electrónico de la Administración u Organismo competente para su tramitación.",
+      "c) desde el día siguiente a la fecha en que la solicitud haya tenido entrada en el registro electrónico de la Administración u Organismo competente para su tramitación.",
+      "d) desde el día siguiente a la fecha del acuerdo de iniciación."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "35. DEBERÁ TRADUCIR AL CASTELLANO LOS DOCUMENTOS, EXPEDIENTES O PARTES DE LOS MISMOS QUE DEBAN SURTIR EFECTO FUERA DEL TERRITORIO DE LA COMUNIDAD AUTÓNOMA Y LOS DOCUMENTOS DIRIGIDOS A LOS INTERESADOS QUE ASÍ LO SOLICITEN EXPRESAMENTE:",
+    "options": [
+      "a) la Administración Pública que inicie el procedimiento.",
+      "b) la Administración Pública instructora del procedimiento.",
+      "c) la Administración Pública encargada de resolver el procedimiento.",
+      "d) el propio interesado."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "36. SI, LLEGADO EL PLAZO DE RESOLUCIÓN, EL ÓRGANO ADMINISTRATIVO COMPETENTE NO DICTASE Y NOTIFICASE RESOLUCIÓN EXPRESA:",
+    "options": [
+      "a) se entenderá estimado el recurso de alzada que se haya interpuesto contra la estimación por silencio administrativo de una solicitud por el transcurso del plazo.",
+      "b) se entenderá desestimado el recurso de alzada que se haya interpuesto contra la estimación por silencio administrativo de una solicitud por el transcurso del plazo.",
+      "c) se entenderá desestimado el recurso de alzada que se haya interpuesto contra la desestimación por silencio administrativo de una solicitud por el transcurso del plazo.",
+      "d) se entenderá estimado el recurso de alzada que se haya interpuesto contra la desestimación por silencio administrativo de una solicitud por el transcurso del plazo."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "37. LAS PERSONAS FÍSICAS PODRÁN ELEGIR EN TODO MOMENTO SI SE COMUNICAN CON LAS ADMINISTRACIONES PÚBLICAS PARA EL EJERCICIO DE SUS DERECHOS Y OBLIGACIONES A TRAVÉS DE MEDIOS ELECTRÓNICOS O NO:",
+    "options": [
+      "a) salvo que estén obligadas a relacionarse a través de medios electrónicos con las Administraciones Públicas.",
+      "b) salvo que estén obligadas a relacionarse a través de medios no electrónicos con las Administraciones Públicas.",
+      "c) no pudiendo estar obligadas a relacionarse a través de unos medios u otros con las Administraciones Públicas.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "38. EL PLAZO EN EL QUE DEBE NOTIFICARSE LA RESOLUCIÓN EXPRESA, SALVO QUE UNA NORMA CON RANGO DE LEY ESTABLEZCA UNO MAYOR O ASÍ VENGA PREVISTO EN EL DERECHO DE LA UNIÓN EUROPEA, NO PODRÁ EXCEDER DE:",
+    "options": [
+      "a) 10 días hábiles.",
+      "b) 1 mes.",
+      "c) 3 meses.",
+      "d) 6 meses."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "39. EL CERTIFICADO ACREDITATIVO DEL SILENCIO PRODUCIDO SE EXPEDIRÁ DE OFICIO POR EL ÓRGANO COMPETENTE PARA RESOLVER EN EL PLAZO DE:",
+    "options": [
+      "a) 10 días desde que expire el plazo máximo para resolver el procedimiento.",
+      "b) 15 días desde que expire el plazo máximo para resolver el procedimiento.",
+      "c) 20 días desde que expire el plazo máximo para resolver el procedimiento.",
+      "d) 30 días desde que expire el plazo máximo para resolver el procedimiento."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "40. LAS COPIAS AUTÉNTICAS DE LOS DOCUMENTOS PÚBLICOS ADMINISTRATIVOS QUE HAYAN SIDO VÁLIDAMENTE EMITIDOS POR LAS ADMINISTRACIONES PÚBLICAS SE EXPEDIRÁN EN UN PLAZO DE:",
+    "options": [
+      "a) 10 días desde la recepción de la solicitud en el registro electrónico de la Administración u Organismo competente.",
+      "b) 15 días desde la recepción de la solicitud en el registro electrónico de la Administración u Organismo competente.",
+      "c) 20 días desde la recepción de la solicitud en el registro electrónico de la Administración u Organismo competente.",
+      "d) 30 días desde la recepción de la solicitud en el registro electrónico de la Administración u Organismo competente."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "41. LOS ACTOS ADMINISTRATIVOS QUE DICTEN LAS ADMINISTRACIONES PÚBLICAS:",
+    "options": [
+      "a) A instancia del interesado, se producirán por el órgano competente ajustándose a los requisitos y al procedimiento establecido.",
+      "b) De oficio, se producirán por el órgano competente ajustándose a los requisitos y al procedimiento establecido.",
+      "c) De oficio o a instancia del interesado, se producirán por el órgano competente ajustándose a los requisitos y al procedimiento establecido.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "42. EL CONTENIDO DE LOS ACTOS SE AJUSTARÁ:",
+    "options": [
+      "a) A lo dispuesto por el ordenamiento jurídico y será determinado y adecuado a los fines de aquéllos.",
+      "b) Exclusivamente a lo dispuesto por la presente ley y será determinado y adecuado a los fines del ordenamiento jurídico.",
+      "c) A lo dispuesto por el ordenamiento jurídico y será determinado y adecuado a los fines de la presente ley.",
+      "d) Exclusivamente a lo dispuesto por la presente ley y será determinado y adecuado a los fines de aquéllos."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "43. CUANDO RAZONES DE INTERÉS PÚBLICO LO ACONSEJEN, SE PODRÁ ACORDAR LA APLICACIÓN AL PROCEDIMIENTO DE LA TRAMITACIÓN DE URGENCIA:",
+    "options": [
+      "a) De oficio por la cual se reducirán un tercio los plazos establecidos para el procedimiento ordinario.",
+      "b) A petición del interesado por la cual se reducirán a la mitad los plazos establecidos para el procedimiento ordinario.",
+      "c) De oficio o a petición del interesado por la cual se reducirán un tercio los plazos establecidos para el procedimiento ordinario.",
+      "d) De oficio o a petición del interesado por la cual se reducirán a la mitad los plazos establecidos para el procedimiento ordinario."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "44. A LOS EFECTOS DEL CÓMPUTO DE PLAZO FIJADO EN DÍAS HÁBILES, Y EN LO QUE SE REFIERE AL CUMPLIMIENTO DE PLAZOS POR LOS INTERESADOS, LA PRESENTACIÓN DE DOCUMENTOS EN UN REGISTRO ELECTRÓNICO UN DÍA INHÁBIL:",
+    "options": [
+      "a) Se entenderá realizada en la primera hora del primer día hábil siguiente salvo que una norma permita expresamente la recepción en día inhábil.",
+      "b) Se entenderá, en todo caso, realizada en la última hora del primer día hábil anterior.",
+      "c) Se entenderá, en todo caso, realizada en la primera hora del primer día hábil siguiente.",
+      "d) Se entenderá realizada en la última hora del primer día hábil anterior salvo que una norma permita expresamente la recepción en día inhábil."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "45. RESPECTO AL FUNCIONAMIENTO DEL REGISTRO ELECTRÓNICO:",
+    "options": [
+      "a) Permitirá la presentación de documentos todos los días hábiles del año entre las 8 y las 22 horas.",
+      "b) Permitirá la presentación de documentos todos los días del año durante las 24 horas.",
+      "c) Permitirá la presentación de documentos todos los días hábiles del año durante las 24 horas.",
+      "d) Permitirá la presentación de documentos todos los días del año entre las 8 y las 22 horas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "46. SERÁN MOTIVADOS, CON SUCINTA REFERENCIA DE HECHOS Y FUNDAMENTOS DE DERECHO (SEÑALE LA INCORRECTA):",
+    "options": [
+      "a) Los actos que limiten derechos subjetivos o intereses legítimos.",
+      "b) Los actos que resuelvan procedimientos de revisión de oficio de disposiciones o actos administrativos.",
+      "c) Los acuerdos de acumulación de un procedimiento a otro con el que guarde identidad sustancial o íntima conexión.",
+      "d) Los acuerdos de suspensión de actos, cualquiera que sea el motivo de ésta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "47. SERÁN MOTIVADOS, CON SUCINTA REFERENCIA DE HECHOS Y FUNDAMENTOS DE DERECHO (SEÑALE LA INCORRECTA):",
+    "options": [
+      "a) Los actos que acuerden la terminación del procedimiento por la imposibilidad material de continuarlo por causas sobrevenidas.",
+      "b) Las propuestas de resolución en los procedimientos de carácter sancionador.",
+      "c) Los actos que rechacen pruebas propuestas por la Administración.",
+      "d) Los actos que se dicten en el ejercicio de potestades discrecionales."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "48. LA MOTIVACIÓN DE LOS ACTOS QUE PONGAN FIN A LOS PROCEDIMIENTOS SELECTIVOS Y DE CONCURRENCIA COMPETITIVA:",
+    "options": [
+      "a) Se realizará de conformidad con lo que dispongan la presente ley.",
+      "b) Se realizará de conformidad con lo que dispongan las normas que regulen sus convocatorias, debiendo, en todo caso, quedar acreditados en el procedimiento los fundamentos de la resolución que se adopte.",
+      "c) Se realizará de conformidad con lo que dispongan las normas que regulen sus convocatorias, sin necesidad de que queden acreditados en el procedimiento los fundamentos de la resolución que se adopte.",
+      "d) No precisarán de motivación."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "49. LOS ACTOS ADMINISTRATIVOS, A MENOS QUE SU NATURALEZA EXIJA OTRA FORMA MÁS ADECUADA DE EXPRESIÓN Y CONSTANCIA, SE PRODUCIRÁN:",
+    "options": [
+      "a) Por escrito a través de medios electrónicos.",
+      "b) Por escrito a través de medios no electrónicos.",
+      "c) Por escrito a través de medios electrónicos o no electrónicos.",
+      "d) Verbalmente."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "50. EXCEPCIONALMENTE, PODRÁ OTORGARSE EFICACIA RETROACTIVA A LOS ACTOS:",
+    "options": [
+      "a) Cuando produzcan efectos favorables al interesado, siempre que los supuestos de hecho necesarios existieran ya en la fecha a que se retrotraiga la eficacia del acto.",
+      "b) Cuando produzcan efectos desfavorables al interesado, siempre que los supuestos de hecho necesarios no existieran en la fecha a que se retrotraiga la eficacia del acto.",
+      "c) Cuando produzcan efectos desfavorables al interesado, siempre que los supuestos de hecho necesarios existieran ya en la fecha a que se retrotraiga la eficacia del acto.",
+      "d) Cuando produzcan efectos favorables al interesado, siempre que los supuestos de hecho necesarios no existieran en la fecha a que se retrotraiga la eficacia del acto."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "51. TODA NOTIFICACIÓN DEBERÁ SER CURSADA DENTRO DEL PLAZO DE:",
+    "options": [
+      "a) 5 días a partir de la fecha en que el acto haya sido incoado.",
+      "b) 10 días a partir de la fecha en que el acto haya sido dictado.",
+      "c) 10 días a partir de la fecha en que el acto haya sido incoado.",
+      "d) 20 días a partir de la fecha en que el acto haya sido dictado."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "52. CUANDO UNA ADMINISTRACIÓN PÚBLICA TENGA QUE DICTAR, EN EL ÁMBITO DE SUS COMPETENCIAS, UN ACTO QUE NECESARIAMENTE TENGA POR BASE OTRO DICTADO POR UNA ADMINISTRACIÓN PÚBLICA DISTINTA Y AQUÉLLA ENTIENDA QUE ES ILEGAL, PODRÁ REQUERIR A ÉSTA PREVIAMENTE PARA QUE ANULE O REVISE EL ACTO Y, DE RECHAZAR EL REQUERIMIENTO, PODRÁ INTERPONER:",
+    "options": [
+      "a) Recurso de alzada.",
+      "b) Recurso potestativo de reposición.",
+      "c) Recurso extraordinario de revisión.",
+      "d) Recurso contencioso-administrativo."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "53. LAS NORMAS Y ACTOS DICTADOS POR LOS ÓRGANOS DE LAS ADMINISTRACIONES PÚBLICAS EN EL EJERCICIO DE SU PROPIA COMPETENCIA DEBERÁN SER OBSERVADAS POR EL RESTO DE LOS ÓRGANOS ADMINISTRATIVOS:",
+    "options": [
+      "a) Siempre que dependan jerárquicamente entre sí y dependan de la misma Administración.",
+      "b) Aunque no dependan jerárquicamente entre sí o pertenezcan a otra Administración.",
+      "c) Aunque no dependan jerárquicamente entre sí y dependan de la misma Administración.",
+      "d) Siempre que dependan jerárquicamente entre sí o pertenezcan a otra Administración."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "54. EN LOS CASOS EN QUE LOS ÓRGANOS ADMINISTRATIVOS EJERZAN SU COMPETENCIA DE FORMA VERBAL, LA CONSTANCIA ESCRITA DEL ACTO, CUANDO SEA NECESARIA, SE EFECTUARÁ Y FIRMARÁ POR:",
+    "options": [
+      "a) El titular del órgano inferior.",
+      "b) El titular del órgano inferior o funcionario que la reciba oralmente.",
+      "c) El titular del órgano superior o funcionario que la reciba oralmente.",
+      "d) El titular del órgano superior."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "55. PODRÁN REFUNDIRSE EN UN ÚNICO ACTO, ACORDADO POR EL ÓRGANO COMPETENTE, QUE ESPECIFICARÁ LAS PERSONAS U OTRAS CIRCUNSTANCIAS QUE INDIVIDUALICEN LOS EFECTOS DEL ACTO PARA CADA INTERESADO, CUANDO DEBA DICTARSE UNA SERIE DE ACTOS ADMINISTRATIVOS DE LA MISMA NATURALEZA, TALES COMO:",
+    "options": [
+      "a) Nombramientos.",
+      "b) Concesiones.",
+      "c) Licencias.",
+      "d) todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "56. RESPECTO A LA INDEROGALIDAD SINGULAR:",
+    "options": [
+      "a) Las resoluciones administrativas de carácter particular no podrán vulnerar lo establecido en una disposición de carácter general, salvo que aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general.",
+      "b) Las resoluciones administrativas de carácter general no podrán vulnerar lo establecido en una disposición de carácter particular, aunque aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general.",
+      "c) Las resoluciones administrativas de carácter particular no podrán vulnerar lo establecido en una disposición de carácter general, aunque aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general.",
+      "d) Las resoluciones administrativas de carácter general no podrán vulnerar lo establecido en una disposición de carácter particular, salvo que aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "57. LAS RESOLUCIONES ADMINISTRATIVAS QUE VULNEREN LO ESTABLECIDO EN UNA DISPOSICIÓN REGLAMENTARIA:",
+    "options": [
+      "a) Son nulas.",
+      "b) Son anulables.",
+      "c) Son válidas.",
+      "d) No son recurribles."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "58. LOS ACTOS DE LAS ADMINISTRACIONES PÚBLICAS SUJETOS AL DERECHO ADMINISTRATIVO SERÁN EJECUTIVOS CON ARREGLO A LO DISPUESTO:",
+    "options": [
+      "a) En esta Ley.",
+      "b) En la Ley reguladora de la Jurisdicción Contencioso-Administrativa.",
+      "c) En la Ley de Régimen Jurídico del Sector Público.",
+      "d) En la Constitución Española."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "59. LOS ACTOS DE LAS ADMINISTRACIONES PÚBLICAS SUJETOS AL DERECHO ADMINISTRATIVO SE PRESUMIRÁN VÁLIDOS Y PRODUCIRÁN EFECTOS DESDE:",
+    "options": [
+      "a) La fecha en que se dicten, salvo que en ellos se disponga otra cosa.",
+      "b) El día siguiente a la fecha en que se dicten, en cualquier caso.",
+      "c) El día siguiente a la fecha en que se dicten, salvo que en ellos se disponga otra cosa.",
+      "d) La fecha en que se dicten, en cualquier caso."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "60. LA EFICACIA DE LOS ACTOS QUEDARÁ DEMORADA CUANDO:",
+    "options": [
+      "a) Así lo exija el contenido del acto.",
+      "b) Esté supeditada a su notificación o publicación.",
+      "c) Esté supeditada a aprobación superior.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "61. SE ENTIENDE POR COMPARECENCIA EN LA SEDE ELECTRÓNICA:",
+    "options": [
+      "a) El acceso por el interesado al contenido de la notificación.",
+      "b) El acceso por el interesado o su representante debidamente identificado al contenido de la notificación.",
+      "c) La puesta al alcance del interesado del contenido de la notificación en la misma sede.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "62. CUANDO LA NOTIFICACIÓN POR MEDIOS ELECTRÓNICOS SEA DE CARÁCTER OBLIGATORIO, O HAYA SIDO EXPRESAMENTE ELEGIDA POR EL INTERESADO:",
+    "options": [
+      "a) Se entenderá efectuada cuando hayan transcurrido 10 días naturales desde la puesta a disposición de la notificación sin que se acceda a su contenido.",
+      "b) Se entenderá rechazada cuando hayan transcurrido 10 días naturales desde la puesta a disposición de la notificación sin que se acceda a su contenido.",
+      "c) Se entenderá efectuada cuando hayan transcurrido 10 días hábiles desde la puesta a disposición de la notificación sin que se acceda a su contenido.",
+      "d) Se entenderá rechazada cuando hayan transcurrido 10 días hábiles desde la puesta a disposición de la notificación sin que se acceda a su contenido."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "63. EN CASO DE QUE EL PRIMER INTENTO DE NOTIFICACIÓN SE HAYA REALIZADO ANTES DE:",
+    "options": [
+      "a) Las 14 horas, el segundo intento deberá realizarse después de las 14 horas y viceversa, dejando en todo caso al menos un margen de diferencia de dos horas entre ambos intentos de notificación.",
+      "b) Las 15 horas, el segundo intento deberá realizarse después de las 15 horas y viceversa, dejando en todo caso al menos un margen de diferencia de dos horas entre ambos intentos de notificación.",
+      "c) Las 14 horas, el segundo intento deberá realizarse después de las 14 horas y viceversa, dejando en todo caso al menos un margen de diferencia de tres horas entre ambos intentos de notificación.",
+      "d) Las 15 horas, el segundo intento deberá realizarse después de las 15 horas y viceversa, dejando en todo caso al menos un margen de diferencia de tres horas entre ambos intentos de notificación."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "64. CUANDO EL INTERESADO FUERA NOTIFICADO POR DISTINTOS CAUCES SE TOMARÁ COMO FECHA DE NOTIFICACIÓN:",
+    "options": [
+      "a) La de aquélla que se hubiera producido en primer lugar.",
+      "b) La de aquélla que se hubiera producido en último lugar.",
+      "c) La de aquélla que elija el interesado.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "65. CUANDO EL INTERESADO O SU REPRESENTANTE RECHACE LA NOTIFICACIÓN DE UNA ACTUACIÓN ADMINISTRATIVA:",
+    "options": [
+      "a) Se hará constar en el expediente, especificándose las circunstancias del intento de notificación y el medio.",
+      "b) Se dará por efectuado el trámite.",
+      "c) Seguirá el procedimiento.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "66. EN LOS PROCEDIMIENTOS INICIADOS DE OFICIO, A LOS SOLOS EFECTOS DE SU INICIACIÓN, LAS ADMINISTRACIONES PÚBLICAS PODRÁN RECABAR, MEDIANTE CONSULTA A LAS BASES DE DATOS DE:",
+    "options": [
+      "a) El Centro de Investigaciones Sociológicas, los datos sobre el domicilio del interesado recogido en el catastro virtual, remitidos por la Seguridad Social.",
+      "b) El Instituto Nacional de Estadística, los datos sobre el domicilio del interesado recogido en el catastro virtual, remitidos por las Entidades Locales.",
+      "c) El Centro de Investigaciones Sociológicas, los datos sobre el domicilio del interesado recogido en el Padrón Municipal, remitidos por las Entidades Locales.",
+      "d) El Instituto Nacional de Estadística, los datos sobre el domicilio del interesado recogido en el Padrón Municipal, remitidos por las Entidades Locales."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "67. RESPECTO A LA PRÁCTICA DE LAS NOTIFICACIONES A TRAVÉS DE MEDIOS ELECTRÓNICOS, LOS INTERESADOS PODRÁN ACCEDER A LAS NOTIFICACIONES DESDE:",
+    "options": [
+      "a) El Punto de Acceso General electrónico de la Administración, que funcionará como un portal de acceso.",
+      "b) La página inicial de la Web de la Administración electrónica, que funcionará como un portal de acceso.",
+      "c) La oficina de la Administración virtual, que funcionará como un portal de acceso.",
+      "d) El Portal de Aplicaciones Informáticas, que funcionará como un portal de acceso."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "68. RESPECTO A LA CONVALIDACIÓN NO ES CORRECTO:",
+    "options": [
+      "a) La Administración podrá convalidar los actos anulables, subsanando los vicios de que adolezcan.",
+      "b) El acto de convalidación producirá efecto desde su fecha, salvo lo dispuesto en el artículo 39.3 para la retroactividad de los actos administrativos.",
+      "c) Si el vicio consistiera en incompetencia no determinante de nulidad, la convalidación podrá realizarse por el órgano competente siempre que no sea superior jerárquico del que dictó el acto viciado.",
+      "d) Si el vicio consistiese en la falta de alguna autorización, podrá ser convalidado el acto mediante el otorgamiento de la misma por el órgano competente."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "69. RESPECTO A LA ANULABILIDAD:",
+    "options": [
+      "a) Son anulables los actos de la Administración que incurran en cualquier infracción del ordenamiento jurídico, salvo la desviación de poder.",
+      "b) El defecto de forma sólo determinará la anulabilidad cuando el acto carezca de los requisitos formales indispensables para alcanzar su fin o dé lugar a la indefensión de los interesados.",
+      "c) La realización de actuaciones administrativas fuera del tiempo establecido para ellas implicará la anulabilidad del acto en cualquier caso.",
+      "d) Todas son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "70. SERÁN NULAS DE PLENO DERECHO LAS DISPOSICIONES ADMINISTRATIVAS (SEÑALE LA INCORRECTA):",
+    "options": [
+      "a) Que vulneren la Constitución.",
+      "b) Que vulneren las leyes u otras disposiciones administrativas de rango superior.",
+      "c) Que regulen materias reservadas a la Ley.",
+      "d) Que establezcan la irretroactividad de disposiciones sancionadoras no favorables. o restrictivas de derechos individuales."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "71. LOS ACTOS DE LAS ADMINISTRACIONES PÚBLICAS SON NULOS DE PLENO DERECHO EN LOS CASOS SIGUIENTES (SEÑALE LA INCORRECTA):",
+    "options": [
+      "a) Los dictados prescindiendo total y absolutamente del procedimiento legalmente establecido.",
+      "b) Los dictados prescindiendo total y absolutamente de las normas que contienen las reglas esenciales para la formación de la voluntad de los órganos colegiados.",
+      "c) Los actos expresos o presuntos contrarios al ordenamiento jurídico por los que se adquieren facultades o derechos cuando se carezca de los requisitos esenciales para su adquisición.",
+      "d) Cualquiera que se establezca expresamente en una disposición con rango de Ley o reglamentaria."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "72. LOS ACTOS DE LAS ADMINISTRACIONES PÚBLICAS SON NULOS DE PLENO DERECHO EN LOS CASOS SIGUIENTES (SEÑALE LA INCORRECTA):",
+    "options": [
+      "a) Los que limiten derechos subjetivos o intereses legítimos.",
+      "b) Los dictados por órgano manifiestamente incompetente por razón de la materia o del territorio.",
+      "c) Los que tengan un contenido imposible.",
+      "d) Los que sean constitutivos de infracción penal o se dicten como consecuencia de ésta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "73. SE LIMITARÁ A PUBLICAR EN EL DIARIO OFICIAL QUE CORRESPONDA UNA SOMERA INDICACIÓN DEL CONTENIDO DEL ACTO Y DEL LUGAR DONDE LOS INTERESADOS PODRÁN COMPARECER PARA CONOCIMIENTO DEL CONTENIDO ÍNTEGRO DEL MENCIONADO ACTO, SI EL ÓRGANO COMPETENTE APRECIASE QUE:",
+    "options": [
+      "a) La notificación por medio de anuncios lesiona derechos o intereses legítimos.",
+      "b) La publicación de un acto lesiona derechos o intereses legítimos.",
+      "c) a y b son correctos.",
+      "d) a y b son incorrectos."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "74. RESPECTO A LA PREGUNTA ANTERIOR, PREVIAMENTE Y CON CARÁCTER FACULTATIVO, LAS ADMINISTRACIONES PODRÁN PUBLICAR UN ANUNCIO EN:",
+    "options": [
+      "a) El boletín oficial de la Comunidad Autónoma o de la Provincia.",
+      "b) El tablón de edictos del Ayuntamiento del último domicilio del interesado.",
+      "c) El tablón de edictos del Ayuntamiento del Consulado o Sección Consular de la Embajada correspondiente.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "75. EL TÍTULO III DE LA LEY 39/2015, DE 1 DE OCTUBRE, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN DE LAS ADMINISTRACIONES PÚBLICAS TIENE:",
+    "options": [
+      "a) 1.",
+      "b) 2.",
+      "c) 3.",
+      "d) 4."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "76. EL TÍTULO III DE LA LEY 39/2015, DE 1 DE OCTUBRE, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN DE LAS ADMINISTRACIONES PÚBLICAS SE DENOMINA:",
+    "options": [
+      "a) De los actos administrativos.",
+      "b) Plazos y términos.",
+      "c) Eficacia de los actos.",
+      "d) Nulidad y anulabilidad."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "77. CUANDO NO PODRÁ CABER LA TRAMITACIÓN DE URGENCIA:",
+    "options": [
+      "a) En lo relativo a la presentación de solicitudes y recursos.",
+      "b) Únicamente cuando la tramitación se produzca de oficio.",
+      "c) Únicamente cuando la tramitación se produzca a instancia de parte.",
+      "d) Ninguna de las anteriores."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "78. CUANDO LOS INTERESADOS EN UN PROCEDIMIENTO SEAN DESCONOCIDOS, SE IGNORE EL LUGAR DE LA NOTIFICACIÓN O BIEN, INTENTADA ÉSTA, NO SE HUBIESE PODIDO PRACTICAR, LA NOTIFICACIÓN SE HARÁ POR MEDIO DE:",
+    "options": [
+      "a) Un anuncio publicado en el Boletín Oficial del Estado.",
+      "b) Un anuncio en el boletín oficial de la Comunidad Autónoma o de la Provincia.",
+      "c) Un anuncio en el tablón de edictos del Ayuntamiento del último domicilio del interesado.",
+      "d) Un anuncio en un periódico de difusión nacional."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "79. SEÑALE LA INCORRECTA:",
+    "options": [
+      "a) La nulidad o anulabilidad de un acto no implicará la de los sucesivos en el procedimiento que sean independientes del primero.",
+      "b) La nulidad o anulabilidad en parte del acto administrativo no implicará la de las partes del mismo independientes de aquélla, salvo que la parte viciada sea de tal importancia que sin ella el acto administrativo no hubiera sido dictado.",
+      "c) Los actos nulos o anulables que contengan los elementos constitutivos de otro distinto no producirán los efectos de éste.",
+      "d) El órgano que declare la nulidad o anule las actuaciones dispondrá siempre la conservación de aquellos actos y trámites cuyo contenido se hubiera mantenido igual de no haberse cometido la infracción."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "80. EL TÍTULO III DE LA LEY 39/2015, DE 1 DE OCTUBRE, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN DE LAS ADMINISTRACIONES PÚBLICAS COMPRENDE LOS ARTÍCULOS:",
+    "options": [
+      "a) 34 a 52.",
+      "b) 30 a 47.",
+      "c) 28 a 41.",
+      "d) 32 a 49."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "81. ESTARÁN OBLIGADOS A RELACIONARSE A TRAVÉS DE MEDIOS ELECTRÓNICOS CON LAS ADMINISTRACIONES PÚBLICAS PARA LA REALIZACIÓN DE CUALQUIER TRÁMITE DE UN PROCEDIMIENTO ADMINISTRATIVO: (SEÑALA LA INCORRECTA)",
+    "options": [
+      "a) las entidades con personalidad jurídica.",
+      "b) las personas jurídicas.",
+      "c) quienes representen a un interesado que esté obligado a relacionarse electrónicamente con la Administración.",
+      "d) los empleados de las Administraciones Públicas para los trámites y actuaciones que realicen con ellas por razón de su condición de empleado público."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "82. LA LENGUA DE LOS PROCEDIMIENTOS TRAMITADOS POR LA ADMINISTRACIÓN GENERAL DEL ESTADO SERÁ:",
+    "options": [
+      "a) el castellano.",
+      "b) el castellano o cualquier otra lengua oficial en algún territorio del Estado.",
+      "c) Español.",
+      "d) ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "83. UNA VEZ VENCIDO EL PLAZO PARA DICTAR Y NOTIFICAR RESOLUCIÓN, EN PROCEDIMIENTOS INICIADOS DE OFICIO DE LOS QUE PUDIERA DERIVARSE EL RECONOCIMIENTO O LA CONSTITUCIÓN DE DERECHOS U OTRAS SITUACIONES JURÍDICAS FAVORABLES:",
+    "options": [
+      "a) los interesados que hubieren comparecido podrán entender estimadas sus pretensiones por silencio administrativo.",
+      "b) los interesados que hubieren comparecido podrán entender desestimadas sus pretensiones por silencio administrativo.",
+      "c) se producirá la caducidad.",
+      "d) se producirá la prescripción."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "84. ES CORRECTO SEÑALAR:",
+    "options": [
+      "a) En la sede electrónica de acceso a cada registro figurará la relación actualizada de trámites que pueden iniciarse en el mismo.",
+      "b) Los asientos se anotarán respetando el orden temporal de recepción o salida de los documentos, e indicarán la fecha del día en que se produzcan.",
+      "c) Concluido el trámite de registro, los documentos serán cursados sin dilación a sus destinatarios y a las unidades administrativas correspondientes desde el registro en que hubieran sido recibidas.",
+      "d) Todas las respuestas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "85. ¿ANTE QUIÉN SE PUEDE HACER VALER LOS ACTOS PRODUCIDOS POR SILENCIO ADMINISTRATIVO?",
+    "options": [
+      "a) Ante la administración.",
+      "b) Ante cualquier persona física o jurídica.",
+      "c) Ambas respuestas son correctas.",
+      "d) Ante el personal de la administración correspondiente"
+    ],
+    "correct": 2
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

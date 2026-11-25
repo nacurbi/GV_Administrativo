@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Test5</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN:</strong> Test 5</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. En los procedimientos iniciados de oficio, el vencimiento del plazo máximo sin que se haya dictado y notificado resolución:",
+    "options": [
+      "a) Es la excepción al artículo 21 de la ley 39 /2015 sobre la obligación de resolver.",
+      "b) No exime a la administración del cumplimiento de la obligación legal de resolver.",
+      "c) Supone la estimación de las pretensiones de los interesados.",
+      "d) Las respuestas b y c son correctas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "2. Vencido el plazo para dictar y notificar resolución en los procedimientos iniciados de oficio donde la administración ejercite potestades sancionadoras o en general de intervención susceptibles de efectos desfavorables o de gravamen:",
+    "options": [
+      "a) Se producirá la prescripción.",
+      "b) Se producirá la caducidad.",
+      "c) Se entienden estimadas las pretensiones por silencio.",
+      "d) Se entiende interrumpido el plazo para resolver y notificar si es por causa imputable al interesado."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "3. La administración está obligada a dictar resolución expresa en todos los procedimientos cualesquiera que sea su forma de iniciación excepto:",
+    "options": [
+      "a) En los casos de prescripción.",
+      "b) En los casos de desaparición sobrevenida del objeto del procedimiento.",
+      "c) En los procedimientos relativos al ejercicio de derechos sometidos únicamente al deber de comunicación de la administración.",
+      "d) Todas son correctas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "4. Las copias auténticas de documentos privados:",
+    "options": [
+      "a) Surten únicamente efectos administrativos.",
+      "b) No tendrán ningún efecto administrativo.",
+      "c) Tendrán validez en todo caso.",
+      "d) Las respuestas a y c son correctas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "5. Las copias auténticas de los documentos públicos administrativos que hayan sido válidamente emitidos por las administraciones públicas se expedirán en un plazo de:",
+    "options": [
+      "a) 10 días desde la recepción de la solicitud en el registro electrónico de la administración u organismo competente.",
+      "b) 15 días desde la recepción de la solicitud en el registro electrónico de la administración u organismo competente.",
+      "c) 20 días desde la recepción de la solicitud en el registro electrónico de la administración u organismo competente.",
+      "d) 30 días desde la recepción de la solicitud en el registro electrónico de la administración u organismo competente."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "6. A quién corresponde la competencia de expedición de copias auténticas de los documentos públicos administrativos que hayan sido válidamente emitidos por las administraciones públicas? :",
+    "options": [
+      "a) Al órgano administrativo superior de aquél que hubiera emitido el original.",
+      "b) Al órgano directivo superior de aquél que hubiera emitido el original.",
+      "c) Al órgano administrativo que hubiera emitido el original.",
+      "d) A cualquier órgano administrativo que tenga atribuida la expedición de copias auténticas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "7. Para ser considerados validos los documentos electrónicos administrativos deberán:",
+    "options": [
+      "a) Disponer de los datos de los datos de identificación que permitan su individualización.",
+      "b) Incorporar una referencia temporal del momento en que hayan sido emitidos.",
+      "c) Incorporar las firmas electrónicas que correspondan de acuerdo con lo previsto en la normativa aplicable.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "8. Señala la respuesta incorrecta:",
+    "options": [
+      "a) Los interesados podrán solicitar en cualquier momento, la expedición de copias auténticas de los documentos públicos administrativos que hayan sido válidamente emitidos por las administraciones públicas.",
+      "b) Las administraciones públicas estarán obligadas a expedir copias auténticas electrónicas de cualquier documento en papel que presenten los interesados y que vaya a incorporar a un expediente administrativo.",
+      "c) Cuando las administraciones públicas expidan copias auténticas electrónicas, deberá quedar expresamente así indicado en el documento de la copia.",
+      "d) La expedición de copias auténticas de documentos públicos notariales, registrales y judiciales así como de los diarios oficiales, se regirán por la presente ley."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "9. Las copias auténticas realizadas por una administración pública:",
+    "options": [
+      "a) Surten únicamente efectos administrativos.",
+      "b) No tendrán ningún efecto administrativo.",
+      "c) Únicamente tendrán validez en la misma administración.",
+      "d) Tendrán validez en las restantes administraciones."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "10. Con respecto a la emisión de documentos por las administraciones públicas:",
+    "options": [
+      "a) No requieren de firma electrónica los documentos electrónicos emitidos por las administraciones públicas que se publiquen con carácter meramente informativo.",
+      "b) Ni los que no formen parte de un expediente administrativo.",
+      "c) En los dos casos anteriores será necesario identificar el origen de esos documentos.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "11. Sobre la obligatoriedad de los términos y plazos el artículo 29 de la ley 39 /2015 establece:",
+    "options": [
+      "a) Los términos y plazos sólo obligan a los interesados en el procedimiento.",
+      "b) Sólo obligan a las autoridades y personal al servicio de las administraciones públicas competentes para la tramitación de los asuntos.",
+      "c) A las autoridades y personal al servicio de las administraciones públicas competentes para la tramitación de los asuntos, así como a los interesados en los mismos.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "12. Como regla general si el plazo se señala por horas se entiende que éstas son:",
+    "options": [
+      "a) Naturales.",
+      "b) Hábiles.",
+      "c) No hay cómputo en horas.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "13. Son hábiles las horas:",
+    "options": [
+      "a) Salvo que por ley o derecho de la UE se disponga otra cosa, cuando los cómputos sean por horas, se entiende que estas son hábiles.",
+      "b) No son hábiles todas las horas de un día hábil.",
+      "c) Cuando los plazos se computen por horas no podrán tener una duración superior a 36 horas.",
+      "d) Todas son incorrectas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "14. Los plazos expresados por horas se contarán:",
+    "options": [
+      "a) Desde la siguiente hora hábil en que tenga lugar la notificación o publicación del acto.",
+      "b) Desde la hora en que tenga lugar la notificación o publicación del acto.",
+      "c) Desde la hora, minuto y segundo en que tenga lugar la notificación o publicación del acto.",
+      "d) Todas son incorrectas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "15. Cuando los plazos se señalen por días:",
+    "options": [
+      "a) Deberá especificarse si son días naturales o hábiles.",
+      "b) Salvo que una ley o derecho de la UE no exprese otro cómputo, cuando los plazos se señalen por días, se entiende que son naturales.",
+      "c) En el cómputo de días naturales se excluyen sábados, domingos y festivos.",
+      "d) Todas son incorrectas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "16. Nos notifican un acto administrativo el día 1 de abril de 2020 y nos dan 6 días para alegar, cuando empieza y acaba el plazo? :(coged un calendario)",
+    "options": [
+      "a) Empieza a correr el día 2 de abril y acaba el 7 de abril.",
+      "b) Empieza a computar el plazo el día 1 de abril y acaba el 7 de abril.",
+      "c) Empieza a computar el plazo el 2 de abril y acaba el 14 de abril.",
+      "d) Empieza a computar el plazo el 2 de abril y acaba el 13 de abril, porque no es festivo en Madrid, aunque en nuestra comunidad autónoma si es festivo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "17. Si el plazo se señala por días naturales por declararlo la ley:",
+    "options": [
+      "a) El órgano tramitador podrá decidir si se hace constar dicha circunstancia.",
+      "b) El órgano encargado de resolver decidirá sobre la necesidad o no de hacer constar esta circunstancia.",
+      "c) Se hace constar dicha circunstancia en la correspondiente notificación.",
+      "d) Todas son incorrectas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "18. Los plazos expresados en días se contarán a partir:",
+    "options": [
+      "a) Del mismo día en que tiene lugar la notificación o publicación del acto de que se trate.",
+      "b) Del día siguiente a aquél en que tuvo lugar la notificación o publicación del acto.",
+      "c) Del día siguiente a aquél en que se produzca la estimación o desestimación por silencio administrativo.",
+      "d) Las respuestas b y c son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "19. Si el plazo se cuenta en meses o años, éste concluirá:",
+    "options": [
+      "a) Al día siguiente en que se produjo la notificación, publicación o silencio en el mes o año correspondiente.",
+      "b) El mismo día en que se produjo la notificación, publicación o silencio en el mes o año del vencimiento.",
+      "c) El último día hábil del mes o año del vencimiento.",
+      "d) Todas son incorrectas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "20. Según el artículo 30.4 de la ley 39 /2015 de 1 de octubre, si el plazo se fija en meses o años y en el mes de vencimiento no hubiera día equivalente a aquél en que comienza el cómputo:",
+    "options": [
+      "a) Se entiende que el plazo expira el primer día del mes siguiente.",
+      "b) Se entiende que el plazo expira el primer día hábil del mes siguiente.",
+      "c) Se entiende que el plazo expira el último día del mes.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

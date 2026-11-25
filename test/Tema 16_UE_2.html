@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema 16_UE_2</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>TEMA 16. LA UNIÓN EUROPEA</strong> (Test 2)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. Respecto al proceso de construcción europea, señale la afirmación más precisa:",
+    "options": [
+      "a) La Unión Europea nació jurídicamente con la Declaración Schuman de 1950.",
+      "b) La Declaración Schuman propuso una transferencia progresiva de competencias estatales a instituciones supranacionales independientes.",
+      "c) El Tratado de Maastricht creó directamente una federación europea.",
+      "d) La CECA fue creada una vez aprobados el TUE y el TFUE."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "2. Señale la respuesta correcta sobre los tratados fundamentales de la Unión Europea:",
+    "options": [
+      "a) El TUE regula exclusivamente las instituciones y el TFUE únicamente los derechos fundamentales.",
+      "b) El TFUE es el texto de base y el TUE el de desarrollo.",
+      "c) El TUE constituye el texto de base y el TFUE desarrolla su funcionamiento.",
+      "d) Ambos tratados tienen exactamente el mismo contenido material."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "3. ¿Cuál de las siguientes situaciones se ajusta mejor a las funciones del Consejo Europeo?",
+    "options": [
+      "a) Aprobar un reglamento junto con el Parlamento Europeo.",
+      "b) Resolver recursos por incumplimiento.",
+      "c) Determinar las grandes prioridades políticas de la Unión sin participar directamente en la actividad legislativa.",
+      "d) Ejecutar el presupuesto anual europeo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "4. Señale la respuesta incorrecta:",
+    "options": [
+      "a) El Presidente del Consejo Europeo es incompatible con cualquier mandato nacional.",
+      "b) El Consejo Europeo puede reunirse extraordinariamente si las circunstancias lo requieren.",
+      "c) El Consejo Europeo está integrado exclusivamente por los jefes de Estado o de Gobierno.",
+      "d) El Presidente de la Comisión forma parte del Consejo Europeo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "5. Cuando una materia exige unanimidad en el Consejo de la Unión Europea:",
+    "options": [
+      "a) Las abstenciones equivalen a votos contrarios.",
+      "b) Basta una abstención para impedir la decisión.",
+      "c) Un único voto en contra puede bloquear la adopción del acto.",
+      "d) Se aplica automáticamente la mayoría cualificada."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "6. La mayoría cualificada ordinaria en el Consejo exige:",
+    "options": [
+      "a) 55 % de los Estados que representen el 65 % de la población.",
+      "b) 65 % de los Estados que representen el 55 % de la población.",
+      "c) Al menos veinte Estados miembros.",
+      "d) Conformidad expresa del Parlamento Europeo."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "7. ¿Qué característica diferencia al COREPER del Consejo de la Unión Europea?",
+    "options": [
+      "a) Adopta reglamentos directamente aplicables.",
+      "b) Está compuesto por jueces nacionales.",
+      "c) Desarrolla una labor preparatoria y técnica previa a las reuniones del Consejo.",
+      "d) Está formado exclusivamente por ministros de asuntos exteriores."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "8. Señale la respuesta correcta:",
+    "options": [
+      "a) La Comisión ejerce funciones jurisdiccionales.",
+      "b) La Comisión representa el poder ejecutivo de la Unión.",
+      "c) La Comisión es elegida por sufragio universal directo.",
+      "d) La Comisión carece de iniciativa legislativa."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "9. La moción de censura contra la Comisión Europea tiene como consecuencia:",
+    "options": [
+      "a) El cese exclusivo del Presidente.",
+      "b) La disolución automática del Parlamento.",
+      "c) La dimisión colectiva de toda la Comisión.",
+      "d) La convocatoria de elecciones anticipadas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "10. Señale la respuesta incorrecta:",
+    "options": [
+      "a) La Comisión tiene prácticamente el monopolio de la iniciativa legislativa.",
+      "b) La Comisión ejecuta políticas y presupuesto.",
+      "c) La Comisión controla el cumplimiento del Derecho de la Unión por los Estados.",
+      "d) La Comisión comparte con el TJUE la potestad jurisdiccional."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "11. Respecto al Parlamento Europeo:",
+    "options": [
+      "a) Sus miembros se agrupan principalmente por afinidad política.",
+      "b) Sus miembros se agrupan por nacionalidades.",
+      "c) Carece de funciones presupuestarias.",
+      "d) Carece de funciones de control político."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "12. ¿Cuál describe mejor al Defensor del Pueblo Europeo?",
+    "options": [
+      "a) Puede revisar sentencias del TJUE.",
+      "b) Investiga supuestos de mala administración.",
+      "c) Depende orgánicamente de la Comisión.",
+      "d) Tiene facultades sancionadoras directas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "13. La existencia de un juez nacional por cada Estado miembro en el Tribunal de Justicia persigue principalmente:",
+    "options": [
+      "a) Garantizar la representación de los distintos ordenamientos jurídicos nacionales.",
+      "b) Asegurar cuotas de representación política.",
+      "c) Reproducir la composición del Consejo Europeo.",
+      "d) Facilitar sentencias por unanimidad."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "14. Señale la respuesta incorrecta:",
+    "options": [
+      "a) El Tribunal no está vinculado por las conclusiones del abogado general.",
+      "b) Los abogados generales intervienen en los procedimientos.",
+      "c) Los abogados generales pueden imponer la solución jurídica del litigio.",
+      "d) Jueces y abogados generales deben ofrecer garantías de independencia."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "15. ¿Cuál de los siguientes recursos corresponde exclusivamente al Tribunal de Justicia?",
+    "options": [
+      "a) Reenvío prejudicial.",
+      "b) Recurso por incumplimiento.",
+      "c) Recurso de casación contra resoluciones de Tribunales de Estados Miembros.",
+      "d) Recurso de reparación de daños y perjuicios."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "16. El reenvío prejudicial tiene por finalidad:",
+    "options": [
+      "a) Impugnar la legalidad de los tratados.",
+      "b) Permitir consultas sobre interpretación o validez del Derecho de la Unión.",
+      "c) Sancionar a Estados incumplidores.",
+      "d) Revisar decisiones del Parlamento Europeo."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "17. Cuando un órgano jurisdiccional nacional plantea una cuestión prejudicial:",
+    "options": [
+      "a) El procedimiento nacional continúa normalmente.",
+      "b) El procedimiento nacional queda paralizado hasta la decisión del Tribunal.",
+      "c) El asunto pasa definitivamente al Tribunal General.",
+      "d) La Comisión dicta la resolución."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "18. El recurso de reparación de daños y perjuicios exige, entre otros elementos:",
+    "options": [
+      "a) La existencia de daños efectivamente acreditados.",
+      "b) Que el demandante sea necesariamente un Estado.",
+      "c) Una sentencia penal previa.",
+      "d) Que el daño proceda de una actuación legislativa estatal."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "19. Respecto al Tribunal de Cuentas Europeo:",
+    "options": [
+      "a) Ejerce funciones judiciales especializadas.",
+      "b) Fiscaliza la corrección de ingresos y gastos de la Unión.",
+      "c) Aprueba el presupuesto anual.",
+      "d) Dirige la OLAF."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "20. Señale la respuesta correcta:",
+    "options": [
+      "a) El BCE forma parte del Eurosistema junto con todos los bancos centrales nacionales de la UE.",
+      "b) El Eurosistema está integrado únicamente por el BCE y los bancos centrales de los Estados del euro.",
+      "c) El BCE tiene su sede en Luxemburgo.",
+      "d) El objetivo principal del Eurosistema es fomentar el crecimiento económico."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "21. Respecto al TEDH:",
+    "options": [
+      "a) Forma parte de las siete instituciones principales de la Unión.",
+      "b) Es un órgano del BCE.",
+      "c) Se accede a él tras agotar las vías judiciales internas.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "22. Señale la respuesta incorrecta:",
+    "options": [
+      "a) Reglamentos y directivas son actos vinculantes.",
+      "b) Las recomendaciones son vinculantes.",
+      "c) Los dictámenes no son vinculantes.",
+      "d) Los actos vinculantes deben motivarse."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "23. La principal diferencia entre reglamento y directiva radica en que:",
+    "options": [
+      "a) El reglamento es directamente aplicable y la directiva requiere normalmente transposición.",
+      "b) La directiva tiene rango superior.",
+      "c) El reglamento nunca genera derechos a particulares.",
+      "d) La directiva siempre produce efectos inmediatos."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "24. Si una directiva se dirige únicamente a determinados Estados miembros:",
+    "options": [
+      "a) No se publica.",
+      "b) Solo se comunica verbalmente.",
+      "c) Debe notificarse a los Estados destinatarios y luego publicarse.",
+      "d) Requiere aprobación previa del TJUE."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "25. ¿Cuál de las siguientes afirmaciones es correcta?",
+    "options": [
+      "a) El Parlamento Europeo y el Consejo comparten funciones legislativas.",
+      "b) La Comisión suele iniciar el procedimiento legislativo.",
+      "c) El TJUE garantiza la aplicación uniforme del Derecho de la Unión.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

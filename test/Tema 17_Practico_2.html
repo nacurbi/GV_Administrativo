@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema 17_Practico_2</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>TEMA 17. LEY 19/2013 · SUPUESTO PRÁCTICO 2</strong></p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = ["<p>Fermín Fernández es vecino de la localidad de Vitoria y desea toda la información relativa a las actuaciones de la Policía Autónoma que se han realizado en su término municipal en el pasado año 2020.</p><p>También está interesado en la información sobre los contratos menores de obras que se han llevado a cabo en el año 2021 en la localidad.</p><p>Por último, solicita también información sobre las solicitudes de locales sociales de uso continuado, realizadas en 2019, cuyas concesiones siguen vigentes hasta 2023.</p>"];
+            let preguntas = [
+  {
+    "question": "1. Fermín realiza las dos primeras solicitudes el día 25/03/2021 al Ayuntamiento de Vitoria. Conforme a Derecho, ¿Qué debe hacer dicho organismo?",
+    "options": [
+      "a) Facilitará toda la información solicitada al interesado.",
+      "b) El Ayuntamiento remitirá al interesado la información sobre contratos solicitada y remitirá la solicitud sobre las actuaciones de la Ertzaina al Departamento de Interior del Gobierno Vasco, poniéndolo en conocimiento del interesado.",
+      "c) El Ayuntamiento inadmitirá a trámite la solicitud de contratos menores al interesado, y hará lo mismo con la solicitud sobre actuaciones de la policía autónoma.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2,
+    "caso": 0,
+    "ref": "Los contratos menores se publican trimestralmente"
+  },
+  {
+    "question": "2. La tercera solicitud no identifica de manera concreta los datos que Fermín requiere… ¿Qué debe hacer el Ayuntamiento en ese caso?",
+    "options": [
+      "a) Concederá un plazo de 10 días para subsanación, con indicación de la suspensión del plazo para dictar resolución desde la fecha de notificación del requerimiento de subsanación hasta que éste sea atendido.",
+      "b) Concederá un plazo de 10 días para subsanación, con indicación de que, en caso de no atenderlo se entenderá que renuncia a su solicitud, con indicación de la suspensión del plazo de resolver y notificar.",
+      "c) Concederá un plazo de 10 días para subsanación, con indicación de que, en caso de no atenderlo, se le tendrá por desistido de su solicitud, y de que se suspenderá el plazo para resolver y notificar, desde la fecha del requerimiento de subsanación hasta que éste sea atendido.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 3,
+    "caso": 0,
+    "ref": "Suspensión del plazo desde la notificación al interesado."
+  },
+  {
+    "question": "3. Esta última solicitud ha tenido entrada el día 15 abril de 2021. ¿Qué plazo tiene para resolver y notificar el Ayuntamiento de Vitoria?",
+    "options": [
+      "a) En el plazo máximo de 1 mes desde que la solicitud haya tenido entrada en el órgano competente para su resolución.",
+      "b) En el plazo máximo de 1 mes desde que la solicitud ha tenido entrada en el registro del Ayuntamiento de Vitoria.",
+      "c) En el plazo máximo de 1 mes desde que la solicitud ha tenido entrada en el órgano competente para su tramitación.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "4. Dado que el Ayuntamiento entiende que dicha información podría afectar a intereses de terceras personas y entidades…",
+    "options": [
+      "a) Abrirá un período de información pública por un máximo de 15 días, para que los terceros afectados realicen las alegaciones que estimen oportunas, con suspensión del plazo para resolver y notificar, informando de ello al interesado.",
+      "b) Abrirá un período de alegaciones para los terceros afectados, y suspenderá el procedimiento durante un máximo de 15 días, aunque no es necesario informar al interesado.",
+      "c) Abrirá un período de alegaciones para los terceros afectados durante un máximo de 15 días, y suspenderá el procedimiento, informando de todo ello al interesado.",
+      "d) Suspenderá el procedimiento durante un mínimo de 15 días, para que los terceros afectados realicen sus alegaciones, e informará de ello al interesado."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "5. ¿Es posible ampliar el plazo de resolver y notificar?",
+    "options": [
+      "a) Sí, dado el volumen de la información solicitada, por otro mes más, notificando al interesado previamente a la adopción del acuerdo de ampliación de plazos.",
+      "b) Sí, dada la complejidad de la información solicitada, por otro mes más, notificando posteriormente el acuerdo de ampliación de plazos al interesado.",
+      "c) Sí, dado el volumen y la complejidad de la información solicitada, por otros 15 días más, notificando al interesado previamente a la adopción del acuerdo de ampliación de plazos.",
+      "d) Sí, dado el volumen y la complejidad de la información solicitada, por otro mes más, notificando posteriormente al interesado de la adopción del acuerdo de ampliación de plazos."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "6. Si transcurriese el plazo máximo de resolución ¿Cómo se entendería la resolución?",
+    "options": [
+      "a) Estimada.",
+      "b) Desestimada, por tratarse de un procedimiento relativo al derecho de petición.",
+      "c) Desestimada.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2,
+    "caso": 0,
+    "ref": "Porque así lo dice la Ley 19/2013 (art. 20.4)"
+  },
+  {
+    "question": "7. La falta de resolución en plazo, podría suponer para los responsables:",
+    "options": [
+      "a) Infracción grave, que puede ser castigada con la sanción de apercibimiento.",
+      "b) Infracción grave, pudiendo ser sancionada con suspensión firme de funciones.",
+      "c) Infracción grave, pudiendo ser castigada con la sanción de separación del servicio.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 3,
+    "caso": 0,
+    "ref": "No hay incumplimiento reiterado, luego no hay sanción"
+  },
+  {
+    "question": "8. El club de ajedrez “Reina Negra”, decide realizar alegaciones en contra de la concesión de la información solicitada por Fermín dentro del último día del plazo concedido al efecto. El Ayuntamiento estima la solicitud el día 19/05/2021…",
+    "options": [
+      "a) Aunque se ha producido un silencio administrativo, la resolución expresa se notificará a los terceros afectados y al interesado, haciéndole entrega a este último de los datos solicitados.",
+      "b) Se ha resuelto en plazo, y la resolución se notificará a los terceros afectados y al interesado, haciéndole entrega a este último de los datos solicitados.",
+      "c) Se ha resuelto en plazo, y la resolución se notificará a los terceros afectados y al interesado, sin hacerle entrega a este último de los datos solicitados.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 3,
+    "caso": 0,
+    "ref": "¿Ha solicitado el club de ajedrez que se le notifique la resolución?"
+  },
+  {
+    "question": "9. El club de ajedrez “Reina Negra”, como tercero afectado por la resolución adoptada por el Ayuntamiento…",
+    "options": [
+      "a) Podría recurrir en alzada, ya que adquiere la condición de interesado en el procedimiento.",
+      "b) Podría recurrir en reposición, o bien acudir a la jurisdicción contencioso- administrativa.",
+      "c) Podría reclamar ante el órgano de la CCAA que tenga la competencia en la materia.",
+      "d) Todas son correctas."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "10. En el supuesto de que el Ayuntamiento hubiera denegado la solicitud de información realizada… ¿Qué podría hacer don Fermín?",
+    "options": [
+      "a) Interponer reclamación ante el órgano de la CCAA que tenga la competencia en la materia y a la vez impugnarlo ante el juzgado de lo contencioso-administrativo.",
+      "b) Interponer reclamación ante el órgano de la CCAA que tenga la competencia en la materia, o bien acudir a la jurisdicción contencioso-administrativa.",
+      "c) Interponer reclamación ante el órgano de la CCAA que tenga la competencia en la materia, y tras la resolución estimatoria de éste, acudir a la jurisdicción contencioso- administrativa.",
+      "d) Todas son correctas."
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Si has marcado D… Por poder, podría hacer todas… a) Inadmisión a trámite de los dos recursos, b) OK y c) recurrir una estimación? Posible, aunque…"
+  },
+  {
+    "question": "11. El club de ajedrez “Reina Negra” ha decidido interponer un recurso contencioso- administrativo contra la resolución estimatoria del Ayuntamiento del 19 de mayo… ¿Cuándo entregará el Ayuntamiento la información solicitada a Don Fermín?",
+    "options": [
+      "a) En el mismo momento que notifica la resolución por la que estima la solicitud y adjunta a ésta.",
+      "b) La pondrá a disposición del interesado en su Sede Electrónica, para que el mismo acceda a la misma cuando desee.",
+      "c) No antes de que transcurra el plazo para interponer el antedicho recurso.",
+      "d) En cuanto el juez otorgue la oportuna autorización, sin necesidad de que recaiga sentencia desestimatoria en el proceso."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "12. Al final, el club de ajedrez “Reina Negra” ha cambiado de idea y se decantado por usar el procedimiento potestativo que sustituye al recurso de reposición en la materia… ¿Qué plazo tendrá la Comisión Vasca de Acceso a la Información Pública para resolverlo?",
+    "options": [
+      "a) El club tendrá 1 mes para interponer la reclamación y la CVAIP tendrá 3 meses para resolverlo, entendiéndose desestimada si no lo hiciera.",
+      "b) El club tendrá 1 mes para interponer la reclamación y la CVAIP tendrá 1 mes para resolverlo, entendiéndose desestimada si no lo hiciera.",
+      "c) El club tendrá 1 mes para interponer la reclamación y la CVAIP tendrá 3 meses para resolverlo, entendiéndose estimada si no lo hiciera.",
+      "d) El club tendrá 1 mes para interponer la reclamación y la CVAIP tendrá 1 mes para resolverlo, entendiéndose estimada si no lo hiciera."
+    ],
+    "correct": 0,
+    "caso": 0
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index] || '';
+                    boton.classList.toggle('hidden', pregunta.options[index] === undefined);
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

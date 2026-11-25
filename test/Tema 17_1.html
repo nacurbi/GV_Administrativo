@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema 17_1</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>TEMA 17. LEY 19/2013, DE TRANSPARENCIA, ACCESO A LA INFORMACIÓN PÚBLICA Y BUEN GOBIERNO</strong> (Test 1)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. Una entidad privada percibe en un año 4.900 euros de subvenciones públicas, equivalentes al 60 % de sus ingresos. Conforme al artículo 3.b de la Ley 19/2013:",
+    "options": [
+      "a) Queda sujeta porque las ayudas superan el 40 % de sus ingresos.",
+      "b) No queda sujeta, porque no alcanza el mínimo de 5.000 euros exigido para aplicar el criterio porcentual.",
+      "c) Queda sujeta únicamente si las subvenciones proceden de la Administración General del Estado.",
+      "d) Queda sujeta si carece de ánimo de lucro."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "2. La obligación de suministro de información prevista en el artículo 4 de la Ley 19/2013 se extiende a los adjudicatarios de contratos del sector público:",
+    "options": [
+      "a) En los términos previstos en el respectivo contrato.",
+      "b) Solo cuando el contrato sea de concesión de servicios.",
+      "c) Únicamente si reciben además una subvención pública.",
+      "d) Sin necesidad de requerimiento previo y respecto de cualquier información empresarial."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "3. Respecto de la publicidad activa, señale la afirmación correcta:",
+    "options": [
+      "a) Los límites del derecho de acceso nunca resultan aplicables a la información que deba publicarse de oficio.",
+      "b) La información con datos especialmente protegidos debe publicarse íntegramente cuando exista interés público.",
+      "c) Las obligaciones estatales excluyen cualquier régimen autonómico más amplio.",
+      "d) La información se publicará periódicamente y de forma actualizada, aplicando, en su caso, los límites al derecho de acceso y especialmente la protección de datos."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "4. El organigrama actualizado exigido por la Ley 19/2013 debe identificar:",
+    "options": [
+      "a) Exclusivamente la denominación de los órganos superiores.",
+      "b) A todo el personal, con su currículum completo.",
+      "c) A los responsables de los diferentes órganos y su perfil y trayectoria profesional.",
+      "d) Solo a los titulares de órganos con rango de dirección general."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "5. La publicación de información relativa a los contratos menores, conforme al artículo 8.1.a de la Ley 19/2013:",
+    "options": [
+      "a) Debe realizarse mensualmente.",
+      "b) Puede realizarse trimestralmente.",
+      "c) Debe realizarse semestralmente.",
+      "d) Solo es obligatoria al finalizar el ejercicio presupuestario."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "6. Señale la opción que NO constituye un principio técnico expresamente enumerado para el Portal de la Transparencia estatal:",
+    "options": [
+      "a) Accesibilidad.",
+      "b) Interoperabilidad.",
+      "c) Reutilización.",
+      "d) Confidencialidad."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "7. A efectos de la Ley 19/2013, puede constituir información pública:",
+    "options": [
+      "a) Un contenido en cualquier soporte que obre en poder de un sujeto obligado y haya sido adquirido en el ejercicio de sus funciones.",
+      "b) Solo un documento administrativo que haya puesto fin a un procedimiento.",
+      "c) Únicamente un documento elaborado por la Administración que recibe la solicitud.",
+      "d) Solo información previamente incluida en un archivo administrativo electrónico."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "8. La aplicación de un límite del artículo 14 de la Ley 19/2013 exige:",
+    "options": [
+      "a) Invocarlo de forma automática siempre que la materia coincida nominalmente con el límite.",
+      "b) Mantener la restricción mientras el documento conserve valor administrativo.",
+      "c) Justificación y proporcionalidad, atendiendo a las circunstancias del caso y especialmente a la concurrencia de un interés público o privado superior.",
+      "d) Denegar necesariamente la totalidad de la información solicitada."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "9. Si una solicitud de acceso no identifica suficientemente la información, el órgano debe:",
+    "options": [
+      "a) Inadmitirla a trámite sin posibilidad de subsanación.",
+      "b) Requerir su concreción en diez días, advirtiendo del desistimiento y suspendiendo el plazo para resolver.",
+      "c) Conceder cinco días y mantener corriendo el plazo para resolver.",
+      "d) Conceder diez días y dar por caducado el procedimiento si no se concreta."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "10. Cuando la información solicitada pueda afectar a derechos o intereses de terceros debidamente identificados:",
+    "options": [
+      "a) Se les conceden quince días para alegar y se suspende el plazo para resolver hasta recibir las alegaciones o vencer dicho plazo.",
+      "b) Se les conceden diez días, sin suspensión del plazo para resolver.",
+      "c) Su oposición determina automáticamente la denegación.",
+      "d) Ninguna es correcta"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "11. El plazo máximo ordinario para notificar la resolución de acceso se computa:",
+    "options": [
+      "a) Desde la presentación en cualquier registro y es siempre improrrogable.",
+      "b) Desde la identificación de la unidad de información y puede ampliarse quince días.",
+      "c) Desde la recepción por el órgano competente para resolver y puede ampliarse otro mes por volumen o complejidad, previa notificación.",
+      "d) Desde la fecha de subsanación y puede ampliarse tres meses."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "12. Transcurrido el plazo máximo sin resolución expresa sobre una solicitud de acceso:",
+    "options": [
+      "a) La solicitud se entiende estimada.",
+      "b) Se produce la caducidad del procedimiento.",
+      "c) El procedimiento queda suspendido hasta que se dicte resolución.",
+      "d) La solicitud se entiende desestimada."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "13. Según la ley 19/2013, si no puede darse acceso en el momento de notificarse una resolución estimatoria, este deberá otorgarse:",
+    "options": [
+      "a) En un plazo no superior a diez días.",
+      "b) En los quince días hábiles siguientes.",
+      "c) En el plazo de un mes desde la firmeza.",
+      "d) Cuando lo solicite nuevamente la persona interesada."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "14. Frente a una resolución expresa en materia de acceso, la reclamación ante el Consejo de Transparencia y Buen Gobierno:",
+    "options": [
+      "a) Es obligatoria y debe interponerse antes del recurso contencioso-administrativo.",
+      "b) Es voluntaria y se interpone, con carácter general, en el plazo de un mes desde el día siguiente a la notificación.",
+      "c) Es voluntaria y se interpone, con carácter general, en el plazo de tres meses desde el día siguiente a la notificación.",
+      "d) Se puede interponer a la vez que el recurso contencioso-administrativo."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "15. El plazo máximo para resolver y notificar la reclamación del artículo 24 de la Ley 19/2013 es de:",
+    "options": [
+      "a) Un mes, con silencio desestimatorio.",
+      "b) Dos meses, con silencio desestimatorio.",
+      "c) Tres meses, transcurridos los cuales se entiende desestimada.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "16. Conforme a los principios de actuación de buen gobierno, un obsequio de mayor relevancia institucional:",
+    "options": [
+      "a) Puede aceptarse personalmente si se declara en el portal de transparencia.",
+      "b) Debe rechazarse en todo caso, sin excepción.",
+      "c) Puede conservarse si no condiciona el ejercicio de las funciones.",
+      "d) Se incorporará al patrimonio de la Administración pública correspondiente."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "17. En materia de prescripción del título II de la Ley 19/2013, señale la opción correcta:",
+    "options": [
+      "a) Las infracciones muy graves prescriben a los cinco años; las graves, a los tres; y las leves, al año.",
+      "b) Las sanciones muy graves prescriben a los cinco años; las graves, a los tres; y las leves, a los 6 meses.",
+      "c) La Ley solo regula la prescripción de las infracciones, no la de sanciones.",
+      "d) La Ley solo regula la prescripción de las sanciones, no la de infracciones."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "18. La presidencia del Consejo de Transparencia y Buen Gobierno es nombrada:",
+    "options": [
+      "a) Por cinco años renovables una sola vez.",
+      "b) Por cinco años, prorrogables por un período que suponga la mitad del inicial.",
+      "c) Por cinco años no renovables, mediante real decreto y con el refrendo parlamentario previsto legalmente.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "19. ¿Cuál de las siguientes funciones corresponde al Consejo de Transparencia y Buen Gobierno y no específicamente a su presidencia?",
+    "options": [
+      "a) Conocer de las reclamaciones del artículo 24.",
+      "b) Adoptar criterios de interpretación uniforme.",
+      "c) Instar el inicio del procedimiento sancionador del \\tulo II.",
+      "d) Elaborar anualmente una memoria de evaluación del grado de aplicación de la ley para presentarla ante las Cortes Generales."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "20. Entre los objetos de la Ley 3/2026, de Transparencia de Euskadi, se encuentra:",
+    "options": [
+      "a) Regular exclusivamente la publicidad activa de la Administración autonómica.",
+      "b) Regular y garantizar la transparencia y publicidad de la actividad pública y el derecho de acceso de la ciudadanía a la información pública.",
+      "c) Sustituir el régimen básico estatal de acceso.",
+      "d) Condicionar el acceso a la acreditación de un interés legítimo."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "21. Según el principio general de transparencia de la Ley 3/2026:",
+    "options": [
+      "a) Toda limitación puede establecerse mediante instrucción del órgano competente.",
+      "b) Las excepciones se interpretan extensivamente cuando protejan intereses administrativos.",
+      "c) Se aplica de forma preferente como regla general; las excepciones o limitaciones requieren rango legal o protección de un derecho fundamental y se interpretan restrictivamente.",
+      "d) Solo se aplica preferentemente a la publicidad activa, no al derecho de acceso."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "22. La información señalada en el artículo 3.1 de la Ley 3/2026:",
+    "options": [
+      "a) Se desagregará por sexo solo cuando resulte estadísticamente posible.",
+      "b) Debe traducirse a todas las lenguas oficiales de la Unión Europea.",
+      "c) Solo debe estar disponible en el portal autonómico.",
+      "d) Adoptará lenguaje inclusivo y no sexista y ofrecerá, en todo caso, desagregación por sexo."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "23. El ejercicio del derecho de acceso en la Ley 3/2026:",
+    "options": [
+      "a) No exige motivar la solicitud ni ostentar la condición de persona interesada o un derecho o interés legítimo.",
+      "b) Exige invocar el artículo legal que ampara la petición.",
+      "c) Solo corresponde a personas ^sicas.",
+      "d) Requiere justificar la finalidad de reutilización."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "24. En el apartado visible sobre protección de datos del portal de transparencia deben figurar, al menos:",
+    "options": [
+      "a) Las evaluaciones de impacto completas de todos los tratamientos.",
+      "b) La política de protección de datos del portal, los contactos de la persona delegada y de la Autoridad Vasca de Protección de Datos, y los procedimientos para ejercer los derechos correspondientes.",
+      "c) La identidad de todas las personas que hayan ejercido el derecho de supresión.",
+      "d) El registro íntegro de accesos al portal."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "25. Como regla general, la información sujeta a publicidad conforme a la Ley 3/2026 se publicará:",
+    "options": [
+      "a) Cada mes, sin excepciones.",
+      "b) Cada seis meses.",
+      "c) Cada tres meses, sin perjuicio de disposiciones específicas que establezcan un régimen más estricto.",
+      "d) Anualmente, salvo la información contractual."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "26. Indique cuál NO es uno de los ámbitos enumerados en el artículo 14 de la Ley 3/2026:",
+    "options": [
+      "a) Información sobre planificación y evaluación.",
+      "b) Información sobre actividad administrativa con incidencia económica.",
+      "c) Información de interés general.",
+      "d) Información sobre hábitos privados del personal empleado público."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "27. Los planes y programas anuales y plurianuales sujetos a publicidad deben incluir:",
+    "options": [
+      "a) Objetivos concretos, actividades, medios y tiempo previsto para su consecución; además, su cumplimiento y resultados serán objeto de evaluación y publicación periódica.",
+      "b) Solo objetivos generales y una liquidación económica final.",
+      "c) El calendario, sin indicadores de medida o valoración.",
+      "d) Exclusivamente los planes aprobados para un único ejercicio."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "28. En la información de relevancia jurídica, el catálogo actualizado de procedimientos administrativos debe incluir en todos los casos:",
+    "options": [
+      "a) Los borradores de resolución de cada procedimiento.",
+      "b) Las normas sobre silencio administrativo y los recursos que puedan interponerse.",
+      "c) Los datos identificativos de quienes hayan tramitado procedimientos semejantes.",
+      "d) Solo los procedimientos disponibles íntegramente en formato electrónico."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "29. La información solicitada se facilitará, como regla general:",
+    "options": [
+      "a) Exclusivamente por vía electrónica.",
+      "b) En el formato decidido por la Administración por razones de eficiencia.",
+      "c) En el soporte y formato utilizados para la solicitud o demandados por la persona solicitante, salvo que concurra una excepción legal debidamente justificada.",
+      "d) Siempre mediante copia auténtica."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "30. Respecto del coste del acceso conforme a la Ley 3/2026:",
+    "options": [
+      "a) La consulta está sujeta siempre a tasa.",
+      "b) La expedición de copias nunca puede generar coste.",
+      "c) El precio por cambio de formato puede superar el coste real si existe ordenanza.",
+      "d) El acceso es gratuito, aunque pueden exigirse tasas o precios regulados por copias o formatos distintos, sin superar el coste real."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "31. La aplicación de límites al derecho de acceso en la Ley 3/2026:",
+    "options": [
+      "a) Debe ser proporcional al objeto y finalidad, ponderar los derechos en conflicto e interpretarse restrictivamente en beneficio del acceso.",
+      "b) Se presume indefinida una vez acordada.",
+      "c) Permite denegar sin motivación reforzada cuando se cite una causa legal.",
+      "d) Impide acudir a la disociación de datos personales."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "32. Si solo parte de la información está afectada por una limitación, la Ley 3/2026 dispone que:",
+    "options": [
+      "a) Debe denegarse íntegramente para evitar interpretaciones parciales.",
+      "b) Se dará acceso parcial cuando sea posible, salvo que resulte información distorsionada, equívoca o sin sentido, indicando la parte omitida.",
+      "c) Se entregará íntegramente tras advertir de la limitación.",
+      "d) La solicitud se inadmitirá por reelaboración."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "33. En la Administración general e institucional de la Comunidad Autónoma del País Vasco, son competentes para tramitar y resolver las solicitudes de acceso:",
+    "options": [
+      "a) Las unidades de transparencia, en todo caso.",
+      "b) La presidencia de Gardena.",
+      "c) Las personas titulares de los órganos directivos que posean la información.",
+      "d) Las secretarías generales técnicas, con independencia de dónde obre la información."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "34. Una solicitud de acceso formulada conforme a la Ley 3/2026 debe indicar, como mínimo:",
+    "options": [
+      "a) La identidad, una descripción precisa de la información y una dirección de contacto; la modalidad o formato preferidos solo en su caso.",
+      "b) La norma jurídica invocada y el interés legítimo.",
+      "c) El número exacto del expediente y la finalidad del acceso.",
+      "d) La motivación, salvo que se utilice identificación electrónica."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "35. En relación con las causas de inadmisión de la Ley 3/2026, señale la respuesta correcta:",
+    "options": [
+      "a) Todo informe interno tiene carácter auxiliar o de apoyo.",
+      "b) La ausencia de motivación constituye por sí sola causa de inadmisión.",
+      "c) Cualquier tratamiento informático equivale a reelaboración.",
+      "d) El tratamiento informatizado de uso corriente no se considera reelaboración que justifique la inadmisión."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "36. La resolución de una solicitud de acceso según la Ley 3/2026 debe notificarse, con carácter ordinario:",
+    "options": [
+      "a) En quince días desde su registro, prorrogables otro mes.",
+      "b) En un mes desde la recepción por el órgano competente, ampliable otros quince días por volumen o complejidad.",
+      "c) En un mes desde la recepción en cualquier registro, sin posibilidad de ampliación.",
+      "d) En tres meses desde la presentación."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "37. Si una resolución estimatoria afecta a terceras personas que se opusieron en el trámite previo, el acceso efectivo:",
+    "options": [
+      "a) Se produce inmediatamente, porque la resolución es ejecutiva.",
+      "b) Queda condicionado al consentimiento posterior de las terceras personas.",
+      "c) Se difiere hasta que venza sin recurso el plazo para impugnar o sea firme la resolución que confirme el derecho de acceso.",
+      "d) Se difiere siempre durante diez días."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "38. Contra las resoluciones en materia de acceso dictadas por el Ararteko:",
+    "options": [
+      "a) Solo cabe recurso contencioso-administrativo.",
+      "b) Cabe reclamación potestativa ante Gardena antes del recurso judicial.",
+      "c) Cabe recurso de alzada.",
+      "d) Debe intentarse previamente la mediación."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "39. Cuando el acto impugnado no sea expreso, la reclamación potestativa ante Gardena puede interponerse:",
+    "options": [
+      "a) Solo durante el mes siguiente a la producción del silencio.",
+      "b) En cualquier momento desde el día siguiente a aquel en que se produzcan los efectos del silencio administrativo.",
+      "c) En tres meses desde la solicitud inicial.",
+      "d) Únicamente cuando la Administración certifique el silencio."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "40. En el procedimiento de mediación del artículo 41 de la Ley 3/2026:",
+    "options": [
+      "a) La solicitud puede presentarse durante todo el plazo de resolución de la reclamación y la mediación dura hasta tres meses.",
+      "b) La Administración puede oponerse, aunque todas las partes interesadas acepten.",
+      "c) La solicitud debe formalizarse en cinco días desde que se conozca la reclamación; la reclamación queda suspendida y la mediación debe sustanciarse en un mes desde su aceptación.",
+      "d) El acuerdo no requiere ratificación de Gardena."
+    ],
+    "correct": 2
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

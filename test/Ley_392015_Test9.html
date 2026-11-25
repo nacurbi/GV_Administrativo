@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_392015_Test9</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 39/2015, DEL PROCEDIMIENTO ADMINISTRATIVO COMÚN:</strong> Test 9 (Arts. 28 a 52)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. Los plazos expresados en horas se contarán",
+    "options": [
+      "a) De minuto en minuto, en todo caso,",
+      "b) Ninguna de las respuestas es correcta",
+      "c) De segundo en segundo",
+      "d) De hora en hora y de minuto en minuto"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "2. Como norma general, cuando los plazos se señalen por días:",
+    "options": [
+      "a) Se entiende que estos son hábiles, excluyéndose del cómputo los sábados, domingos y los declarados festivos",
+      "b) Deberá expresarse si se trata de días hábiles o naturales",
+      "c) Se entiende que estos son hábiles, excluyéndose del cómputo los domingos y los declarados festivos",
+      "d) Deberá expresarse el ultimo día a efectos del cómputo de los plazos."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "3. Los plazos expresados por días se contarán a partir.",
+    "options": [
+      "a) Del mismo dia en que tenga lugar la notificación o publicación del acto de que se trate",
+      "b) Del dia siguiente aquel en que tenga lugar la notificación o publicación del acto que se trate",
+      "c) Del dia siguiente a aquel en que se produzca la estimación o desestimación por silencio administrativo",
+      "d) B y c son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "4. Si el plazo se fija en meses o años y en el mes de vencimiento no hubiera día equivalente a aquel en que comienza el computo:",
+    "options": [
+      "a) Se entenderá que el plazo expira el primer día hábil del mes siguiente",
+      "b) Se entenderá que el plazo expira el primer día del mes siguiente",
+      "c) Ninguna de las respuestas es correcta",
+      "d) Se entenderá que el plazo expira el último día del mes"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "5. En cuanto a la ampliación de plazos del artículo 32, cuál de las siguientes afirmaciones es incorrecta:",
+    "options": [
+      "a) No cabrá recurso alguno contra el acuerdo de ampliación",
+      "b) La ampliación no puede ser superior a lo establecido para la tramitación del procedimiento.",
+      "c) Se podrá conceder de oficio o a petición del interesado",
+      "d) En ningún caso podrá ser objeto de ampliación un plazo ya vencido"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "6. En cuanto al cómputo de plazos en el registro, una de las siguientes afirmaciones es incorrecta",
+    "options": [
+      "a) Permitirá la presentación de documentos todos los dias del año durante las 24 horas",
+      "b) A efectos del cómputo de plazo fijado en dias hábiles, la presentación en un dia inhábil se entenderá realizada en la primera hora del primer dia hábil siguiente, en todo caso.",
+      "c) Se regirá a efectos de computo de los plazos por la fecha y hora oficial de la sede electrónica de acceso",
+      "d) A efectos del cómputo de plazo fijado en dias hábiles, la presentación en un dia inhábil se entenderá realizada en la primera hora del primer dia hábil siguiente."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "7. ¿En qué casos se podrá acordad la aplicación del procedimiento de urgencia?",
+    "options": [
+      "a) Cuando razones de interés público lo aconsejen y se hará exclusivamente de oficio",
+      "b) Cuando razones de interés público lo aconsejen y se hará exclusivamente a petición del interesado",
+      "c) Cuando razones de interés público lo aconsejen y se hará de oficio o a petición del interesado",
+      "d) Cuando el órgano competente lo estime conveniente y se hará de oficio o a petición del interesado"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "8. Los actos administrativos que dicten las Administraciones Públicas:",
+    "options": [
+      "a) A instancia del interesado, se producirán por el órgano competente ajustándose a los requisitos y al procedimiento establecido.",
+      "b) De oficio o a instancia del interesado, se producirán por el órgano competente ajustándose a los requisitos y al procedimiento establecido.",
+      "c) De oficio, se producirán por el órgano competente ajustándose a los requisitos y al procedimiento establecido.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "9. Respecto al funcionamiento del registro electrónico:",
+    "options": [
+      "a) Permitirá la presentación de documentos todos los días hábiles del año entre las 8 y las 22 horas.",
+      "b) Permitirá la presentación de documentos todos los días del año durante las 24 horas.",
+      "c) Permitirá la presentación de documentos todos los días hábiles del año durante las 24 horas.",
+      "d) Permitirá la presentación de documentos todos los días del año entre las 8 y las 22 horas."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "10. Serán motivados, con sucinta referencia de hechos y fundamentos de derecho (señale la incorrecta):",
+    "options": [
+      "a) Los actos que rechacen pruebas propuestas por la Administración.",
+      "b) Los actos que acuerden la terminación del procedimiento por la imposibilidad material de continuarlo por causas sobrevenidas.",
+      "c) Las propuestas de resolución en los procedimientos de carácter sancionador.",
+      "d) Los actos que se dicten en el ejercicio de potestades discrecionales."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "11. Toda notificación deberá ser cursada dentro del plazo de:",
+    "options": [
+      "a) 5 días a partir de la fecha en que el acto haya sido incoado.",
+      "b) 10 días a partir del dia siguiente a que el acto haya sido dictado",
+      "c) 20 días a partir de la fecha en que el acto haya sido dictado.",
+      "d) 10 días a partir de la fecha en que el acto haya sido dictado"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "12. Respecto a la inderogabilidad singular:",
+    "options": [
+      "a) Las resoluciones administrativas de carácter particular no podrán vulnerar lo establecido en una disposición de carácter general, salvo que aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general.",
+      "b) Las resoluciones administrativas de carácter general no podrán vulnerar lo establecido en una disposición de carácter particular, aunque aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general.",
+      "c) Las resoluciones administrativas de carácter general no podrán vulnerar lo establecido en una disposición de carácter particular, salvo que aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general.",
+      "d) Las resoluciones administrativas de carácter particular no podrán vulnerar lo establecido en una disposición de carácter general, aunque aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "13. Cuando el interesado fuera notificado por distintos cauces se tomará como fecha de notificación:",
+    "options": [
+      "a) La de aquélla que se hubiera producido en último lugar.",
+      "b) La de aquélla que elija el interesado.",
+      "c) La de aquélla que se hubiera producido en primer lugar.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "14. Las notificaciones deberán:",
+    "options": [
+      "a) Todas son correctas",
+      "b) Contener el texto íntegro de la resolución",
+      "c) Indicar si pone sin o no a la vía administrativa",
+      "d) Indicar la expresión de los recursos que procedan, en su caso, en vía administrativa y judicial, el órgano ante el que hubieran de presentarse y el pazo para interponerlos"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "15. Las notificaciones que carezcan de alguno de los requisitos anteriores se denominan:",
+    "options": [
+      "a) Notificaciones inválidas",
+      "b) Notificaciones incompletas",
+      "c) Notificaciones defectuosas",
+      "d) Notificaciones infructuosas"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "16. Cuando el interesado o su representante rechace la notificación de una actuación administrativa:",
+    "options": [
+      "a) Se hará constar en el expediente, especificándose las circunstancias del intento de notificación y el medio.",
+      "b) Se dará por efectuado el trámite.",
+      "c) Seguirá el procedimiento.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "17. En cuanto a la práctica de las notificaciones en papel, señale la incorrecta",
+    "options": [
+      "a) Deberán ser puestas a disposición del interesado en la sede electrónica",
+      "b) De no hallarse el interesado en el domicilio, podrá hacerse cargo cualquier persona mayor de 16 años que se halle en el domicilio y haga constar su identidad",
+      "c) Tras un primer intento fallido, se repetirá por una sola vez y en hora distinta dentro de los tres dias siguientes.",
+      "d) En caso de que el primer intento de notificación se haya realizado antes de las quince horas, el segundo intento deberá realizarse después de las quince horas y viceversa, dejando en todo caso al menos un margen de diferencia de tres horas entre ambos intentos de notificación."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "18. Respecto a la convalidación no es correcto:",
+    "options": [
+      "a) La Administración podrá convalidar los actos anulables, subsanando los vicios de que adolezcan.",
+      "b) El acto de convalidación producirá efecto desde su fecha, salvo lo dispuesto en el artículo 39.3 para la retroactividad de los actos administrativos.",
+      "c) Si el vicio consistiera en incompetencia no determinante de nulidad, la convalidación podrá realizarse por el órgano competente cuando sea inferior jerárquico del que dictó el acto viciado.",
+      "d) Si el vicio consistiese en la falta de alguna autorización, podrá ser convalidado el acto mediante el otorgamiento de la misma por el órgano competente."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "19. Respecto a la anulabilidad:",
+    "options": [
+      "a) El defecto de forma sólo determinará la anulabilidad cuando el acto carezca de los requisitos formales indispensables para alcanzar su fin o dé lugar a la indefensión de los interesados",
+      "b) Son anulables los actos de la Administración que incurran en cualquier infracción del ordenamiento jurídico, salvo la desviación de poder.",
+      "c) La realización de actuaciones administrativas fuera del tiempo establecido para ellas implicará la anulabilidad del acto en cualquier caso.",
+      "d) Todas son correctas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "20. Los actos de las Administraciones Públicas son nulos de pleno derecho en los casos siguientes (señale la incorrecta):",
+    "options": [
+      "a) Los dictados prescindiendo total y absolutamente del procedimiento legalmente establecido.",
+      "b) Los dictados prescindiendo total y absolutamente de las normas que contienen las reglas esenciales para la formación de la voluntad de los órganos colegiados.",
+      "c) Cualquiera que se establezca expresamente en una disposición con rango de Ley o reglamentaria.",
+      "d) Los actos expresos o presuntos contrarios al ordenamiento jurídico por los que se adquieren facultades o derechos cuando se carezca de los requisitos esenciales para su adquisición."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "21. Señale la incorrecta:",
+    "options": [
+      "a) La nulidad o anulabilidad de un acto no implicará la de los sucesivos en el procedimiento que sean independientes del primero.",
+      "b) Los actos nulos o anulables que contengan los elementos constitutivos de otro distinto no producirán los efectos de éste.",
+      "c) La nulidad o anulabilidad en parte del acto administrativo no implicará la de las partes del mismo independientes de aquélla, salvo que la parte viciada sea de tal importancia que sin ella el acto administrativo no hubiera sido dictado.",
+      "d) El órgano que declare la nulidad o anule las actuaciones dispondrá siempre la conservación de aquellos actos y trámites cuyo contenido se hubiera mantenido igual de no haberse cometido la infracción."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "22. En cuanto a la nulidad de pleno derecho:",
+    "options": [
+      "a) Serán nulos de pleno derecho lo actos que lesionen los derechos y libertades no susceptibles de amparo constitucional.",
+      "b) Serán nulos de pleno derecho lo actos que tengan un contenido posible",
+      "c) serán nulas de pleno derecho las disposiciones administrativas que vulneren la Constitución, las leyes u otras disposiciones administrativas de rango superior, las que regulen materias reservadas a la Ley, y las que establezcan la retroactividad de disposiciones sancionadoras no favorables o restrictivas de derechos individuales.",
+      "d) Los dictados prescindiendo parcialmente del procedimiento legalmente establecido o de las normas que contienen las reglas esenciales para la formación de la voluntad de los órganos colegiados."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "23. ¿Cuando será una notificación infructuosa?",
+    "options": [
+      "a) Cuando los interesados de un procedimiento sean desconocidos",
+      "b) Cuando se ignore el lugar de la notificación",
+      "c) Intentada esta, no se hubiese podido practicar",
+      "d) En las tres situaciones anteriores"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "24. Cuando una notificación ha sido infructuosa, la notificación se hará por medio de anuncio en el",
+    "options": [
+      "a) BOE únicamente",
+      "b) Previamente y con carácter facultativo, se puede publicar en el boletín oficial de la CCAA o provincia",
+      "c) En el BOE y en el boletín oficial de la CCAA, preceptivamente",
+      "d) Previamente y con carácter facultativo en el BOE y en el boletín oficial de la CCAA o provincia"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "25. En todo caso, serán objeto de publicación:",
+    "options": [
+      "a) Cuando el acto tenga por destinatario a una pluralidad indeterminada de personas o cuando la Administración estime que la notificación efectuada a un solo interesado es insuficiente para garantizar la notificación a todos, siendo, en este último caso, adicional a la individualmente realizada.",
+      "b) Cuando se trate de actos integrantes de un procedimiento selectivo o de concurrencia competitiva de cualquier tipo. En este caso, la convocatoria del procedimiento deberá indicar el medio donde se efectuarán las sucesivas publicaciones, careciendo de validez las que se lleven a cabo en lugares distintos.",
+      "c) Cuando el acto tenga por destinatario a una pluralidad determinada de personas o cuando la Administración estime que la notificación efectuada a un solo interesado es suficiente para garantizar la notificación a todos, siendo, en este último caso, adicional a la individualmente realizada.",
+      "d) A y b son correctas"
+    ],
+    "correct": 3
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

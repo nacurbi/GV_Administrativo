@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_402015_Practico2</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 40/2015 · TEST PRÁCTICO 2</strong> (Supuesto 3 de clase)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = ["<p>La persona titular del Ministerio de Hacienda acuerda delegar en la persona titular de la Subsecretaría de Economía y Empresa la competencia para acordar una serie de gastos propios de los servicios del Ministerio de Economía y empresa.</p>"];
+            let preguntas = [
+  {
+    "question": "1. ¿quién ha de aprobar la delegación de competencias?",
+    "options": [
+      "a) El Presidente del Gobierno",
+      "b) La persona titular del Ministerio de Hacienda, que es el órgano delegante",
+      "c) La persona titular del Ministerio de Economía y Empresa, que es el superior del órgano delegado",
+      "d) La persona titular de la subsecretaría de Economía y Empresa, que es quien recibe la delegación"
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "2. ¿Ha de publicarse la delegación de competencias?",
+    "options": [
+      "a) No necesariamente",
+      "b) En todo caso",
+      "c) Solo cuando se realiza en un órgano de una diferente Administración pública",
+      "d) Basta con que la delegación se notifique a los interesados en los procedimientos que en su caso se instituyan"
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "3. Los actos dictados por la persona titular de la Subsecretaría de Economía y empresa ¿ se consideran dictados?",
+    "options": [
+      "a) Por la propia persona titular de la Subsecretaría de Economía y empresa",
+      "b) Por su superior jerárquico",
+      "c) Por la persona titular del Ministerio de Economía y empresa",
+      "d) Por la persona titular del Ministerio de Hacienda, que es el órgano delegante"
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "4. Podría avocar la Ministra de Hacienda la competencia para resolver un asunto que le correspondiera, por la delegación realizada, al Subsecretario o Subsecretaria de Economía o Empresa?",
+    "options": [
+      "a) Sí",
+      "b) No, tendría que revocar la delegación",
+      "c) No, ya que no se puede revocar ni avocar la competencia delegada",
+      "d) No, salvo autorización de la persona titular del Ministerio de Economía y Empresa"
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "5. Podría avocar la Ministra de Economía la competencia para resolver un asunto que le correspondiera, por la delegación realizada, al Subsecretario o Subsecretaria de Economía o Empresa?",
+    "options": [
+      "a) Sí, por ser superior jerárquica del órgano delegado",
+      "b) No, porque la avocación, cuando las competencias se ejerzan por delegación, solo podrá ser realizada por el órgano delegante.",
+      "c) No, salvo autorización expresa de la Ministra de Hacienda",
+      "d) No, salvo autorización expresa de una norma con rango de ley."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "6. Los actos dictados por la Subsecretaría en virtud de la delegación realizada se podrán impugnar a través del recurso?",
+    "options": [
+      "a) De alzada ante la titular del Ministerio de Economía y Empresa",
+      "b) De alzada ante la titular del Ministerio de hacienda",
+      "c) Potestativo de reposición ante la titular del Ministerio de Hacienda o ante el órgano competente de la jurisdicción contencioso-administrativa",
+      "d) Potestativo de reposición ante el titular de la Subsecretaria de Economía y Empresa"
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "7. En relación con la delegación de la competencia, en general:",
+    "options": [
+      "a) Se puede delegar la competencia para resolver recursos administrativos",
+      "b) La competencia para resolver los recursos contra los actos que se dicten en ejercicio de las competencias delegadas va implícita en la delegación y no hace falta mención expresa.",
+      "c) No se puede delegar la competencia para resolver recursos administrativos",
+      "d) Se puede delegar la competencia para resolver recursos, incluso en los órganos que dictaron los actos objeto de recurso."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "8. Según la Ley 40/2015 de RJSP, en el supuesto de ejercicio por la Subsecretaría de Economía y empresa, de competencias propias ¿quién sería competente para conocer del recurso?",
+    "options": [
+      "a) La titular del Ministerio de Economía y empresa",
+      "b) La titular del Ministerio de Economía y empresa, salvo que hubiera delegado la competencia en la propia subsecretaría.",
+      "c) La Subsecretaría, ya que agota la vía administrativa",
+      "d) No cabe recurso contra las resoluciones de la Subsecretaría, dictadas en el ejercicio de su propia competencia."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "9. La persona titular de la Subsecretaría de Economía y Empresa, debido a la carga de trabajo que soporta, decide subdelegar la competencia. Señala la respuesta correcta:",
+    "options": [
+      "a) No hay ningún obstáculo para la subdelegación",
+      "b) No se pueden delegar en ningún caso las competencias ejercidas por delegación",
+      "c) Solo se podrán subdelegar las competencias cuando esté autorizado expresamente por una ley",
+      "d) Solo se podrán subdelegar las competencias cuando esté autorizado expresamente por el titular del órgano delegante, que es el titular de la competencia"
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "10. Transcurridos 6 meses desde la delegación, la Ministra de Hacienda decide revocar la delegación:",
+    "options": [
+      "a) Tendrá que publicar el acuerdo de revocación en el BOE",
+      "b) Recupera el ejercicio de las competencias",
+      "c) Los actos dictados por el titular de la Subsecretaría de Economía y empresa después de la revocación serían inválidos por incompetencia",
+      "d) Todas son correctas"
+    ],
+    "correct": 3,
+    "caso": 0
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

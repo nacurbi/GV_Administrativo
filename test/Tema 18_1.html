@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema 18_1</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>TEMA 18.</strong> La comunicación en la Administración. Uso correcto del lenguaje. Comunicación escrita. Lenguaje no sexista. Contenido y presentación de documentos escritos (Test 1)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. El “conjunto de signos utilizados para trasmitir el mensaje (palabras, gestos, símbolos, imágenes)” hace referencia al:",
+    "options": [
+      "a) Código.",
+      "b) Canal.",
+      "c) Ruido.",
+      "d) Retroalimentación."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "2. ¿Cuántos tipos de barreras de comunicación existen?",
+    "options": [
+      "a) 3",
+      "b) 4",
+      "c) 5",
+      "d) 6"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "3. El “oido selectivo” es un tipo de barera:",
+    "options": [
+      "a) Personal.",
+      "b) Física.",
+      "c) Cultural.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "4. Aquellas barreras que se manifiestan cuando existe una diferencia de conocimientos entre emisor y receptor son:",
+    "options": [
+      "a) Culturales.",
+      "b) Personales.",
+      "c) Físicas.",
+      "d) Semánticas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "5. Además del emisor, receptor, mensaje, código y canal que son elementos esenciales de todo proceso de comunicación, la comunicación escrita tiene otros factores adicionales que son necesarios para que el proceso de intercambio de información tenga éxito. Señala cuál no es uno de ellos:",
+    "options": [
+      "a) Estructura.",
+      "b) Estilo.",
+      "c) Contenido.",
+      "d) Método."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "6. No es una característica de la comunicación escrita:",
+    "options": [
+      "a) Es simultanea.",
+      "b) Permanece en el tiempo.",
+      "c) Requiere planificación.",
+      "d) Deja poco espacio a la redundancia."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "7. Señala la respuesta correcta en relación con la comunicación electrónica:",
+    "options": [
+      "a) Si nuestros contenidos van a ser leídos en la red, no los podemos redactar según los patrones de los textos en papel.",
+      "b) La lectura es dinámica.",
+      "c) Leer en la pantalla resulta pesado.",
+      "d) Todas son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "8. Señala la afirmación incorrecta en relación con el lenguaje administrativo:",
+    "options": [
+      "a) Abundan los arcaísmos, los formulismos y las frases hechas",
+      "b) Utiliza palabras, locuciones y expresiones tomadas del latín.",
+      "c) Carece de frases de estilo impersonal.",
+      "d) Utiliza el futuro de subjuntivo."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "9. Existe una serie de recomendaciones básicas para mejorar la calidad de la redacción en los documentos administrativos. Señala la recomendación que no es cierta:",
+    "options": [
+      "a) Utiliza la 2.ª persona gramatical para dirigirte a la ciudadanía y acercarte a ella.",
+      "b) Estructura los párrafos en 3-4 oraciones.",
+      "c) escribe oraciones que no superen las 15-20 palabras.",
+      "d) Trata de emplazar un único inciso en cada frase."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "10. La definición “es un enfoque sesgado de la realidad en función del sexo y consiste en considerar a los hombres el centro y la medida de todas las cosas” hace referencia a:",
+    "options": [
+      "a) Androcentrismo.",
+      "b) Sexismo.",
+      "c) Machismo.",
+      "d) Las respuestas a) y b) son sinónimas."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "11. Elige la respuesta incorrecta:",
+    "options": [
+      "a) Se recomienda no usar el símbolo @.",
+      "b) Distinguimos dos tipos de documentos según las personas destinatarias: cerrados, abiertos y neutros.",
+      "c) Los documentos abiertos son los mas numerosos dentro de la administración y, a la hora de la redacción, son los más problemáticos desde la óptica del sexismo lingüístico.",
+      "d) Un oficio es un documento generado por la propia AA.PP. para comunicarse dentro de la AA.PP o con otras AA.PP."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "12. Según la finalidad del documento, se distinguen ……. categorías de documentos.",
+    "options": [
+      "a) 2",
+      "b) 3",
+      "c) 4",
+      "d) 6"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "13. Un Informe es un documento:",
+    "options": [
+      "a) De juicio.",
+      "b) De decisión.",
+      "c) De constancia.",
+      "d) De transmisión."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "14. Señala cuál de estas fechas está correctamente escrita:",
+    "options": [
+      "a) Bilbao, 4 de enero de 2024",
+      "b) Madrid a 7 de enero de 2023",
+      "c) Barcelona, 7 de abril de 2.023",
+      "d) En Vigo, a 10 de agosto de 2021"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "15. Usted quiere enviar un correo electrónico a un compañero de otro Departamento. ¿Cuál de las siguientes ideas no emplearía en la redacción?",
+    "options": [
+      "a) Escribir en mayuscula.",
+      "b) Tamaño de la letra 12 puntos.",
+      "c) El tono general del mensaje no será ni tan coloquial como el de una conversación ni tan formal como el de un documento escrito.",
+      "d) Emplearía todas las anteriores."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "16. Señala cuál de estas firmas es correcta (orden de arriba abajo):",
+    "options": [
+      "a) [firma] / El Director de Educación / Fdo: Juan Ortiz Ortiz",
+      "b) Juan Ortiz Ortiz / [firma] / El Director de Educación",
+      "c) El Director de Educación / [firma] / Juan Ortiz Ortiz",
+      "d) [firma] / El Director de Educación / Juan Ortiz Ortiz"
+    ],
+    "correct": 2
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

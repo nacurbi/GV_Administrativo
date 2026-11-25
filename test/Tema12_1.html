@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test 1 Fuentes del Derecho</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>TEST 1: Fuentes del Derecho</strong></p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let preguntas = [
+  {
+    "question": "1. De acuerdo con lo previsto en el Código Civil, las normas jurídicas contenidas en los tratados internacionales:",
+    "options": [
+      "a) En ningún caso puede llegar a tener aplicación directa en España.",
+      "b) Aunque no pueden llegar a tener aplicación directa en España, tendrán carácter informador del ordenamiento jurídico interno.",
+      "c) Serán de aplicación directa en España desde la firma del tratado internacional correspondiente.",
+      "d) Serán de aplicación directa en España cuando hayan pasado a formar parte del ordenamiento interno."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "2 . ¿Cuál de las siguientes materias sí es regulable por medio de decreto ley?",
+    "options": [
+      "a) El régimen de las Comunidades Autónomas.",
+      "b) El derecho electoral general.",
+      "c) Los derechos y deberes de los ciudadanos regulados en el Título I de la Constitución.",
+      "d) Las materias objeto de ley ordinaria."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "3. Si se dicta una ley de bases ¿qué contenido tendrá el decreto legislativo de desarrollo?",
+    "options": [
+      "a) Texto articulado.",
+      "b) Ley ordinaria.",
+      "c) Texto refundido.",
+      "d) Texto delegado."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "4. ¿Cuándo se aplica la costumbre como fuente de derecho?",
+    "options": [
+      "a) En defecto de ley aplicable.",
+      "b) En cualquier caso en que resulte de aplicación por razón de la materia.",
+      "c) En cualquier caso aunque exista ley aplicable.",
+      "d) Cuando no existan principios generales del derecho aplicables al caso."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "5. Las disposiciones que contradigan lo establecido en una norma de carácter superior:",
+    "options": [
+      "a) Son nulas de pleno derecho.",
+      "b) Deben ser recurridas ante el Tribunal Constitucional.",
+      "c) Deben ser recurridas ante el Tribunal Supremo.",
+      "d) Son anuladas por las Cortes Generales."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "6. ¿Qué artículo del Código Civil establece las fuentes del Derecho?",
+    "options": [
+      "a) El art. 9.",
+      "b) El art. 1.",
+      "c) El art. 18.",
+      "d) El art. 35."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "7. La potestad reglamentaria de la Administración Pública es controlada por:",
+    "options": [
+      "a) El Gobierno Central y Autonómico.",
+      "b) El Tribunal Constitucional.",
+      "c) Los Tribunales ordinarios.",
+      "d) Las Cortes Generales."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "8. En caso de extraordinaria y urgente necesidad el Gobierno Vasco podrá dictar disposiciones legislativas provisionales que tomarán la forma de:",
+    "options": [
+      "a) Decreto Legislativo.",
+      "b) Texto refundido.",
+      "c) Decreto Ley.",
+      "d) Orden ministerial."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "9. No es fuente directa del derecho administrativo:",
+    "options": [
+      "a) La costumbre.",
+      "b) La ley.",
+      "c) La doctrina.",
+      "d) Los principios generales del derecho."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "10. El principio de jerarquía de las fuentes del derecho administrativo:",
+    "options": [
+      "a) Implica que las normas estatales están por encima de las autonómicas.",
+      "b) Determina que la norma inferior deroga a la anterior en caso de contradicción entre ellas.",
+      "c) No se aplica en las relaciones entre las leyes ordinarias y las orgánicas.",
+      "d) Implica que la ley se subordina al reglamento."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "11. La reserva de ley significa:",
+    "options": [
+      "a) Que la ley se sitúa en la posición más elevada de la pirámide normativa.",
+      "b) Que no es posible negarse a la aplicación o cumplimiento de la ley.",
+      "c) Que el enjuiciamiento de la ley compete en exclusiva o está reservado al Tribunal Constitucional.",
+      "d) Que determinadas materias establecidas por la Constitución sólo pueden ser reguladas por una norma con rango legal."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "12. Los principios generales del derecho:",
+    "options": [
+      "a) Son fuente indirecta.",
+      "b) Tienen un valor normativo superior a la costumbre.",
+      "c) Son fuente de aplicación en defecto de ley y costumbre.",
+      "d) Es cierta la b) sin perjuicio de su carácter informador del ordenamiento jurídico."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "13. En la Ley Marco:",
+    "options": [
+      "a) Se fijan los principios para desarrollar las disposiciones normativas de las CCAA cuando lo exija el interés general.",
+      "b) Se transferirán facultades de titularidad estatal a las Comunidades, mediante ley orgánica.",
+      "c) Se establecerá la modalidad de control de las Cortes Generales sobre determinadas normas legislativas de las Comunidades.",
+      "d) Podrá otorgarse delegación legislativa al Gobierno para que armonice actuaciones autonómicas cuando así lo exija el interés general."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "14. La aprobación, modificación o derogación de una ley orgánica exigirá:",
+    "options": [
+      "a) La mayoría absoluta del Congreso.",
+      "b) La mayoría absoluta del Senado.",
+      "c) La mayoría absoluta de las Cortes.",
+      "d) La mayoría simple del Congreso, en votación final sobre el conjunto del proyecto."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "15. La delegación legislativa efectuada por las Cortes Generales en favor del Gobierno, con el fin de formar un Texto Articulado, deberán realizarse:",
+    "options": [
+      "a) A través de una Ley Marco.",
+      "b) A través de una Ley de transferencia.",
+      "c) A través de una Ley Ordinaria.",
+      "d) A través de una Ley de Bases."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "16. De acuerdo con lo establecido en la CE, los decretos leyes:",
+    "options": [
+      "a) Deberán ser inmediatamente sometidos a debate y votación de las Cortes Generales para su promulgación.",
+      "b) Deberán ser convalidados o derogados por el Congreso en el plazo de 30 días.",
+      "c) Habrán de ser convalidados o derogados por la totalidad del Senado.",
+      "d) Podrán ser tramitados como proyectos de ley en el plazo de 30 días por las Cortes Generales."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "17. De acuerdo con la CE, el contenido reservado a las leyes orgánicas se regula en el artículo:",
+    "options": [
+      "a) 91.",
+      "b) 82.",
+      "c) 81.",
+      "d) 86."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "18. La cámara baja del poder legislativo estatal es:",
+    "options": [
+      "a) Congreso.",
+      "b) Senado.",
+      "c) Cortes Generales.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "19. ¿El Gobierno Central puede dictar normas con rango de Ley?",
+    "options": [
+      "a) Sí, en cualquier tipo de materias.",
+      "b) Sí, pero sólo decretos leyes.",
+      "c) Sí, pero sólo decretos legislativos.",
+      "d) Las respuestas b) y c) son correctas."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "20. ¿Cuál de las siguientes instancias es posible que no exista?",
+    "options": [
+      "a) Juzgados de Paz.",
+      "b) Juzgados de lo Mercantil.",
+      "c) Audiencia Nacional.",
+      "d) Juzgados de 1º instancia."
+    ],
+    "correct": 0
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonCorrecto, 'correcta');
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = (pregunta.respuestaUsuario === pregunta.correct);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

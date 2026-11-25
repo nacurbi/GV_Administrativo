@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_402015_Practico5</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 40/2015 · TEST PRÁCTICO 5</strong> (Supuesto 6 de clase)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = [];
+            let preguntas = [
+  {
+    "question": "1. ¿Pueden relacionarse entre sí las Administraciones públicas por medios no electrónicos?",
+    "options": [
+      "a) Sí; las Administraciones determinarán la forma en que se relacionan entre ellas, por convenio.",
+      "b) Sí; sólo los empleados al servicio de las Administraciones son obligados electrónicos.",
+      "c) No; se relacionarán entre sí y con sus órganos, organismos públicos y entidades vinculados o dependientes a través de medios electrónicos.",
+      "d) No; pueden elegir en cada procedimiento cómo se relacionan con los interesados y entre ellas."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "2. ¿Cuál de las siguientes figuras supone alteración de la titularidad de la competencia?",
+    "options": [
+      "a) Desconcentración",
+      "b) Delegación de competencias",
+      "c) Avocación",
+      "d) Todas"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "3. Si una norma atribuyera a una Administración pública la competencia para instruir y resolver sin indicar a qué órgano, le corresponderá a:",
+    "options": [
+      "a) Al superior competente por razón de la materia.",
+      "b) Es correcta la anterior y, si hubiera varios, al Consejo de Ministros o al órgano colegiado superior respectivo.",
+      "c) Al inferior por razón de la materia y el territorio.",
+      "d) Es correcta la anterior, y si hubiera varios, al superior jerárquico común."
+    ],
+    "correct": 3
+  },
+  {
+    "question": "4. En los conflictos de atribuciones se exigen los siguientes requisitos:",
+    "options": [
+      "a) Que los órganos en conflicto pertenezcan a distintas Administraciones públicas",
+      "b) Que los órganos en conflicto pertenezcan a la misma Administración pública y que no estén relacionados jerárquicamente",
+      "c) Que esté resuelto el procedimiento",
+      "d) Todas son correctas"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "5. La Ley 40 exige, para la existencia de un conflicto de atribuciones que:",
+    "options": [
+      "a) Los órganos en conflicto pertenezcan a la misma Administración pública.",
+      "b) Que los órganos en conflicto no estén relacionados jerárquicamente.",
+      "c) Que no haya recaído resolución en el procedimiento administrativo.",
+      "d) Todas son correctas"
+    ],
+    "correct": 3
+  },
+  {
+    "question": "6. En los conflictos de atribuciones entre órganos de la Administración general del Estado, según la Disposición adicional undécima de la Ley 40/2015,",
+    "options": [
+      "a) Entre órganos de un mismo Ministerio, serán resueltos por el superior jerárquico común en el plazo de diez días, sin que quepa recurso alguno.",
+      "b) Entre órganos de un mismo Ministerio serán resueltos por el superior jerárquico común en el plazo de quince días, sin que quepa recurso alguno",
+      "c) Entre órganos de un mismo Ministerio serán resueltos por el superior jerárquico común en el plazo de diez días, pudiendo interponerse contra la resolución del conflicto los recursos pertinentes.",
+      "d) Entre órganos de un mismo Ministerio serán resueltos por el superior jerárquico común en el plazo de quince días, pudiendo interponerse contra la resolución del conflicto los recursos pertinentes."
+    ],
+    "correct": 0
+  },
+  {
+    "question": "7. ¿Se pueden encomendar las actividades de carácter material o técnico a un órgano de distinta Administración?",
+    "options": [
+      "a) No, en ningún caso.",
+      "b) No, solo en órganos de la misma Administración o de sus entidades de Derecho público vinculadas o dependientes.",
+      "c) Sí.",
+      "d) Sí, con las limitaciones de la delegación de competencias."
+    ],
+    "correct": 2
+  },
+  {
+    "question": "8. ¿Puede un órgano administrativo realizar una encomienda de gestión cuyo objeto sean prestaciones propias de los contratos del sector público?",
+    "options": [
+      "a) Sí.",
+      "b) No.",
+      "c) Sí, pero con los límites de la ley 40/2015.",
+      "d) No, salvo autorización expresa de una ley."
+    ],
+    "correct": 1
+  },
+  {
+    "question": "9. ¿Cómo se formalizan las encomiendas de gestión entre órganos de la misma Administración pública?",
+    "options": [
+      "a) En los términos que establezca su normativa propia y, en su defecto, por acuerdo expreso de los órganos o Entidades de Derecho Público intervinientes.",
+      "b) En los términos que establezca su normativa propia y, en su defecto, por acuerdo expreso de los órganos o Entidades de Derecho Público intervinientes. En todo caso, deberá ser publicada, para su eficacia, en el Boletín Oficial del Estado, en el Boletín oficial de la Comunidad Autónoma o en el de la Provincia, según la Administración a que pertenezca el órgano encomendante",
+      "c) Mediante firma del correspondiente convenio entre ellas.",
+      "d) Mediante firma del correspondiente convenio entre ellas, que deberá ser publicado en el «Boletín Oficial del Estado», en el Boletín oficial de la Comunidad Autónoma o en el de la Provincia, según la Administración a que pertenezca el órgano encomendante"
+    ],
+    "correct": 1
+  },
+  {
+    "question": "10. ¿Cómo se formalizan las encomiendas de gestión entre órganos de distintas Administraciones públicas?",
+    "options": [
+      "a) En los términos que establezca su normativa propia y, en su defecto, por acuerdo expreso de los órganos o Entidades de Derecho Público intervinientes.",
+      "b) En los términos que establezca su normativa propia y, en su defecto, por acuerdo expreso de los órganos o Entidades de Derecho Público intervinientes. En todo caso, deberá ser publicada, para su eficacia, en el Boletín Oficial del Estado, en el Boletín oficial de la Comunidad Autónoma o en el de la Provincia, según la Administración a que pertenezca el órgano encomendante",
+      "c) Mediante firma del correspondiente convenio entre ellas.",
+      "d) Mediante firma del correspondiente convenio entre ellas, que deberá ser publicado en el «Boletín Oficial del Estado», en el Boletín oficial de la Comunidad Autónoma o en el de la Provincia, según la Administración a que pertenezca el órgano encomendante"
+    ],
+    "correct": 3
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>

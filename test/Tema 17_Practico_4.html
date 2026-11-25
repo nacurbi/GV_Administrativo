@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema 17_Practico_4</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>TEMA 17. LEY 19/2013 · SUPUESTO PRÁCTICO 4</strong></p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = ["<p>Ane Izquierdo solicita al Departamento de Transición Ecológica del Gobierno Vasco copia digital de los informes de seguimiento, las actas de inspección y los anexos económicos relativos a una subvención concedida a BioAraba, S.A. para un proyecto de recuperación ambiental. No motiva su petición y señala una dirección electrónica a efectos de comunicaciones. Parte de la documentación contiene datos identificativos del personal técnico de la Administración y datos económicos y comerciales de BioAraba, S.A.</p><p>El órgano competente identifica a BioAraba, S.A. como tercera persona cuyos derechos o intereses pueden resultar afectados y le concede audiencia. La sociedad se opone a la divulgación íntegra. Tras la tramitación, el órgano deniega totalmente el acceso mediante resolución expresa, alegando de forma genérica la existencia de intereses económicos y comerciales y de datos personales. Ane presenta en plazo reclamación potestativa ante la Autoridad Vasca de Transparencia-Gardena.</p><p>Al mismo tiempo, Ane solicita también iniciar una mediación. Gardena comunica la solicitud a todas las partes. Ane y BioAraba, S.A. aceptan la mediación. Durante las sesiones se propone facilitar las actas e informes, disociando determinados datos personales y omitiendo únicamente pasajes concretos cuya divulgación pudiera lesionar justificadamente intereses económicos y comerciales. No se alcanza un acuerdo, por lo que continúa la reclamación desde el punto en que quedó suspendida.</p><p>Gardena estima parcialmente la reclamación y reconoce el derecho de Ane a obtener la información con disociación de datos personales y omisión motivada de ciertos extremos. BioAraba, S.A., que se había opuesto al acceso, interpone recurso contencioso-administrativo. Mientras el proceso judicial está pendiente, la Administración se plantea entregar inmediatamente la documentación. Posteriormente, el órgano jurisdiccional dicta sentencia desestimatoria que confirma el derecho de acceso reconocido por Gardena. Una vez que la sentencia adquiere firmeza, la Administración no entrega la documentación dentro del plazo fijado y Ane comunica el incumplimiento a Gardena.</p>"];
+            let preguntas = [
+  {
+    "question": "1. La falta de motivación de la solicitud de Ane:",
+    "options": [
+      "a) No es por sí sola causa de rechazo de la solicitud, aunque Ane puede exponer sus motivos.",
+      "b) Obliga a la Administración a requerir subsanación.",
+      "c) Es obligatoria para la interesada y determina la inadmisión",
+      "d) Ninguna es correcta"
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "2. ¿Cuál de los siguientes extremos NO constituye contenido mínimo de la solicitud?",
+    "options": [
+      "a) La modalidad que prefiera para acceder a la información solicitada, en su caso.",
+      "b) La identidad de la persona solicitante o la de su representante.",
+      "c) La descripción precisa de la información solicitada.",
+      "d) Una dirección de contacto, a efectos de comunicaciones."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "3. En el ámbito de la Administración general de la Comunidad Autónoma del País Vasco, es competente para resolver la solicitud:",
+    "options": [
+      "a) La persona titular del departamento que posea la información.",
+      "b) La persona titular del órgano directivo que posea la información.",
+      "c) LA Autoridad Vasca de Transparencia-Gardena.",
+      "d) Ninguna es correcta"
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "4. Al afectar la solicitud a derechos o intereses de una tercera persona debidamente identificada, debe concedérseles audiencia por:",
+    "options": [
+      "a) Diez días hábiles.",
+      "b) Diez días naturales.",
+      "c) Quince días hábiles.",
+      "d) Quince días naturales."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "5. Conforme al artículo 36.3, ¿qué efecto produce el trámite de audiencia a la tercera persona sobre el plazo para resolver la solicitud?",
+    "options": [
+      "a) Se suspende hasta que se reciban las alegaciones o el consentimiento expreso, o hasta que venza el plazo de audiencia.",
+      "b) Se amplía automáticamente el plazo para resolver en quince días, pero no se suspende el procedimiento.",
+      "c) Se suspende únicamente si las terceras personas formulan oposición expresa.",
+      "d) Ninguna es correcta"
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "6. La resolución expresa que deniega totalmente el acceso por alusiones genéricas a datos personales e intereses económicos y comerciales:",
+    "options": [
+      "a) Es válida porque basta citar un límite legal como el de la existencia de datos personales.",
+      "b) Debe estar motivada; la denegación expresa exige una justificación aplicable al caso.",
+      "c) No necesita motivación cuando se concede parcialmente el acceso.",
+      "d) Solo debería motivarse si Ane justificó los motivos de su solicitud."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "7. El plazo máximo ordinario para notificar la resolución de la solicitud es:",
+    "options": [
+      "a) Diez días desde la recepción por el órgano competente para resolver.",
+      "b) Un mes desde la recepción por el órgano competente para resolver.",
+      "c) Tres meses desde la recepción por el órgano competente para resolver.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "8. Según la ley 3/2026, si el volumen o la complejidad de la información lo exige, el plazo para resolver puede ampliarse:",
+    "options": [
+      "a) Por un mes, sin necesidad de notificarlo a la interesada.",
+      "b) Por un mes, notificándolo a la persona solicitante.",
+      "c) Por otros quince días, notificándolo a la persona solicitante.",
+      "d) Por otros quince días, sin necesidad de notificarlo a la persona solicitante."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "9. Frente a la resolución denegatoria, señale la calificación jurídica correcta de la reclamación ante Gardena:",
+    "options": [
+      "a) Es una reclamación; si se interpone, precede a la impugnación contencioso- administrativa y sustituye a los recursos administrativos.",
+      "b) Es una reclamación obligatoria antes de presentar un recurso contencioso- administrativo.",
+      "c) Es un recurso de reposición a todos los efectos.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "10. Al tratarse de una resolución expresa, Ane puede presentar la reclamación:",
+    "options": [
+      "a) Ante el órgano que dictó el acto denegatorio objeto de la reclamación.",
+      "b) Con carácter potestativo y posterior a la impugnación en vía contencioso-administrativa.",
+      "c) En el plazo de un mes desde el día siguiente al de la notificación del acto impugnado.",
+      "d) Todas son correctas."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "11. Si Gardena aprecia en la reclamación de Ane que la información solicitada puede afectar a derechos o intereses de la sociedad:",
+    "options": [
+      "a) Debe inadmitir la reclamación.",
+      "b) Debe concederle trámite de audiencia para que alegue lo que convenga a su derecho.",
+      "c) Debe resolver denegando el acceso a la información solicitada.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Ojo! La sociedad es BIOARABA! Tercero debidamente identificado"
+  },
+  {
+    "question": "12. El plazo máximo de Gardena para resolver y notificar la reclamación es de:",
+    "options": [
+      "a) Un mes, con silencio desestimatorio.",
+      "b) Tres meses, con silencio desestimatorio.",
+      "c) Un mes, transcurridos los cuales se entiende estimada la reclamación.",
+      "d) Tres meses, transcurridos los cuales se entiende estimada la reclamación"
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "13. La solicitud de inicio de la mediación debe formalizarse por Ane:",
+    "options": [
+      "a) En cinco días desde la interposición de la reclamación.",
+      "b) En cinco días a contar desde el día siguiente en que se recibe la notificación por el interesado.",
+      "c) En cinco días desde que se recibe la reclamación por el órgano competente de la Administración actuante.",
+      "d) Todas son correctas."
+    ],
+    "correct": 0,
+    "caso": 0,
+    "ref": "¿Cuándo tiene Ane conocimiento de la interposición de su PROPIA reclamación?"
+  },
+  {
+    "question": "14. Solicitada en plazo la mediación, ¿qué debe hacer Gardena?",
+    "options": [
+      "a) Inadmitirla a trámite si la resolución reclamada fue expresa.",
+      "b) Comunicarla al órgano que dictó la resolución impugnada e iniciar su tramitación.",
+      "c) Resolver primero la reclamación y abrir después, en su caso, la mediación.",
+      "d) Comunicarla a todas las partes para que se pronuncien; si todas las partes interesadas la aceptan, la Administración no puede oponerse."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "15. Mientras dura el procedimiento de mediación:",
+    "options": [
+      "a) Se mantiene íntegramente el cómputo de la reclamación.",
+      "b) Queda suspendida la tramitación de la reclamación potestativa.",
+      "c) Puede producirse el silencio administrativo en la propia reclamación.",
+      "d) Se suspende únicamente durante el tiempo que dure el trámite de audiencia a terceros."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "16. No alcanzado el acuerdo en el plazo máximo legal de mediación:",
+    "options": [
+      "a) Se archiva la reclamación, quedando abierta la vía contencioso-administrativa.",
+      "b) Al ser potestativa, Ane puede presentar una nueva reclamación.",
+      "c) Continúa la tramitación de la reclamación desde el punto en que quedó suspendida.",
+      "d) Se entiende desestimado el acceso íntegro."
+    ],
+    "correct": 2,
+    "caso": 0
+  },
+  {
+    "question": "17. Señale la respuesta INCORRECTA sobre el acuerdo de mediación:",
+    "options": [
+      "a) Debe ser aprobado por la persona reclamante y la Administración afectada y, en su caso, por las terceras personas comparecidas.",
+      "b) Debe ser ratificado por Gardena y no puede ser contrario al ordenamiento jurídico.",
+      "c) Puede ser parcial; en tal caso, el resto de la reclamación continúa por el procedimiento ordinario.",
+      "d) Puede perjudicar intereses de terceras personas cuando lo apruebe la mayoría de quienes intervienen."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "18. Mientras está pendiente el recurso contencioso-administrativo interpuesto por la sociedad que se ha opuesto al acceso, y conforme al artículo 38.2, la entrega de la información:",
+    "options": [
+      "a) Debe efectuarse inmediatamente, porque la resolución de Gardena es ejecutiva.",
+      "b) Puede efectuarse si la Administración considera improbable que prospere el recurso.",
+      "c) Queda definitivamente excluida, aunque posteriormente una sentencia firme confirme el derecho de acceso.",
+      "d) Debe diferirse hasta que sea firme la resolución judicial que confirme el derecho de acceso."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "19. Contra la resolución de Gardena que resuelve la reclamación:",
+    "options": [
+      "a) Solo cabe recurso contencioso-administrativo.",
+      "b) Cabe recurso de reposición ante el Gobierno Vasco.",
+      "c) Cabe reclamación económico-administrativa.",
+      "d) Ninguna es correcta."
+    ],
+    "correct": 0,
+    "caso": 0
+  },
+  {
+    "question": "20. Una vez firme la sentencia que confirma el derecho de acceso y vencido el plazo de cumplimiento sin entrega de la documentación:",
+    "options": [
+      "a) Ane puede comunicarlo a Gardena para que requiera su cumplimiento.",
+      "b) La desatención de los requerimientos de Gardena puede dar lugar a exigencia de responsabilidad.",
+      "c) Gardena puede instar la incoación de un procedimiento sancionador.",
+      "d) Todas las respuestas son correctas."
+    ],
+    "correct": 3,
+    "caso": 0
+  },
+  {
+    "question": "21. En el supuesto descrito, Ane y BioAraba, S.A. aceptan la mediación, pero la Administración no manifiesta su aceptación. Conforme al artículo 41.2:",
+    "options": [
+      "a) La mediación no puede iniciarse sin aceptación expresa de la Administración.",
+      "b) La Administración no puede oponerse si todas las partes interesadas han aceptado la mediación.",
+      "c) Gardena debe archivar la solicitud de mediación, pasando a resolver la reclamación.",
+      "d) La falta de aceptación expresa de la Administración equivale a la inadmisión de la reclamación."
+    ],
+    "correct": 1,
+    "caso": 0
+  },
+  {
+    "question": "22. Cuando la resolución estimatoria de Gardena sea firme y ejecutiva, la comunicación a la entidad encargada de cumplirla debe indicar, como mínimo:",
+    "options": [
+      "a) Únicamente el plazo de cumplimiento.",
+      "b) Solo el alcance del acceso, sin condiciones de ejecución.",
+      "c) El alcance del acceso, el plazo para cumplir y las condiciones en que deba hacerse efectivo.",
+      "d) Ninguna es correcta"
+    ],
+    "correct": 3,
+    "caso": 0
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index] || '';
+                    boton.classList.toggle('hidden', pregunta.options[index] === undefined);
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>
