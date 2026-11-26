@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_402015_Practico6</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+<style>#referencia{white-space:pre-line}</style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 40/2015 · TEST PRÁCTICO 6</strong> (Caso práctico sobre delegación y avocación)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = ["<p>La Diputada foral de Hacienda, Finanzas y Presupuestos de la Diputación Foral de Araba delega en la Directora de Igualdad y Derechos Humanos, perteneciente al departamento de Igualdad, Euskera y Gobernanza, la atribución de acordar los gastos propios de los distintos servicios de la dirección. La Orden foral de delegación se publica en el BOTHA. La Directora de Igualdad y Derechos Humanos, en uso de la delegación, ordena determinados gastos. Asimismo, decide delegar esa atribución en las y los titulares de los servicios dependientes de la Dirección en las materias que les corresponden. Con posterioridad, la Diputada foral de Igualdad, Euskera y Gobernanza, superior jerárquica de la Directora de Igualdad y Derechos Humanos, avoca la resolución de un gasto concreto. Transcurridos seis meses desde la delegación, la Diputada foral de Hacienda, Finanzas y Presupuestos la revoca sin indicar el motivo.</p>"];
+            let preguntas = [
+  {
+    "question": "1) Cuando la resolución se adopta por delegación, ¿ha de constar esta circunstancia? ¿A quién se atribuye el acto dictado por delegación?",
+    "options": [
+      "a) Sí ha de constar; el acto se atribuye a la Directora de Igualdad y Derechos Humanos.",
+      "b) Sí ha de constar; el acto se atribuye a la Diputada foral de Hacienda, Finanzas y Presupuestos (órgano delegante).",
+      "c) No ha de constar; el acto se atribuye a la Directora de Igualdad y Derechos Humanos.",
+      "d) No ha de constar; el acto se atribuye a la Diputada foral de Hacienda, Finanzas y Presupuestos (órgano delegante)."
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Respuesta dada en clase:\n• Constancia obligatoria: Sí, las resoluciones y actos administrativos que se adopten por delegación deben hacer constar expresamente esta circunstancia con referencia a la publicación oficial (en el BOTHA).\n• Atribución del acto: El acto se considera dictado a todos los efectos por el órgano delegante (en este caso, la Diputada foral de Hacienda, Finanzas y Presupuestos).\nBase legal: Art. 9.4 de la Ley 40/2015 y Art. 25.7 de la Ley 3/2022 del Sector Público Vasco."
+  },
+  {
+    "question": "2) ¿Es correcta la delegación llevada a cabo por la Directora de Igualdad y Derechos Humanos a favor de las y los titulares de los servicios de su departamento?",
+    "options": [
+      "a) Sí",
+      "b) No"
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Respuesta dada en clase:\n• NO es correcta. La delegación llevada a cabo por la Directora de Igualdad a favor de los titulares de los servicios es nula porque está prohibida la subdelegación.\n• Salvo autorización expresa de una ley, no se pueden delegar competencias que se estén ejerciendo a su vez por delegación ('la competencia delegada no se puede volver a delegar').\nBase legal: Art. 9.5 de la Ley 40/2015 y Art. 25.8 de la Ley 3/2022 del Sector Público Vasco."
+  },
+  {
+    "question": "3) ¿Es correcta la avocación llevada a cabo por la Diputada foral de Igualdad, Euskera y Gobernanza?",
+    "options": [
+      "a) Sí",
+      "b) No"
+    ],
+    "correct": 1,
+    "caso": 0,
+    "ref": "Respuesta dada en clase:\n• NO es correcta. La Diputada foral de Igualdad, Euskera y Gobernanza no puede abocar la resolución del gasto.\n• Cuando la delegación se produce entre órganos no dependientes jerárquicamente (pertenecientes a distintos departamentos), únicamente el órgano delegante (la Diputada foral de Hacienda) puede acordar la avocación del asunto.\nBase legal: Art. 10.1 de la Ley 40/2015 y Art. 28.2 de la Ley 3/2022 del Sector Público Vasco."
+  },
+  {
+    "question": "4) ¿Cabe revocar la delegación en cualquier momento? ¿Qué requisitos formales se exigen? ¿Es necesario indicar el motivo de la revocación?",
+    "options": [
+      "a) Sí cabe; exige publicación en el boletín oficial correspondiente (BOTHA) y mediante una norma del mismo rango; no es necesario indicar el motivo.",
+      "b) Sí cabe; exige publicación en el boletín oficial correspondiente (BOTHA) y mediante una norma del mismo rango; es necesario indicar el motivo.",
+      "c) No cabe; exige publicación en el boletín oficial correspondiente (BOTHA) y mediante una norma del mismo rango; no es necesario indicar el motivo.",
+      "d) No cabe; exige publicación en el boletín oficial correspondiente (BOTHA) y mediante una norma del mismo rango; es necesario indicar el motivo."
+    ],
+    "correct": 0,
+    "caso": 0,
+    "ref": "Respuesta dada en clase:\n• Posibilidad de revocación: SÍ, la delegación es revocable en cualquier momento por el órgano que la confirió (Diputada foral de Hacienda).\n• Requisitos formales: Exige publicación en el boletín oficial correspondiente (BOTHA) y mediante una norma del mismo rango.\n• Motivación: NO es necesario indicar el motivo. La revocación es una facultad libre y discrecional del órgano delegante.\n• * Particularidad Ley 3/2022 (Euskadi): El profesor remarcó que si la delegación se prolonga más de 1 año, debe ser objeto de desconcentración (modificando el decreto de estructura).\nBase legal: Arts. 9.3, 9.6 de la Ley 40/2015 y Arts. 25.6, 25.9, 25.11 de la Ley 3/2022."
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index] || '';
+                    boton.classList.toggle('hidden', pregunta.options[index] === undefined);
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 4; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>
