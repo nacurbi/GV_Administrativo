@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley_402015_Practico</title>
+    <link rel="stylesheet" href="../src/estilo.css">
+<style>#referencia{white-space:pre-line}</style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <p class="subtitulo-test"><strong>LEY 40/2015 · TEST PRÁCTICO 1</strong> (Abstención y recusación)</p>
+        <section class="contenedor-test">
+            <article id="contenido-pregunta">
+                <details class="supuesto hidden" id="supuesto" open><summary>Supuesto práctico</summary><div id="supuesto-texto"></div></details>
+                <div class="pregunta" id="pregunta-texto"></div>
+                <div class="opciones-contenedor" id="opciones-contenedor"></div>
+                <div class="referencia hidden" id="referencia"></div>
+                <div class="navegacion-btn-contenedor">
+                    <button id="comprobar-btn" class="comprobar-btn">Comprobar</button>
+                    <button id="siguiente-btn" class="navegacion-btn">Siguiente</button>
+                </div>
+            </article>
+        </section>
+        <footer class="rectangulo-resumen" id="rectangulo-resumen">
+            <div class="indices-contenedor" id="indices-contenedor"></div>
+        </footer>
+    </div>
+
+    <div id="custom-modal-overlay" class="custom-modal-overlay hidden">
+        <div class="custom-modal">
+            <p id="custom-modal-message"></p>
+            <button id="custom-modal-ok">Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const supuestos = [];
+            let preguntas = [
+  {
+    "question": "1. Es usted funcionario de las Administraciones Públicas y es nombrado vocal de un tribunal calificador para una OPE. Entre los aspirantes figura la hija de su cónyuge, fruto de un matrimonio anterior.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 0,
+    "ref": "Respuesta: SÍ hay abstención.\nFundamento: Es 1.er grado de afinidad (hija del cónyuge/hijastra)."
+  },
+  {
+    "question": "2. Es usted funcionario de las Administraciones Públicas y debe resolver un procedimiento sancionador contra una empresa cuyo director financiero es su hermano. La empresa tiene más de 3.000 trabajadores y su hermano no es accionista.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 0,
+    "ref": "Respuesta: SÍ hay abstención.\nFundamento: Consanguinidad en 2.º grado con el administrador/director de la entidad interesada."
+  },
+  {
+    "question": "3. Es usted funcionario de las Administraciones Públicas y forma parte de una comisión de valoración de subvenciones. Uno de los proyectos ha sido presentado por una asociación de la que usted fue vocal hace tres años, sin mantener actualmente relación alguna con ella.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 1,
+    "ref": "Respuesta: NO hay abstención.\nFundamento: Al no mantener relación actual, ya no concurre un interés personal directo en el asunto."
+  },
+  {
+    "question": "4. Es usted funcionario de las Administraciones Públicas y debe emitir informe en un expediente urbanístico promovido por una sociedad mercantil en la que su cónyuge trabaja como administrativa laboral.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 1,
+    "ref": "Respuesta: NO hay abstención.\nFundamento: Una empleada administrativa no es administradora, asesora ni representante legal de la empresa."
+  },
+  {
+    "question": "5. Es usted funcionario de las Administraciones Públicas y forma parte de un tribunal de oposición. Uno de los aspirantes fue su preparador de oposiciones hace cuatro años y mantienen desde entonces una relación cordial, intercambiando mensajes ocasionalmente en Navidad.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 1,
+    "ref": "Respuesta: NO hay abstención.\nFundamento: Excede el límite temporal de 2 años para servicios profesionales, y la mera \"relación cordial\" no equivale a \"amistad íntima\"."
+  },
+  {
+    "question": "6. Es usted funcionario de las Administraciones Públicas y debe resolver un recurso de alzada contra una resolución que usted mismo dictó como órgano competente en primera instancia.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 0,
+    "ref": "Respuesta: SÍ hay abstención.\nFundamento: Intervención previa directa en el mismo procedimiento administrativo."
+  },
+  {
+    "question": "7. Es usted funcionario de las Administraciones Públicas y actúa como instructor de un procedimiento disciplinario. La persona expedientada es prima hermana de su esposa.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 1,
+    "ref": "Respuesta: NO hay abstención.\nFundamento: Prima hermana es 4.º grado de consanguinidad, pero respecto a la esposa es 4.º grado de afinidad, superando el límite del 2.º grado fijado para parientes políticos."
+  },
+  {
+    "question": "8. Es usted funcionario de las Administraciones Públicas y debe informar una licencia de actividad solicitada por una empresa cuyo abogado es su padre.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 0,
+    "ref": "Respuesta: SÍ hay abstención.\nFundamento: Consanguinidad en 1.er grado con el asesor o representante legal que interviene en el procedimiento."
+  },
+  {
+    "question": "9. Es usted funcionario de las Administraciones Públicas y forma parte de un tribunal de selección. Uno de los aspirantes mantiene actualmente un procedimiento judicial contra usted reclamándole una deuda derivada de un negocio privado.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 0,
+    "ref": "Respuesta: SÍ hay abstención.\nFundamento: Concurrencia de cuestión litigiosa pendiente con persona interesada y enemistad manifiesta."
+  },
+  {
+    "question": "10. Es usted funcionario de las Administraciones Públicas y debe resolver un expediente de responsabilidad patrimonial. El reclamante fue compañero suyo de universidad hace veinte años y no ha vuelto a tener contacto con él.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 1,
+    "ref": "Respuesta: NO hay abstención.\nFundamento: El mero compañerismo pasado no constituye la relación de \"amistad íntima\" exigida por la ley."
+  },
+  {
+    "question": "11. Es usted funcionario de las Administraciones Públicas y participa en la concesión de subvenciones. Una de las entidades solicitantes le ha propuesto incorporarse a su plantilla cuando finalice una excedencia que tiene prevista para el año siguiente.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 0,
+    "ref": "Respuesta: SÍ hay abstención.\nFundamento: Interés personal directo y evidente en el resultado del expediente."
+  },
+  {
+    "question": "12. Es usted funcionario de las Administraciones Públicas y forma parte de un tribunal de oposición. Uno de los aspirantes es sobrino de su pareja de hecho, con la que convive desde hace diez años.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 1,
+    "ref": "Respuesta: NO hay abstención.\nFundamento: El sobrino de la pareja es 3.er grado de afinidad, quedando fuera del límite legal del 2.º grado de afinidad."
+  },
+  {
+    "question": "13. Es usted funcionario de las Administraciones Públicas y debe resolver un expediente sancionador. El denunciante es una persona con la que mantiene una enemistad pública y notoria derivada de varios litigios civiles durante los últimos años.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 1,
+    "ref": "Respuesta de Examen (Puridad): NO hay causa de abstención (SÍ en el solucionario del test / vida real).\nFundamento: Según el Art. 62.5 de la Ley 39/2015, el denunciante NO tiene la condición de persona interesada."
+  },
+  {
+    "question": "14. Es usted funcionario de las Administraciones Públicas y forma parte de una mesa de contratación. Una de las empresas licitadoras pertenece en un 15 % a su hijo.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 0,
+    "ref": "Respuesta: SÍ hay abstención.\nFundamento (Criterio de clase): Se equipara dicha participación a ostentar capacidad de dirección, administración o interés directo del pariente de 1.er grado."
+  },
+  {
+    "question": "15. Es usted funcionario de las Administraciones Públicas y debe resolver una reclamación presentada por una asociación cultural de la que usted es socio, pagando únicamente una cuota anual de 25 euros y sin participar en órganos de gobierno.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 0,
+    "ref": "Respuesta: SÍ hay abstención.\nFundamento: Interés personal por pertenencia a la entidad privada interesada, independientemente de la cuota o cargo."
+  },
+  {
+    "question": "16. Es usted funcionario de las Administraciones Públicas y forma parte de un tribunal de selección. Uno de los candidatos realizó prácticas universitarias en su servicio durante tres meses hace seis meses, habiendo sido usted su tutor directo.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 1,
+    "ref": "Respuesta: NO hay abstención.\nFundamento: La labor docente o tutoría de prácticas no constituye una relación laboral ni una prestación de servicios profesionales remunerados."
+  },
+  {
+    "question": "17. Es usted funcionario de las Administraciones Públicas y debe emitir informe en un expediente promovido por una empresa cuyo administrador es el marido de su prima hermana.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 1,
+    "ref": "Respuesta: NO hay abstención.\nFundamento: Es 4.º grado de afinidad, superando el máximo de 2.º grado de afinidad."
+  },
+  {
+    "question": "18. Es usted funcionario de las Administraciones Públicas y debe resolver una solicitud de autorización formulada por una sociedad mercantil de la que posee acciones valoradas en 30.000 euros.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 0,
+    "ref": "Respuesta: SÍ hay abstención.\nFundamento: Interés personal y patrimonial directo en el asunto."
+  },
+  {
+    "question": "19. Es usted funcionario de las Administraciones Públicas y forma parte de un tribunal de oposición. Una aspirante es hija de una persona con la que usted comparte una amistad íntima desde la infancia, viéndose semanalmente y realizando viajes familiares conjuntos.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 1,
+    "ref": "Respuesta de Examen (Puridad): NO hay causa de abstención.\nFundamento: La amistad íntima es con los progenitores, no con la aspirante (que es la persona interesada)."
+  },
+  {
+    "question": "20. Es usted funcionario de las Administraciones Públicas y debe participar en la resolución de un recurso administrativo. Antes de acceder a la Administración ejerció como abogado y defendió en ese mismo asunto a una de las partes interesadas.",
+    "options": [
+      "SÍ hay abstención",
+      "NO hay abstención"
+    ],
+    "correct": 0,
+    "ref": "Respuesta: SÍ hay abstención.\nFundamento: Intervención previa directa en el procedimiento y prestación de servicios profesionales previos."
+  }
+];
+            let DOM = {};
+
+            const estado = {
+                preguntaActual: 0,
+                respuestasCorrectas: 0,
+                respuestasIncorrectas: 0,
+                totalPreguntas: preguntas.length
+            };
+
+            let botonesOpciones;
+            let indicesPreguntas;
+
+            function toggleClasses(element, addClass, removeClasses) {
+                if (removeClasses && removeClasses.length > 0) {
+                    removeClasses.forEach(cls => element.classList.remove(cls));
+                }
+                if (addClass) {
+                    element.classList.add(addClass);
+                }
+            }
+
+            function mostrarModal(message) {
+                DOM.modalMessage.textContent = message;
+                DOM.modalOverlay.classList.remove('hidden');
+            }
+
+            function ocultarModal() {
+                DOM.modalOverlay.classList.add('hidden');
+            }
+
+            function marcarRespuesta(index) {
+                const pregunta = preguntas[index];
+
+                const botonCorrecto = botonesOpciones[pregunta.correct];
+                const indiceCorrecto = indicesPreguntas[index];
+
+                toggleClasses(indiceCorrecto, null, ['correcta', 'incorrecta']);
+
+                if (pregunta.respuestaUsuario !== null) {
+                    [].concat(pregunta.correct).forEach(c => toggleClasses(botonesOpciones[c], 'correcta'));
+
+                    if (pregunta.esCorrecta) {
+                        toggleClasses(indiceCorrecto, 'correcta');
+                    } else {
+                        const botonSeleccionado = botonesOpciones[pregunta.respuestaUsuario];
+                        toggleClasses(botonSeleccionado, 'incorrecta');
+                        toggleClasses(indiceCorrecto, 'incorrecta');
+                    }
+                }
+            }
+
+            function mostrarPregunta() {
+                DOM.rectanguloResumen.classList.remove('hidden');
+
+                const pregunta = preguntas[estado.preguntaActual];
+                DOM.preguntaTexto.textContent = pregunta.question;
+                const sup = document.getElementById('supuesto');
+                if (pregunta.caso != null && supuestos[pregunta.caso]) {
+                    if (sup.dataset.caso !== String(pregunta.caso)) { document.getElementById('supuesto-texto').innerHTML = supuestos[pregunta.caso]; sup.dataset.caso = pregunta.caso; }
+                    sup.classList.remove('hidden');
+                } else sup.classList.add('hidden');
+                const ref = document.getElementById('referencia');
+                ref.textContent = pregunta.ref || '';
+                ref.classList.toggle('hidden', !(pregunta.comprobada && pregunta.ref));
+
+                botonesOpciones.forEach((boton, index) => {
+                    toggleClasses(boton, null, ['seleccionada', 'correcta', 'incorrecta']);
+                    boton.textContent = pregunta.options[index];
+                    boton.disabled = pregunta.comprobada;
+                });
+
+                if (pregunta.respuestaUsuario !== null) {
+                    toggleClasses(botonesOpciones[pregunta.respuestaUsuario], 'seleccionada');
+                    if (pregunta.comprobada) {
+                        marcarRespuesta(estado.preguntaActual);
+                    }
+                }
+
+                if (indicesPreguntas) {
+                    indicesPreguntas.forEach(indice => indice.classList.remove('activa'));
+                    indicesPreguntas[estado.preguntaActual].classList.add('activa');
+                }
+
+                DOM.comprobarBtn.classList.toggle('hidden', pregunta.comprobada);
+                actualizarEstadoBotones();
+            }
+
+            function manejarSeleccion(event) {
+                const boton = event.target.closest('.opcion');
+                if (boton) {
+                    const pregunta = preguntas[estado.preguntaActual];
+                    if (!pregunta.comprobada) {
+                        botonesOpciones.forEach(b => toggleClasses(b, null, ['seleccionada']));
+                        toggleClasses(boton, 'seleccionada');
+                        pregunta.respuestaUsuario = parseInt(boton.dataset.index);
+                    }
+                }
+            }
+
+            function comprobarRespuesta() {
+                const pregunta = preguntas[estado.preguntaActual];
+                if (pregunta.respuestaUsuario === null) {
+                    mostrarModal('Por favor, selecciona una respuesta antes de comprobar.');
+                    return;
+                }
+
+                pregunta.comprobada = true;
+                pregunta.esCorrecta = [].concat(pregunta.correct).includes(pregunta.respuestaUsuario);
+
+                if (pregunta.esCorrecta) {
+                    estado.respuestasCorrectas++;
+                } else {
+                    estado.respuestasIncorrectas++;
+                }
+
+                marcarRespuesta(estado.preguntaActual);
+                actualizarResumen();
+                if (pregunta.ref) document.getElementById('referencia').classList.remove('hidden');
+
+                botonesOpciones.forEach(boton => boton.disabled = true);
+                DOM.comprobarBtn.classList.add('hidden');
+            }
+
+            function actualizarEstadoBotones() {
+                const esUltimaPregunta = estado.preguntaActual === estado.totalPreguntas - 1;
+                DOM.siguienteBtn.disabled = esUltimaPregunta;
+            }
+
+            function siguientePregunta() {
+                if (estado.preguntaActual < estado.totalPreguntas - 1) {
+                    estado.preguntaActual++;
+                    mostrarPregunta();
+                }
+            }
+
+            function crearIndices() {
+                DOM.indicesContenedor.innerHTML = Array.from(
+                    {length: estado.totalPreguntas},
+                    (_, i) => `<div class="indice-pregunta" data-index="${i}">${i+1}</div>`
+                ).join('');
+                indicesPreguntas = DOM.indicesContenedor.querySelectorAll('.indice-pregunta');
+            }
+
+            function manejarClickIndice(event) {
+                const indice = event.target.closest('.indice-pregunta');
+                if (indice) {
+                    estado.preguntaActual = parseInt(indice.dataset.index);
+                    mostrarPregunta();
+                }
+            }
+
+            function actualizarResumen() {
+                indicesPreguntas.forEach((indice, index) => {
+                    toggleClasses(indice, null, ['correcta', 'incorrecta']);
+                    const pregunta = preguntas[index];
+                    if (pregunta.comprobada) {
+                        if (pregunta.esCorrecta) {
+                            toggleClasses(indice, 'correcta');
+                        } else {
+                            toggleClasses(indice, 'incorrecta');
+                        }
+                    }
+                });
+            }
+
+            function cacheElements() {
+                return {
+                    preguntaTexto: document.getElementById('pregunta-texto'),
+                    opcionesContenedor: document.getElementById('opciones-contenedor'),
+                    siguienteBtn: document.getElementById('siguiente-btn'),
+                    comprobarBtn: document.getElementById('comprobar-btn'),
+                    indicesContenedor: document.getElementById('indices-contenedor'),
+                    contenedorTest: document.querySelector('section.contenedor-test'),
+                    rectanguloResumen: document.querySelector('footer.rectangulo-resumen'),
+                    modalOverlay: document.getElementById('custom-modal-overlay'),
+                    modalMessage: document.getElementById('custom-modal-message'),
+                    modalOkBtn: document.getElementById('custom-modal-ok'),
+                    contenidoPregunta: document.getElementById('contenido-pregunta')
+                };
+            }
+
+            function initData() {
+                preguntas = preguntas.map(p => ({
+                    ...p,
+                    respuestaUsuario: null,
+                    comprobada: false,
+                    esCorrecta: false
+                }));
+
+                const fragmentoOpciones = document.createDocumentFragment();
+                for (let i = 0; i < 2; i++) {
+                    const boton = document.createElement('button');
+                    boton.className = 'opcion';
+                    boton.dataset.index = i;
+                    fragmentoOpciones.appendChild(boton);
+                }
+                DOM.opcionesContenedor.appendChild(fragmentoOpciones);
+
+                botonesOpciones = Array.from(DOM.opcionesContenedor.querySelectorAll('.opcion'));
+
+                crearIndices();
+            }
+
+            function setupEvents() {
+                DOM.contenedorTest.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.id === 'siguiente-btn') {
+                        siguientePregunta();
+                    } else if (target.id === 'comprobar-btn') {
+                        comprobarRespuesta();
+                    } else if (target.classList.contains('opcion')) {
+                        manejarSeleccion(event);
+                    }
+                });
+
+                DOM.rectanguloResumen.addEventListener('click', (event) => {
+                    const target = event.target;
+                    if (target.classList.contains('indice-pregunta')) {
+                        manejarClickIndice(event);
+                    }
+                });
+
+                DOM.modalOkBtn.addEventListener('click', ocultarModal);
+            }
+
+            function init() {
+                DOM = cacheElements();
+                initData();
+                setupEvents();
+                mostrarPregunta();
+            }
+
+            init();
+        });
+    </script>
+
+    <script>
+        // Informa a la ventana padre (index.html) de la altura real de este
+        // contenido, para que el iframe que lo muestra se ajuste sin dejar
+        // hueco extra abajo. Se reenvía cada vez que cambia el contenido
+        // (cambio de pregunta, comprobar respuesta, etc.).
+        (function () {
+            function reportarAltura() {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(
+                        { tipo: "alturaContenido", altura: document.documentElement.scrollHeight },
+                        "*"
+                    );
+                }
+            }
+            window.addEventListener("load", reportarAltura);
+            new MutationObserver(reportarAltura).observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        })();
+    </script>
+</body>
+</html>
